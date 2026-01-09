@@ -477,3 +477,24 @@ section {
     color: #444;
     margin-top: 20px;
 }
+
+
+/* Asegura que el enlace no tenga subrayado ni bordes raros */
+.social-links a {
+    text-decoration: none;
+    display: inline-block;
+    color: inherit; /* Hereda el color de texto definido en tu web */
+    transition: opacity 0.3s ease; /* Pequeño efecto suave al pasar el ratón */
+}
+
+.social-links a:hover {
+    opacity: 0.7; /* Efecto visual sutil al hacer hover */
+}
+
+/* Configuración del tamaño y color del icono */
+.icon-instagram {
+    width: 24px;   /* Tamaño estándar minimalista */
+    height: 24px;
+    fill: currentColor; /* ESTO ES CLAVE: toma el color del texto de tu footer automáticamente */
+    vertical-align: middle;
+}

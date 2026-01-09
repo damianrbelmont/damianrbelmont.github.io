@@ -497,4 +497,5 @@ section {
     height: 24px;
     fill: currentColor; /* ESTO ES CLAVE: toma el color del texto de tu footer automáticamente */
     vertical-align: middle;
+    margin-bottom: 5px;
 }

@@ -1,4 +1,25 @@
-/* --- RESET BÁSICO --- */
+/* =========================================
+   VARIABLES (IDENTICAS A INICIO)
+   ========================================= */
+:root {
+    /* Paleta Autoridad Literaria */
+    --bg-color: #050b14;       /* Celúreo muy profundo */
+    --bg-alt: #0a131f;
+    --text-main: #e6e6e6;      /* Blanco roto */
+    --text-muted: #8a93a0;     /* Gris azulado metálico */
+    --accent: #b89b5e;         /* Dorado oscuro (Antique Gold) */
+    
+    /* Tipografía */
+    --font-serif: 'Georgia', 'Times New Roman', serif; 
+    --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+    
+    /* Dimensiones */
+    --header-height: 75px; 
+}
+
+/* =========================================
+   RESET Y BASE
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -6,117 +27,171 @@
 }
 
 body {
-    background-color: #050505; /* Fondo oscuro base */
-    color: #e0e0e0;
-    font-family: 'Times New Roman', serif; /* Estilo clásico autor */
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-serif); /* Mantengo serif para novelas como pediste */
     overflow-x: hidden;
+    line-height: 1.6;
 }
 
 a {
     text-decoration: none;
     color: inherit;
+    transition: color 0.3s ease;
 }
 
-/* --- HEADER (Replicado de index principal) --- */
+ul {
+    list-style: none;
+}
+
+/* =========================================
+   HEADER (COPIA EXACTA DE STYLES.CSS)
+   ========================================= */
 .site-header {
-    background: linear-gradient(180deg, #0a1128 0%, #000000 100%);
-    padding: 1rem 1.5rem;
-    position: relative;
-    border-bottom: 1px solid #c5a059;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background-color: rgba(5, 11, 20, 0.95);
+    border-bottom: 1px solid rgba(184, 155, 94, 0.1);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
 }
 
 .header-container {
-    display: flex;
-    justify-content: space-between;
+    width: 90%;
+    /* GRID: 3 columnas (Izquierda | Centro | Derecha) */
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
 }
 
-.brand {
+/* 1. IZQUIERDA: Nombre del Autor */
+.author-name {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.site-logo {
-    height: 40px;
-    margin-bottom: 5px;
-}
-
-.author-name {
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    color: #c5a059; /* Dorado */
-    font-family: sans-serif;
+    justify-self: start;
+    
+    font-family: var(--font-serif);
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
+    font-weight: bold;
+    color: var(--accent);
+    line-height: 1.3;
 }
 
-/* Hamburguesa */
+/* 2. CENTRO: Logo DRB */
+.header-logo {
+    height: 32px;
+    width: auto;
+    opacity: 0.95;
+    justify-self: center;
+}
+
+/* 3. DERECHA: Menú Hamburguesa */
 .menu-toggle {
     background: none;
     border: none;
+    color: var(--accent);
+    font-size: 1.8rem;
     cursor: pointer;
-    position: absolute;
-    right: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100;
+    padding: 0;
+    justify-self: end;
+    transition: opacity 0.2s;
 }
 
+.menu-toggle:active {
+    opacity: 0.7;
+    transform: scale(0.95);
+}
+
+/* Barra del menú hamburguesa (para animación X) */
 .bar {
     display: block;
     width: 25px;
     height: 2px;
-    background-color: #c5a059;
+    background-color: var(--accent);
     margin: 5px 0;
     transition: 0.3s;
 }
 
-/* Navegación */
-.main-nav {
-    display: none;
-    background-color: #000;
-    position: absolute;
-    top: 100%;
+/* =========================================
+   MENÚ MÓVIL (OVERLAY - IGUAL A INICIO)
+   ========================================= */
+.mobile-nav { /* Antes .main-nav */
+    position: fixed;
+    top: 0;
     left: 0;
     width: 100%;
-    padding: 2rem 0;
+    height: 100vh;
+    background-color: var(--bg-color);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-100%);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Clase active para abrir menú (usada por JS) */
+.mobile-nav.active, .main-nav.active { 
+    transform: translateY(0);
+    display: flex; /* Asegura flex si se llamaba main-nav antes */
+}
+
+.menu-close {
+    position: absolute;
+    top: 20px;
+    right: 5%;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.nav-list {
     text-align: center;
-    border-bottom: 1px solid #333;
-    z-index: 99;
 }
 
-.main-nav.active {
-    display: block;
+.nav-list li {
+    margin: 30px 0;
 }
 
-.main-nav ul {
-    list-style: none;
-}
-
-.main-nav li {
-    margin: 1.5rem 0;
-}
-
-.main-nav a {
-    color: #c5a059;
-    font-family: sans-serif;
+.nav-link {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
     letter-spacing: 2px;
-    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
 }
 
-/* --- CUERPO NOVELAS --- */
+.nav-link:hover, .nav-link:active {
+    color: var(--accent);
+}
+
+/* =========================================
+   CUERPO NOVELAS (GRID)
+   ========================================= */
 .novels-container {
     padding: 3rem 1.5rem;
     max-width: 1200px;
     margin: 0 auto;
     text-align: center;
+    margin-top: var(--header-height); /* Compensar header fijo */
 }
 
 .page-title {
-    color: #c5a059;
+    color: var(--accent);
+    font-family: var(--font-serif);
     font-size: 2rem;
     margin-bottom: 3rem;
     letter-spacing: 3px;
@@ -142,7 +217,7 @@ a {
 .book-cover {
     width: 100%;
     height: auto;
-    aspect-ratio: 2 / 3; /* Proporción libro estándar */
+    aspect-ratio: 2 / 3;
     object-fit: cover;
     box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     transition: transform 0.3s ease;
@@ -166,30 +241,32 @@ a {
 }
 
 .book-item:hover .book-placeholder {
-    border-color: #c5a059;
+    border-color: var(--accent);
 }
 
 .placeholder-symbol {
     font-size: 4rem;
-    color: #c5a059;
+    color: var(--accent);
     opacity: 0.5;
 }
 
 .book-title {
     margin-top: 1rem;
-    color: #888;
+    color: var(--text-muted);
     font-size: 0.8rem;
     letter-spacing: 1px;
     text-transform: uppercase;
-    font-family: sans-serif;
+    font-family: var(--font-sans);
 }
 
-/* --- FOOTER (Estilo Dan Brown Móvil) --- */
+/* =========================================
+   FOOTER (ESTILO DAN BROWN)
+   ========================================= */
 .site-footer {
     background-color: #080808;
     padding: 4rem 2rem;
     text-align: center;
-    border-top: 1px solid #1a1a1a;
+    border-top: 1px solid rgba(184, 155, 94, 0.1);
 }
 
 .footer-links {
@@ -200,8 +277,8 @@ a {
 }
 
 .footer-links a {
-    color: #c5a059;
-    font-family: sans-serif;
+    color: var(--accent);
+    font-family: var(--font-sans);
     letter-spacing: 2px;
     font-size: 0.9rem;
     text-transform: uppercase;
@@ -222,7 +299,7 @@ a {
 .social-icons .icon {
     width: 24px;
     height: 24px;
-    color: #c5a059;
+    color: var(--accent);
     transition: transform 0.3s, color 0.3s;
 }
 
@@ -236,15 +313,17 @@ a {
     font-size: 0.7rem;
     letter-spacing: 1px;
     line-height: 1.4;
-    font-family: sans-serif;
+    font-family: var(--font-sans);
     text-transform: uppercase;
 }
 
-/* --- MODAL POSEIDÓN --- */
+/* =========================================
+   MODAL POSEIDÓN
+   ========================================= */
 .modal {
     display: none; 
     position: fixed; 
-    z-index: 1000; 
+    z-index: 3000; /* Z-index alto para estar sobre el header */
     left: 0;
     top: 0;
     width: 100%; 
@@ -255,18 +334,18 @@ a {
 
 .modal-content {
     background-color: #111;
-    margin: 40% auto; /* Centrado vertical aprox móvil */
+    margin: 40% auto;
     padding: 2rem;
-    border: 1px solid #c5a059;
+    border: 1px solid var(--accent);
     width: 80%; 
     max-width: 400px;
     text-align: center;
     position: relative;
-    box-shadow: 0 0 20px rgba(197, 160, 89, 0.2);
+    box-shadow: 0 0 20px rgba(184, 155, 94, 0.2);
 }
 
 .close-modal {
-    color: #c5a059;
+    color: var(--accent);
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -277,45 +356,23 @@ a {
 }
 
 .modal-content p {
-    color: #e0e0e0;
-    font-family: 'Times New Roman', serif;
+    color: var(--text-main);
+    font-family: var(--font-serif);
     font-size: 1.1rem;
     margin-bottom: 1rem;
     line-height: 1.5;
 }
 
-/* --- RESPONSIVE ADJUSTMENTS --- */
+/* =========================================
+   RESPONSIVE
+   ========================================= */
 @media (min-width: 768px) {
     .books-grid {
-        grid-template-columns: repeat(3, 1fr); /* 3 columnas en escritorio si fuera necesario */
+        grid-template-columns: repeat(3, 1fr);
         max-width: 900px;
     }
     .footer-links {
         flex-direction: row;
         justify-content: center;
-    }
-    .main-nav {
-        position: static;
-        display: block;
-        background: transparent;
-        padding: 0;
-        border: none;
-        margin-top: 1rem;
-    }
-    .header-container {
-        justify-content: center;
-    }
-    .menu-toggle {
-        display: none;
-    }
-    .brand {
-        position: static;
-        transform: none;
-        margin-bottom: 1rem;
-    }
-    .main-nav ul {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
     }
 }

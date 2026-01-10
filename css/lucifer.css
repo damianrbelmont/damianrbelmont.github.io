@@ -330,7 +330,7 @@ ul { list-style: none; }
 }
 
 .modal-content.text-content {
-    color: #ddd;
+    color: #d8cdb8;
     font-family: var(--font-serif);
     font-size: 1.1rem;
     line-height: 1.8;

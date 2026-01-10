@@ -1,0 +1,321 @@
+/* --- RESET BÁSICO --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #050505; /* Fondo oscuro base */
+    color: #e0e0e0;
+    font-family: 'Times New Roman', serif; /* Estilo clásico autor */
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- HEADER (Replicado de index principal) --- */
+.site-header {
+    background: linear-gradient(180deg, #0a1128 0%, #000000 100%);
+    padding: 1rem 1.5rem;
+    position: relative;
+    border-bottom: 1px solid #c5a059;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.site-logo {
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.author-name {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: #c5a059; /* Dorado */
+    font-family: sans-serif;
+    text-transform: uppercase;
+}
+
+/* Hamburguesa */
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: #c5a059;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+/* Navegación */
+.main-nav {
+    display: none;
+    background-color: #000;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 2rem 0;
+    text-align: center;
+    border-bottom: 1px solid #333;
+    z-index: 99;
+}
+
+.main-nav.active {
+    display: block;
+}
+
+.main-nav ul {
+    list-style: none;
+}
+
+.main-nav li {
+    margin: 1.5rem 0;
+}
+
+.main-nav a {
+    color: #c5a059;
+    font-family: sans-serif;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+}
+
+/* --- CUERPO NOVELAS --- */
+.novels-container {
+    padding: 3rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.page-title {
+    color: #c5a059;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    letter-spacing: 3px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+/* Grid Layout */
+.books-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columnas exactas */
+    gap: 20px;
+    justify-content: center;
+}
+
+.book-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.book-cover {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3; /* Proporción libro estándar */
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease;
+}
+
+.book-item:hover .book-cover {
+    transform: scale(1.02);
+}
+
+/* Placeholder Poseidón */
+.book-placeholder {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    background-color: #111;
+    border: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    transition: border-color 0.3s;
+}
+
+.book-item:hover .book-placeholder {
+    border-color: #c5a059;
+}
+
+.placeholder-symbol {
+    font-size: 4rem;
+    color: #c5a059;
+    opacity: 0.5;
+}
+
+.book-title {
+    margin-top: 1rem;
+    color: #888;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: sans-serif;
+}
+
+/* --- FOOTER (Estilo Dan Brown Móvil) --- */
+.site-footer {
+    background-color: #080808;
+    padding: 4rem 2rem;
+    text-align: center;
+    border-top: 1px solid #1a1a1a;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.footer-links a {
+    color: #c5a059;
+    font-family: sans-serif;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.social-icons .icon {
+    width: 24px;
+    height: 24px;
+    color: #c5a059;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.social-icons a:hover .icon {
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.footer-legal p {
+    color: #444;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    font-family: sans-serif;
+    text-transform: uppercase;
+}
+
+/* --- MODAL POSEIDÓN --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0,0.9); 
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #111;
+    margin: 40% auto; /* Centrado vertical aprox móvil */
+    padding: 2rem;
+    border: 1px solid #c5a059;
+    width: 80%; 
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.2);
+}
+
+.close-modal {
+    color: #c5a059;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+.modal-content p {
+    color: #e0e0e0;
+    font-family: 'Times New Roman', serif;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (min-width: 768px) {
+    .books-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas en escritorio si fuera necesario */
+        max-width: 900px;
+    }
+    .footer-links {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .main-nav {
+        position: static;
+        display: block;
+        background: transparent;
+        padding: 0;
+        border: none;
+        margin-top: 1rem;
+    }
+    .header-container {
+        justify-content: center;
+    }
+    .menu-toggle {
+        display: none;
+    }
+    .brand {
+        position: static;
+        transform: none;
+        margin-bottom: 1rem;
+    }
+    .main-nav ul {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+}

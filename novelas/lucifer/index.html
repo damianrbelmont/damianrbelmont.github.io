@@ -1,4 +1,175 @@
-<link rel="stylesheet" href="../../css/styles.css">
-<link rel="stylesheet" href="../../css/lucifer.css">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucifer | Damian R. Belmont</title>
+    <link rel="stylesheet" href="../../css/lucifer.css">
+</head>
+<body>
 
-<script src="../../scripts/lucifer.js"></script>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="brand">
+                <a href="../../index.html" class="logo-link">
+                    <img src="../../assets/images/DRB.png" alt="Damian R. Belmont Logo" class="site-logo">
+                </a>
+                <span class="author-name">DAMIAN R. BELMONT</span>
+            </div>
+            
+            <button class="menu-toggle" aria-label="Abrir menú">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+
+        <nav class="mobile-nav">
+            <button class="menu-close" aria-label="Cerrar menú">&times;</button>
+            <ul class="nav-list">
+                <li><a href="../../index.html">INICIO</a></li>
+                <li><a href="../../damian/index.html">DAMIAN</a></li>
+                <li><a href="../../novelas/index.html">NOVELAS</a></li>
+                <li><a href="../../desarrollo/index.html">EN DESARROLLO</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="book-detail-container">
+        
+        <div class="cover-section">
+            <img src="../../assets/images/libros/lucifer/Lucifer.png" alt="Portada Lucifer" class="main-cover">
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-disabled" disabled>COMPRAR EL LIBRO</button>
+            
+            <button id="extract-trigger" class="btn btn-gold">LEER UN EXTRACTO</button>
+        </div>
+
+        <div class="book-synopsis">
+            <p>Souto, 1960. En una aldea gallega olvidada por el tiempo, donde la lluvia borra los límites entre lo divino y lo profano, el equilibrio milenario está a punto de romperse.</p>
+
+            <p>Esta no es la historia de una caída, sino de un descenso calculado. Lucifer, la Estrella de la Mañana, camina sobre la tierra húmeda no como adversario, sino como una entidad atrapada entre la memoria del Cielo y la necesidad del Infierno. Su presencia en la casa de piedra no busca la destrucción, sino el cumplimiento de una obediencia terrible y malentendida.</p>
+
+            <p>En el centro de la tormenta se encuentra José. Un niño nacido en el silencio de la noche, cuya existencia se convierte en el eje involuntario de una disputa que trasciende la comprensión humana. A través de la niebla y el granito, fuerzas antiguas —ángeles custodios agotados, la Santa Compaña y el propio Primer Arcángel— convergen para definir un destino que ya estaba escrito antes del principio de los tiempos.</p>
+
+            <p>Una exploración atmosférica sobre la fe, la identidad y las consecuencias de las decisiones llevadas al límite absoluto. ¿Y si la rebelión no fue un acto de soberbia, sino el sacrificio definitivo?</p>
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="../../index.html">INICIO</a>
+            <a href="../../damian/index.html">DAMIAN</a>
+            <a href="../../novelas/index.html">NOVELAS</a>
+            <a href="../../desarrollo/index.html">EN DESARROLLO</a>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://www.instagram.com/damianrbelmont/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="footer-legal">
+            <p>&copy; 2024 Damian R. Belmont. Ficción especulativa · Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <div id="modal-extract" class="modal-overlay">
+        <div class="modal-wrapper">
+            <div class="modal-header">
+                <h2>PRÓLOGO</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            
+            <div class="modal-content text-content">
+                <p><strong>PRÓLOGO</strong><br>
+                Souto, Ourense. Invierno de 1960.</p>
+
+                <p>La noche no caía sobre Souto; se desplomaba con el peso del agua y la piedra. A ochocientos metros de altura, el viento del norte traía un frío que mordía los huesos, bajando desde las cumbres para enredarse en las ramas desnudas del gran Carballo centenario. El roble, guardián vegetal de la plaza, gemía bajo la tormenta, proyectando sombras convulsas sobre el cruceiro de granito que, impasible, vigilaba el camino embarrado hacia la iglesia de Santa María de Albos.</p>
+
+                <p>La aldea olía a invierno profundo: a humo de leña de carballo escapando de las chimeneas, a tierra empapada y, sobre todo, al vaho animal, espeso y dulce, de la bosta acumulada en las cuadras.</p>
+
+                <p>En la casa de piedra de dos plantas, la que cerraba el pequeño patio comunal frente a la rectoral del cura, la actividad humana había cesado. Abajo, en la planta baja, las dos vacas rumiaban con lentitud en la oscuridad, compartiendo la tibieza de sus alientos con las ovejas y los cerdos. Ese calor ascendía a través de las vigas de madera, calentando el suelo del piso superior, donde la vida acababa de abrirse paso.</p>
+
+                <p>Arriba, tras subir las escaleras exteriores de granito, el aire de la cocina aún conservaba el aroma del caldo y el calor residual de la cocina de hierro que crepitaba suavemente. Pero el milagro estaba en la habitación contigua.</p>
+
+                <p>Nadie vio descender al visitante. No hubo trompetas ni cielos abiertos, solo un funcionario de la eternidad atravesando el techo de tejas y castaño como si fuera niebla.</p>
+
+                <p>El Ángel Custodio asignado, una entidad de geometría perfecta y luz tenue, aterrizó suavemente junto a la cama de matrimonio. Su rostro era hermoso, pero carente de pasión; la belleza eficiente de quien ha realizado esta tarea millones de veces.</p>
+
+                <p>La habitación estaba en penumbra. El padre roncaba levemente en una silla, vencido por el agotamiento de horas de tensión. La madre, sepultada bajo mantas de lana pesada, dormía con una mano protectora sobre el bulto minúsculo que respiraba a su lado.</p>
+
+                <p>El Custodio no estaba solo en el plano invisible. Saludó con una inclinación de cabeza a los otros guardianes presentes en la estancia. Allí estaba el ángel del padre, una figura robusta y cansada, apoyada contra el armario ropero; y el de la madre, una entidad luminosa que acariciaba el cabello sudoroso de la mujer. También se desvanecía, atravesando la puerta hacia la noche lluviosa, el ángel de la matrona, siguiendo a su protegida que ya marchaba camino abajo, sorteando los charcos de la carretera comarcal.</p>
+
+                <p>—Es un varón sano —transmitió el ángel de la madre sin palabras, una vibración de pura información—. Se llamará José.</p>
+
+                <p>El Custodio asintió. Se acercó a la cuna improvisada. El niño dormía con la placidez ignorante de los recién llegados. El ángel extendió una mano traslúcida sobre el pecho del bebé. Comenzó el rito del Sellado: la vinculación de su propia esencia inmortal con el alma virgen del humano, un nudo de luz plateada diseñado para durar una vida entera, para susurrar advertencias en el oído y ofrecer consuelo en la soledad.</p>
+
+                <p>Fue un proceso rápido. Rutinario. Burocracia celestial ejecutada con precisión.</p>
+
+                <p>Cuando terminó, el silencio en la casa se hizo absoluto.</p>
+
+                <p>Los ángeles de los padres, percibiendo que el trabajo estaba hecho y que la familia necesitaba descanso, replegaron su presencia, volviéndose inactivos, meras conciencias latentes vigilando el sueño de sus protegidos. El mundo espiritual de Souto pareció contener la respiración.</p>
+
+                <p>El Custodio se quedó solo, de pie junto a la cabecera, listo para iniciar su guardia de décadas. Observó la lluvia golpear el cristal de la pequeña ventana. Todo estaba en orden. El Plan de Dios seguía su curso, un engranaje más en la maquinaria infinita.</p>
+
+                <p>Entonces, las vacas en el piso de abajo dejaron de rumiar. El perro, ovillado junto a la cocina de hierro, soltó un gemido agudo, un sonido de terror primitivo, y se orinó en el suelo de madera.</p>
+
+                <p>El Custodio sintió un frío que no pertenecía al clima de Galicia. No era el frío de la nieve, sino el cero absoluto del vacío. La luz de la habitación pareció ser absorbida por las esquinas. El Ángel se giró hacia la puerta, desenvainando una espada de luz pura, pero su mano tembló.</p>
+
+                <p>Alguien había entrado. Alguien tan antiguo que el propio tiempo parecía curvarse a su alrededor para dejarle paso.</p>
+
+                <p>Fuera, bajo el aguacero que repicaba contra las tejas curvas, el mundo invisible sufrió una convulsión.</p>
+
+                <p>Por el camino viejo, el que serpenteaba desde el monte pasando junto al cementerio, bajaba la procesión. Eran seis figuras difusas, portando cirios de cera que no se apagaban con el viento. La Santa Compaña.</p>
+
+                <p>La Santa Compaña, acostumbrada a imponer respeto con su sola presencia espectral, llegó a la altura del cruceiro de la plaza y allí Laureana se detuvo en seco. Sus ojos vacíos se abrieron con un terror que superaba a la muerte. Lo que había dentro de la casa de José no era un alma para recolectar. Era un abismo.</p>
+
+                <p>Las ánimas no se disolvieron simplemente. Huyeron.</p>
+
+                <p>Dentro de la habitación, el Ángel Custodio percibió la llegada, pero lo que le heló la sangre no fue la presencia del intruso, sino el silencio de sus aliados.</p>
+
+                <p>—¡Hermanos! —gritó el Custodio.</p>
+
+                <p>Nadie respondió.</p>
+
+                <p>De la penumbra junto a la puerta, donde las sombras se habían espesado hasta hacerse sólidas, emergió la figura.</p>
+
+                <p>—Lucifer —susurró el Custodio—. No tienes permiso…</p>
+
+                <p>—La tierra es de mi Padre —respondió Lucifer—. Y yo sigo siendo su hijo.</p>
+
+                <p>—¡Aléjate del niño!</p>
+
+                <p>Lucifer lo miró. En sus ojos negros no había odio, ni furia de batalla. Solo una piedad infinita y terrible.</p>
+
+                <p>—Lo siento, hermano menor —dijo Lucifer suavemente—. Tu lealtad te honra. Pero tu guardia ha terminado antes de empezar.</p>
+
+                <p>El Custodio intentó atacar. Lucifer no se molestó en esquivar. Solo proyectó un pensamiento. Una orden simple, absoluta, dicha con la autoridad del Primer Arcángel.</p>
+
+                <p><strong>Apágate.</strong></p>
+
+                <p class="copyright-text"><em>Extracto del prólogo de <strong>Lucifer</strong>.<br>
+                © 2026 Damian R. Belmont. Todos los derechos reservados.</em></p>
+            </div>
+            
+            <div class="modal-footer-btn">
+                <button class="close-modal-btn-bottom">CERRAR</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/lucifer.js"></script>
+</body>
+</html>

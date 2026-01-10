@@ -451,31 +451,71 @@ section {
 }
 
 /* =========================================
-   FOOTER
+   FOOTER (ESTILO DAN BROWN)
    ========================================= */
 .site-footer {
-    padding: 50px 5%;
+    background-color: #080808; /* O usa var(--bg-alt) si prefieres */
+    padding: 4rem 2rem;
     text-align: center;
     border-top: 1px solid rgba(184, 155, 94, 0.1);
-    background-color: var(--bg-color);
+    margin-top: auto;
 }
 
-.social-icons a {
-    display: inline-block;
-    margin: 0 15px;
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    color: var(--text-muted);
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
 }
 
-.social-icons a:hover {
+.footer-links a {
     color: var(--accent);
+    font-family: var(--font-sans);
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: color 0.3s;
 }
 
-.copyright {
-    font-size: 0.7rem;
+.footer-links a:hover {
+    color: #fff;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.social-icons .icon {
+    width: 24px;
+    height: 24px;
+    color: var(--accent);
+    transition: transform 0.3s, color 0.3s;
+}
+
+.social-icons a:hover .icon {
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.footer-legal p {
     color: #444;
-    margin-top: 20px;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+}
+
+/* Ajuste Responsive para Desktop */
+@media (min-width: 768px) {
+    .footer-links {
+        flex-direction: row;
+        justify-content: center;
+        gap: 3rem;
+    }
 }
 
 

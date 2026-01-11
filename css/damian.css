@@ -163,32 +163,43 @@ ul { list-style: none; }
     margin-bottom: 2.5rem;
     width: 100%;
     display: flex;
-    justify-content: flex-start; /* Alineado izq según diseño referencia, o center si prefieres */
+    flex-direction: column; 
+    justify-content: flex-start; 
 }
 
 .author-photo {
     width: 100%;
     height: auto;
-    border-radius: 5px; /* Bordes redondeados 5px como acordamos */
+    border-radius: 5px; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     object-fit: cover;
-    /* Placeholder style */
-    background-color: #0f1824; 
-    aspect-ratio: 16/9; /* Proporción panorámica o cuadrada según foto */
+    aspect-ratio: 16/9;
+}
+
+/* Crédito de IA */
+.image-credit {
+    font-family: var(--font-serif);
+    font-size: 0.75rem; 
+    color: var(--text-muted); 
+    font-style: italic; 
+    text-align: left; 
+    margin-top: 10px; 
+    opacity: 0.7;
 }
 
 /* Contenido Texto */
 .author-content-section {
-    text-align: left; /* Alineado a la izquierda estricto */
+    text-align: left;
 }
 
+/* --- TÍTULO MODIFICADO CON CORMORANT GARAMOND --- */
 .author-title {
-    font-family: var(--font-serif);
+    font-family: 'Cormorant Garamond', serif; /* FUENTE NUEVA */
     color: var(--accent);
     font-size: 1.8rem;
-    letter-spacing: 2px;
+    letter-spacing: 0.05em; /* ESPACIADO AJUSTADO */
     text-transform: uppercase;
-    font-weight: normal;
+    font-weight: 600; /* PESO 600 */
     margin-bottom: 2rem;
     line-height: 1.2;
     border-bottom: 1px solid rgba(184, 155, 94, 0.2);
@@ -198,7 +209,7 @@ ul { list-style: none; }
 }
 
 .author-bio-text {
-    color: var(--sepia-text); /* Color SEPIA exacto (#d8cdb8) */
+    color: var(--sepia-text);
     font-family: var(--font-serif);
     font-size: 1.1rem;
     line-height: 1.8;

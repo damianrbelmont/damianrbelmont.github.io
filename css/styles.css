@@ -265,7 +265,7 @@ ul {
         
         /* ¡AQUÍ ESTÁ LA CLAVE! */
         /* Aumenta este número para separarlos más, bájalo para juntarlos */
-        gap: 250px; 
+        gap: 800px; 
         
         justify-content: center;
     }

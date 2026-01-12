@@ -186,6 +186,7 @@ ul {
 
     /* AQUÍ LA CORRECCIÓN CON TUS DATOS: */
     aspect-ratio: 1750 / 1536; 
+    margin-top: 80px;
 }
 
 /* --- ESTILO PARA TABLET Y PC (Pantallas mayores a 768px) --- */

@@ -166,6 +166,9 @@ ul {
 /* =========================================
    HERO EDITORIAL (SOLUCIÓN BOTONES)
    ========================================= */
+/* =========================================
+   HERO EDITORIAL (SOLUCIÓN SEPARACIÓN)
+   ========================================= */
 .hero-section {
     position: relative; 
     
@@ -185,15 +188,18 @@ ul {
 /* --- CONTENEDOR DE BOTONES --- */
 .hero-buttons-container {
     position: absolute;
-    /* Ajustado para móvil: más pegado abajo para no tapar el dibujo central */
-    bottom: 30px; 
+    /* Ajustado para móvil: más espacio abajo */
+    bottom: 40px; 
     left: 50%;
     transform: translateX(-50%); 
     
     display: flex;
     flex-direction: column; 
-    align-items: center; /* Centra los botones para que no se estiren */
-    gap: 12px; /* Menos espacio entre botones en móvil */
+    align-items: center;
+    
+    /* MÓVIL: SEPARACIÓN VERTICAL ENTRE BOTONES */
+    /* Aquí controlas cuánto se separan uno del otro en el móvil */
+    gap: 20px; 
     
     width: 100%;
     z-index: 20; 
@@ -206,21 +212,21 @@ ul {
     text-transform: uppercase;
     font-family: var(--font-serif); 
     
-    /* CAMBIOS MÓVIL: Texto más pequeño y botón más estrecho */
-    font-size: 0.7rem; 
-    padding: 10px 20px; 
-    width: auto;         /* Ya no ocupa el 100% */
-    min-width: 200px;    /* Ancho mínimo para consistencia */
-    max-width: 80%;      /* Nunca tocará los bordes de la pantalla */
+    /* CAMBIOS MÓVIL */
+    font-size: 0.75rem; 
+    padding: 12px 20px; 
+    width: auto;         
+    min-width: 180px;    /* Un poco más estrechos en móvil */
+    max-width: 80%;      
     
     border-radius: 2px;
     transition: all 0.3s ease;
     border: 1px solid transparent;
 }
 
-/* COLORES (Placeholder - Cámbialos a tu gusto) */
+/* COLORES MÓVIL (Gris neutro) */
 .btn-primary {
-    background-color: #333; /* Gris oscuro para móvil (menos intrusivo) */
+    background-color: #333; 
     color: #ffffff; 
     border-color: #333;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -233,7 +239,6 @@ ul {
     backdrop-filter: blur(4px);
 }
 
-/* Hover genérico */
 .btn-primary:hover, .btn-secondary:hover {
     transform: translateY(-2px);
     opacity: 0.9;
@@ -251,26 +256,29 @@ ul {
         aspect-ratio: 2752 / 1536; 
     }
 
-    /* RECOLOCACIÓN EN PC */
+    /* RECOLOCACIÓN EN PC: SEPARACIÓN EXTREMA */
     .hero-buttons-container {
         flex-direction: row; /* Fila horizontal */
         
-        /* Subimos un poco los botones para centrarlos mejor en el espacio vacío */
+        /* Ajusta la altura vertical en PC aquí */
         bottom: 12%; 
         
-        gap: 40px; /* Más aire entre botones */
+        /* ¡AQUÍ ESTÁ LA CLAVE! */
+        /* Aumenta este número para separarlos más, bájalo para juntarlos */
+        gap: 250px; 
+        
         justify-content: center;
     }
 
     .btn-lucifer {
-        /* En PC los hacemos un poco más grandes y elegantes */
-        min-width: 220px;
+        /* En PC los hacemos un poco más grandes */
+        min-width: 200px;
         padding: 14px 30px;
         font-size: 0.85rem; 
-        letter-spacing: 3px; /* Más espaciado entre letras */
+        letter-spacing: 3px; 
     }
 
-    /* COLOR ESPECÍFICO PC (Tu azul corporativo) */
+    /* COLOR ESPECÍFICO PC (Azul) */
     .btn-primary {
         background-color: #0c123f; 
         border-color: #0c123f;

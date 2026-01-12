@@ -175,19 +175,23 @@ ul {
 .hero-section {
     background-image: url('../assets/images/libros/lucifer/Hero_MOVIL_Lucifer.png');
     
-    /* CENTRADO: */
-    background-position: center center;
+    /* 1. Alineamos ARRIBA para que no haya hueco superior */
+    background-position: top center; 
     background-repeat: no-repeat;
-    
-    /* CAMBIO CLAVE: */
-    /* Usamos 'contain' en vez de 'cover'. */
-    /* Esto obliga al navegador a mostrar la imagen ENTERA siempre. */
     background-size: contain; 
-
-    background-color: #0e0e0e; /* Color de fondo para rellenar huecos si los hay */
+    background-color: #0e0e0e; 
     
-    height: 100vh; /* Ocupa toda la pantalla */
     width: 100%;
+
+    /* 2. EL CAMBIO IMPORTANTE: */
+    /* Borra "height: 100vh;" */
+    height: auto; 
+
+    /* 3. Ajustamos la proporción de la caja a la de la imagen */
+    /* Tienes que jugar con estos dos números hasta que encaje perfecto. */
+    /* Si tu imagen es, por ejemplo, de 1000px ancho x 1200px alto, pon: 1000 / 1200 */
+    /* Probablemente tu imagen esté cerca de un 4/5 o 9/16 */
+    aspect-ratio: 4 / 5; 
 }
 
 /* --- ESTILO PARA TABLET Y PC (Pantallas mayores a 768px) --- */

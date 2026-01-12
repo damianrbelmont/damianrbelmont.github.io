@@ -2,7 +2,6 @@
    VARIABLES Y PALETA DE COLOR
    ========================================= */
 :root {
-    /* Paleta Base */
     --bg-color: #050b14;       
     --bg-alt: #0a131f;         
     --bg-gradient: radial-gradient(circle at center 30%, #162235 0%, #050b14 70%);
@@ -11,11 +10,9 @@
     --text-muted: #8a93a0;     
     --accent: #b89b5e;         
     
-    /* Tipografía */
     --font-serif: 'Georgia', 'Times New Roman', serif; 
     --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
     
-    /* Dimensiones */
     --header-height: 75px; 
 }
 
@@ -164,12 +161,11 @@ ul {
 }
 
 /* =========================================
-   HERO EDITORIAL (LÓGICA FULL WIDTH)
+   HERO EDITORIAL - VERSIÓN MÓVIL (Base)
    ========================================= */
 .hero-section {
     position: relative; 
     
-    /* Versión MÓVIL (Base) */
     background-image: url('../assets/images/libros/lucifer/Hero_MOVIL_Lucifer.png');
     background-position: top center; 
     background-size: cover; 
@@ -182,41 +178,47 @@ ul {
     aspect-ratio: 1750 / 1536; 
 }
 
-/* --- CONTENEDOR DE BOTONES --- */
+/* --- CONTENEDOR DE BOTONES (MÓVIL) --- */
 .hero-buttons-container {
     position: absolute;
-    bottom: 30px; /* En móvil, abajo del todo */
-    left: 0;      /* Pegado a la izquierda */
-    width: 100%;  /* Ocupa todo el ancho */
+    bottom: 25px; /* Pegado abajo */
+    left: 0;
+    width: 100%;
     
+    /* EN FILA (Izquierda - Derecha) */
     display: flex;
-    flex-direction: column; 
-    align-items: center; /* En móvil los centramos */
-    gap: 15px; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    
+    /* Margen lateral de seguridad */
+    padding: 0 15px; 
     
     z-index: 20; 
 }
 
-/* ESTILO GENERAL BOTONES */
+/* ESTILO DE BOTONES (TAMAÑO MÓVIL REDUCIDO) */
 .btn-lucifer {
     display: block;
     text-align: center;
     text-transform: uppercase;
     font-family: var(--font-serif); 
     
-    /* CAMBIOS MÓVIL */
-    font-size: 0.75rem; 
-    padding: 12px 20px; 
-    width: auto;         
-    min-width: 180px;    
-    max-width: 80%;      
+    /* TAMAÑO PEQUEÑO */
+    font-size: 0.6rem;      
+    padding: 10px 5px;     
+    width: 48%;             /* Ocupan casi la mitad cada uno */
     
     border-radius: 2px;
     transition: all 0.3s ease;
     border: 1px solid transparent;
+    
+    /* Prevención de ruptura de texto */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* COLORES MÓVIL (Gris neutro) */
+/* COLORES MÓVIL (Gris Oscuro / Transparente) */
 .btn-primary {
     background-color: #333; 
     color: #ffffff; 
@@ -225,9 +227,9 @@ ul {
 }
 
 .btn-secondary {
-    background-color: #0c123f; 
+    background-color: rgba(51, 51, 51, 0.5); 
     color: #e6e6e6;
-    border: 1px solid #0c123f;
+    border: 1px solid rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(4px);
 }
 
@@ -238,7 +240,8 @@ ul {
 
 
 /* =========================================
-   VERSIÓN PC y TABLET HORIZONTAL
+   HERO EDITORIAL - VERSIÓN PC
+   (Se activa si ancho > 1024px y apaisado)
    ========================================= */
 @media screen and (min-width: 1024px) and (orientation: landscape) {
     .hero-section {
@@ -247,41 +250,41 @@ ul {
         aspect-ratio: 2752 / 1536; 
     }
 
-    /* RECOLOCACIÓN EN PC: FULL WIDTH */
+    /* RECOLOCACIÓN EN PC: FULL WIDTH + SEPARACIÓN */
     .hero-buttons-container {
-        flex-direction: row; /* Uno al lado del otro */
+        flex-direction: row; 
         bottom: 12%; 
+        justify-content: space-between; /* Uno a cada extremo */
         
-        /* AQUÍ ESTÁ LA MAGIA: */
-        /* space-between manda uno a la izq y otro a la dcha */
-        justify-content: space-between; 
-        
-        /* AQUÍ CONTROLAS LA DISTANCIA AL BORDE */
-        /* 0 arriba/abajo | 15% a los lados */
-        /* Cambia 15% por 10% para separarlos más */
-        /* Cambia 15% por 25% para juntarlos más */
-        padding: 0 9%; 
-        
-        /* Quitamos el límite de ancho para que usen toda la pantalla */
-        max-width: 100%; 
+        /* En PC damos mucho más margen a los lados */
+        padding: 0 18%; 
     }
 
+    /* TAMAÑO BOTONES PC (Más grandes) */
     .btn-lucifer {
+        width: auto; 
         min-width: 200px;
         padding: 14px 30px;
         font-size: 0.85rem; 
         letter-spacing: 3px; 
     }
 
-    /* COLOR ESPECÍFICO PC (Azul) */
-    .btn-primary {
+    /* COLOR UNIFICADO PC: AZUL CORPORATIVO (#0c123f) */
+    .btn-primary, .btn-secondary {
         background-color: #0c123f; 
         border-color: #0c123f;
-        box-shadow: 0 4px 20px rgba(12, 18, 63, 0.5);
+        color: #ffffff;
+        
+        box-shadow: 0 4px 20px rgba(12, 18, 63, 0.4);
+        backdrop-filter: none; /* Quitamos efecto cristal en PC */
     }
     
-    .btn-primary:hover {
-        background-color: #151e5e;
+    /* EFECTO HOVER COMPARTIDO EN PC */
+    .btn-primary:hover, .btn-secondary:hover {
+        background-color: #151e5e; 
+        border-color: #151e5e;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 25px rgba(12, 18, 63, 0.7);
     }
 }
 

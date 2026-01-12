@@ -172,16 +172,17 @@ ul {
    HERO EDITORIAL (NUEVO DISEÑO)
    ========================================= */
 .hero-section {
+    /* Ruta de la imagen */
+    background-image: url('../assets/images/libros/lucifer/Hero_Lucifer.png');
+    
+    /* Propiedades para que la imagen se vea bien */
+    background-size: cover;      /* Cubre todo el espacio sin deformarse */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat;
+    
+    /* Opcional: Asegura que la sección tenga altura si no tiene contenido suficiente */
+    min-height: 100vh; 
     position: relative;
-    /* Altura suficiente para móvil pero mostrando contenido */
-    min-height: 90vh; 
-    padding-top: var(--header-height);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    /* Fondo con viñeta para centrar atención */
-    background: var(--bg-gradient);
 }
 
 .hero-editorial-container {

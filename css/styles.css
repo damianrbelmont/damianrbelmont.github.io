@@ -192,12 +192,13 @@ ul {
 /* --- ESTILO PARA TABLET Y PC (Pantallas mayores a 768px) --- */
 @media screen and (min-width: 768px) {
     .hero-section {
-        /* Aquí pondrás la ruta de la imagen GRANDE cuando la tengas */
-        /* Por ahora dejo la misma o una de prueba para que veas que el código funciona */
+        /* Asegúrate de que la ruta de la imagen sea la correcta */
         background-image: url('../assets/images/libros/lucifer/HeroPC_Lucifer.png'); 
         
-        /* Ajustes opcionales para PC */
         background-position: center;
+        
+        /* Tus medidas exactas de PC */
+        aspect-ratio: 2752 / 1536; 
     }
 }
 

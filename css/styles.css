@@ -171,17 +171,38 @@ ul {
 /* =========================================
    HERO EDITORIAL (NUEVO DISEÑO)
    ========================================= */
+/* --- ESTILO BASE (Móviles) --- */
 .hero-section {
-    position: relative;
-    /* Altura suficiente para móvil pero mostrando contenido */
-    min-height: 90vh; 
-    padding-top: var(--header-height);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    /* Fondo con viñeta para centrar atención */
-    background: var(--bg-gradient);
+    /* Ruta de la imagen MÓVIL */
+    background-image: url('../assets/images/libros/lucifer/Hero_MOVIL_Lucifer.png');
+    
+    /* Configuración para que se vea bien */
+    background-position: center top; /* Alineada arriba al centro */
+    background-repeat: no-repeat;
+    
+    /* IMPORTANTE: */
+    /* 'cover' recortará los bordes para llenar todo. */
+    /* 'contain' mostrará la imagen entera sin recortes (pero puede dejar huecos). */
+    /* Dado que es una imagen con texto integrado para móvil, prueba 'cover' primero. */
+    background-size: cover; 
+
+    /* ALTO DE LA SECCIÓN */
+    /* Como el HTML está vacío, necesitamos forzar una altura. */
+    /* 100vh = 100% de la altura de la pantalla del móvil */
+    height: 100vh; 
+    width: 100%;
+}
+
+/* --- ESTILO PARA TABLET Y PC (Pantallas mayores a 768px) --- */
+@media screen and (min-width: 768px) {
+    .hero-section {
+        /* Aquí pondrás la ruta de la imagen GRANDE cuando la tengas */
+        /* Por ahora dejo la misma o una de prueba para que veas que el código funciona */
+        background-image: url('../assets/images/libros/lucifer/HeroPC_Lucifer.png'); 
+        
+        /* Ajustes opcionales para PC */
+        background-position: center;
+    }
 }
 
 .hero-editorial-container {

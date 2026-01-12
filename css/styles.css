@@ -185,13 +185,13 @@ ul {
 
     /* 2. EL CAMBIO IMPORTANTE: */
     /* Borra "height: 100vh;" */
-    height: 100%; 
+    height: auto; 
 
     /* 3. Ajustamos la proporción de la caja a la de la imagen */
     /* Tienes que jugar con estos dos números hasta que encaje perfecto. */
     /* Si tu imagen es, por ejemplo, de 1000px ancho x 1200px alto, pon: 1000 / 1200 */
     /* Probablemente tu imagen esté cerca de un 4/5 o 9/16 */
-    aspect-ratio: 4 / 4; 
+    aspect-ratio: 5 / 4; 
 }
 
 /* --- ESTILO PARA TABLET Y PC (Pantallas mayores a 768px) --- */

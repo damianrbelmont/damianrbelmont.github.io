@@ -171,33 +171,38 @@ ul {
 /* =========================================
    HERO EDITORIAL (NUEVO DISEÑO)
    ========================================= */
-/* --- ESTILO BASE (Móviles) --- */
+/* =========================================
+   1. ESTILO BASE (Móviles y Tablet Vertical)
+   ========================================= */
 .hero-section {
+    /* Imagen alta para formato vertical */
     background-image: url('../assets/images/libros/lucifer/Hero_MOVIL_Lucifer.png');
+    
     background-position: top center; 
+    background-size: cover; 
     background-repeat: no-repeat;
     
-    /* Importante: cover para que rellene */
-    background-size: cover; 
-    
-    background-color: #0e0e0e; 
     width: 100%;
-    height: auto; 
-
-    /* AQUÍ LA CORRECCIÓN CON TUS DATOS: */
-    aspect-ratio: 1750 / 1536; 
     margin-top: 80px;
+
+    /* Ratio vertical (Móvil) */
+    aspect-ratio: 1750 / 1536; 
 }
 
-/* --- ESTILO PARA TABLET Y PC (Pantallas mayores a 768px) --- */
-@media screen and (min-width: 768px) {
+/* =========================================
+   2. ESTILO TABLET HORIZONTAL Y PC
+   Se activa SOLO si:
+   - El ancho es mayor a 1024px
+   - Y ADEMÁS la pantalla está apaisada (landscape)
+   ========================================= */
+@media screen and (min-width: 1024px) and (orientation: landscape) {
     .hero-section {
-        /* Asegúrate de que la ruta de la imagen sea la correcta */
+        /* Imagen ancha para PC/Tablet Horizontal */
         background-image: url('../assets/images/libros/lucifer/HeroPC_Lucifer.png'); 
         
         background-position: center;
-        
-        /* Tus medidas exactas de PC */
+
+        /* Ratio panorámico (PC) */
         aspect-ratio: 2752 / 1536; 
     }
 }

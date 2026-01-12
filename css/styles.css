@@ -2,14 +2,14 @@
    VARIABLES Y PALETA DE COLOR
    ========================================= */
 :root {
-    /* Paleta Autoridad Literaria */
-    --bg-color: #050b14;       /* Celúreo muy profundo, casi negro */
-    --bg-alt: #0a131f;         /* Variación sutil para contraste */
+    /* Paleta Base */
+    --bg-color: #050b14;       
+    --bg-alt: #0a131f;         
     --bg-gradient: radial-gradient(circle at center 30%, #162235 0%, #050b14 70%);
     
-    --text-main: #e6e6e6;      /* Blanco roto (hueso) */
-    --text-muted: #8a93a0;     /* Gris azulado metálico */
-    --accent: #b89b5e;         /* Dorado oscuro apagado (Antique Gold) */
+    --text-main: #e6e6e6;      
+    --text-muted: #8a93a0;     
+    --accent: #b89b5e;         
     
     /* Tipografía */
     --font-serif: 'Georgia', 'Times New Roman', serif; 
@@ -47,7 +47,7 @@ ul {
 }
 
 /* =========================================
-   HEADER FIJO (GRID LAYOUT)
+   HEADER FIJO
    ========================================= */
 .site-header {
     position: fixed;
@@ -109,7 +109,7 @@ ul {
 }
 
 /* =========================================
-   MENÚ MÓVIL (OVERLAY)
+   MENÚ MÓVIL
    ========================================= */
 .mobile-nav {
     position: fixed;
@@ -164,11 +164,12 @@ ul {
 }
 
 /* =========================================
-   HERO EDITORIAL (CON BOTONES INTEGRADOS)
+   HERO EDITORIAL (SOLUCIÓN BOTONES)
    ========================================= */
 .hero-section {
     position: relative; 
-    /* Imagen alta para formato vertical (Base) */
+    
+    /* Versión MÓVIL (Base) */
     background-image: url('../assets/images/libros/lucifer/Hero_MOVIL_Lucifer.png');
     background-position: top center; 
     background-size: cover; 
@@ -177,23 +178,24 @@ ul {
     width: 100%;
     margin-top: 80px;
 
-    /* Ratio vertical (Móvil) */
+    /* Ratio vertical */
     aspect-ratio: 1750 / 1536; 
 }
 
 /* --- CONTENEDOR DE BOTONES --- */
 .hero-buttons-container {
     position: absolute;
-    bottom: 5%; 
+    /* Ajustado para móvil: más pegado abajo para no tapar el dibujo central */
+    bottom: 30px; 
     left: 50%;
     transform: translateX(-50%); 
     
     display: flex;
-    flex-direction: column; /* Móvil: uno encima de otro */
-    gap: 15px; 
+    flex-direction: column; 
+    align-items: center; /* Centra los botones para que no se estiren */
+    gap: 12px; /* Menos espacio entre botones en móvil */
     
-    width: 90%;
-    max-width: 600px;
+    width: 100%;
     z-index: 20; 
 }
 
@@ -203,48 +205,44 @@ ul {
     text-align: center;
     text-transform: uppercase;
     font-family: var(--font-serif); 
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    padding: 14px 25px;
+    
+    /* CAMBIOS MÓVIL: Texto más pequeño y botón más estrecho */
+    font-size: 0.7rem; 
+    padding: 10px 20px; 
+    width: auto;         /* Ya no ocupa el 100% */
+    min-width: 200px;    /* Ancho mínimo para consistencia */
+    max-width: 80%;      /* Nunca tocará los bordes de la pantalla */
+    
     border-radius: 2px;
     transition: all 0.3s ease;
-    width: 100%;
     border: 1px solid transparent;
 }
 
-/* --- BOTÓN PRINCIPAL (LÓGICA DE COLOR) --- */
-
-/* 1. MÓVIL (Por defecto): Gris oscuro */
+/* COLORES (Placeholder - Cámbialos a tu gusto) */
 .btn-primary {
-    background-color: #454545; /* Gris neutro elegante */
+    background-color: #333; /* Gris oscuro para móvil (menos intrusivo) */
     color: #ffffff; 
-    border-color: #454545;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    border-color: #333;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.btn-primary:hover {
-    background-color: #5a5a5a; /* Un poco más claro al tocar */
-    border-color: #5a5a5a;
-    transform: translateY(-2px);
-}
-
-/* 2. BOTÓN SECUNDARIO (Info): Transparente */
 .btn-secondary {
-    background-color: rgba(69, 69, 69, 0.4); 
+    background-color: rgba(51, 51, 51, 0.5); 
     color: #e6e6e6;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(4px);
 }
 
-.btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: #fff;
-    color: #fff;
+/* Hover genérico */
+.btn-primary:hover, .btn-secondary:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
 }
 
+
 /* =========================================
-   ESTILO TABLET HORIZONTAL Y PC
-   Se activa SOLO si ancho > 1024px Y pantalla apaisada
+   VERSIÓN PC y TABLET HORIZONTAL
+   (Se activa si ancho > 1024px y apaisado)
    ========================================= */
 @media screen and (min-width: 1024px) and (orientation: landscape) {
     .hero-section {
@@ -253,31 +251,34 @@ ul {
         aspect-ratio: 2752 / 1536; 
     }
 
-    /* Ajuste de botones para PC */
+    /* RECOLOCACIÓN EN PC */
     .hero-buttons-container {
-        flex-direction: row; /* En fila horizontal */
-        bottom: 8%; 
-        gap: 25px;
+        flex-direction: row; /* Fila horizontal */
+        
+        /* Subimos un poco los botones para centrarlos mejor en el espacio vacío */
+        bottom: 12%; 
+        
+        gap: 40px; /* Más aire entre botones */
         justify-content: center;
     }
 
     .btn-lucifer {
-        width: auto; 
-        min-width: 200px;
-        font-size: 0.9rem;
+        /* En PC los hacemos un poco más grandes y elegantes */
+        min-width: 220px;
+        padding: 14px 30px;
+        font-size: 0.85rem; 
+        letter-spacing: 3px; /* Más espaciado entre letras */
     }
 
-    /* CAMBIO DE COLOR SOLO PARA PC: Azul #0c123f */
+    /* COLOR ESPECÍFICO PC (Tu azul corporativo) */
     .btn-primary {
         background-color: #0c123f; 
         border-color: #0c123f;
-        box-shadow: 0 4px 15px rgba(12, 18, 63, 0.4);
+        box-shadow: 0 4px 20px rgba(12, 18, 63, 0.5);
     }
-
+    
     .btn-primary:hover {
         background-color: #151e5e;
-        border-color: #151e5e;
-        box-shadow: 0 6px 20px rgba(12, 18, 63, 0.6);
     }
 }
 
@@ -304,7 +305,7 @@ section {
 }
 
 /* =========================================
-   CARRUSEL DE LIBROS
+   CARRUSEL
    ========================================= */
 .books-section {
     background-color: var(--bg-alt);
@@ -416,7 +417,7 @@ section {
 .next-btn { right: 0; }
 
 /* =========================================
-   OTRAS SECCIONES
+   OTRAS SECCIONES Y FOOTER
    ========================================= */
 .wip-section, .author-section {
     padding: 80px 8%;
@@ -437,9 +438,6 @@ section {
     margin-top: 30px;
 }
 
-/* =========================================
-   FOOTER
-   ========================================= */
 .site-footer {
     background-color: #080808; 
     padding: 4rem 2rem;

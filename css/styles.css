@@ -172,32 +172,16 @@ ul {
    HERO EDITORIAL (NUEVO DISEÑO)
    ========================================= */
 .hero-section {
-    /* 1. Tu imagen de fondo */
-    background-image: url('../assets/images/libros/lucifer/Hero_Lucifer.png');
-    
-    /* 2. Color de fondo para rellenar el hueco que dejará la imagen al achicarse */
-    /* (Usa el mismo color oscuro de tu web para que se fusione) */
-    background-color: #0e0e0e; 
-
-    /* 3. TAMAÑO: Aquí está la magia. */
-    /* En lugar de 'cover', le decimos que ocupe el 85% de ancho (automático de alto) */
-    /* Puedes probar con 80%, 85% o 90% hasta que te guste */
-    background-size: 85% auto; 
-
-    /* 4. POSICIÓN: Centrada completamente */
-    background-position: center center;
-
-    /* 5. IMPORTANTE: Que no se repita tipo mosaico */
-    background-repeat: no-repeat;
-
-    /* 6. Altura y Flexbox para alinear el contenido HTML (tu portada de la izquierda) */
-    min-height: 100vh;
+    position: relative;
+    /* Altura suficiente para móvil pero mostrando contenido */
+    min-height: 90vh; 
+    padding-top: var(--header-height);
     display: flex;
-    align-items: center; /* Centra verticalmente el contenido HTML */
+    align-items: center;
     justify-content: center;
-    
-    /* 7. Un poco de padding extra por seguridad para pantallas pequeñas */
-    padding: 2rem;
+    overflow: hidden;
+    /* Fondo con viñeta para centrar atención */
+    background: var(--bg-gradient);
 }
 
 .hero-editorial-container {

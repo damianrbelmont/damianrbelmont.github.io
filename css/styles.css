@@ -1,11 +1,11 @@
 /* =========================================
    VARIABLES Y PALETA DE COLOR
    ========================================= */
-   :root {
+:root {
     /* Paleta Autoridad Literaria */
     --bg-color: #050b14;       /* Celúreo muy profundo, casi negro */
     --bg-alt: #0a131f;         /* Variación sutil para contraste */
-    --bg-gradient: radial-gradient(circle at center 30%, #162235 0%, #050b14 70%); /* Nuevo: Gradiente Hero */
+    --bg-gradient: radial-gradient(circle at center 30%, #162235 0%, #050b14 70%);
     
     --text-main: #e6e6e6;      /* Blanco roto (hueso) */
     --text-muted: #8a93a0;     /* Gris azulado metálico */
@@ -66,19 +66,16 @@ ul {
 
 .header-container {
     width: 90%;
-    /* GRID: 3 columnas (Izquierda | Centro | Derecha) */
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
 }
 
-/* 1. IZQUIERDA: Nombre del Autor */
 .author-name {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-self: start;
-    
     font-family: var(--font-serif);
     font-size: 0.75rem;
     letter-spacing: 1.5px;
@@ -88,7 +85,6 @@ ul {
     line-height: 1.3;
 }
 
-/* 2. CENTRO: Logo DRB */
 .header-logo {
     height: 32px;
     width: auto;
@@ -96,7 +92,6 @@ ul {
     justify-self: center;
 }
 
-/* 3. DERECHA: Menú Hamburguesa */
 .menu-toggle {
     background: none;
     border: none;
@@ -169,15 +164,12 @@ ul {
 }
 
 /* =========================================
-   HERO EDITORIAL (NUEVO DISEÑO)
-   ========================================= */
-/* =========================================
-   1. ESTILO BASE (Móviles y Tablet Vertical)
+   HERO EDITORIAL (CON BOTONES INTEGRADOS)
    ========================================= */
 .hero-section {
-    /* Imagen alta para formato vertical */
+    position: relative; 
+    /* Imagen alta para formato vertical (Base) */
     background-image: url('../assets/images/libros/lucifer/Hero_MOVIL_Lucifer.png');
-    
     background-position: top center; 
     background-size: cover; 
     background-repeat: no-repeat;
@@ -189,130 +181,104 @@ ul {
     aspect-ratio: 1750 / 1536; 
 }
 
+/* --- CONTENEDOR DE BOTONES --- */
+.hero-buttons-container {
+    position: absolute;
+    bottom: 5%; 
+    left: 50%;
+    transform: translateX(-50%); 
+    
+    display: flex;
+    flex-direction: column; /* Móvil: uno encima de otro */
+    gap: 15px; 
+    
+    width: 90%;
+    max-width: 600px;
+    z-index: 20; 
+}
+
+/* ESTILO GENERAL BOTONES */
+.btn-lucifer {
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-serif); 
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    padding: 14px 25px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    width: 100%;
+    border: 1px solid transparent;
+}
+
+/* --- BOTÓN PRINCIPAL (LÓGICA DE COLOR) --- */
+
+/* 1. MÓVIL (Por defecto): Gris oscuro */
+.btn-primary {
+    background-color: #454545; /* Gris neutro elegante */
+    color: #ffffff; 
+    border-color: #454545;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.btn-primary:hover {
+    background-color: #5a5a5a; /* Un poco más claro al tocar */
+    border-color: #5a5a5a;
+    transform: translateY(-2px);
+}
+
+/* 2. BOTÓN SECUNDARIO (Info): Transparente */
+.btn-secondary {
+    background-color: rgba(69, 69, 69, 0.4); 
+    color: #e6e6e6;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+    color: #fff;
+}
+
 /* =========================================
-   2. ESTILO TABLET HORIZONTAL Y PC
-   Se activa SOLO si:
-   - El ancho es mayor a 1024px
-   - Y ADEMÁS la pantalla está apaisada (landscape)
+   ESTILO TABLET HORIZONTAL Y PC
+   Se activa SOLO si ancho > 1024px Y pantalla apaisada
    ========================================= */
 @media screen and (min-width: 1024px) and (orientation: landscape) {
     .hero-section {
-        /* Imagen ancha para PC/Tablet Horizontal */
         background-image: url('../assets/images/libros/lucifer/HeroPC_Lucifer.png'); 
-        
         background-position: center;
-
-        /* Ratio panorámico (PC) */
         aspect-ratio: 2752 / 1536; 
     }
-}
 
-.hero-editorial-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    z-index: 10;
-    width: 100%;
-    padding: 0 5%;
-}
+    /* Ajuste de botones para PC */
+    .hero-buttons-container {
+        flex-direction: row; /* En fila horizontal */
+        bottom: 8%; 
+        gap: 25px;
+        justify-content: center;
+    }
 
-/* --- ESCENARIO VISUAL (ARCO) --- */
-.hero-visual-stage {
-    position: relative;
-    width: 240px; /* Ancho controlado en móvil */
-    height: 360px;
-    margin-bottom: 35px;
-    /* Perspectiva sutil */
-    perspective: 1000px;
-}
+    .btn-lucifer {
+        width: auto; 
+        min-width: 200px;
+        font-size: 0.9rem;
+    }
 
-/* El Resplandor trasero (Glow) */
-.hero-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120%;
-    height: 90%;
-    background: radial-gradient(circle, rgba(184, 155, 94, 0.15) 0%, rgba(5, 11, 20, 0) 70%);
-    z-index: 1;
-    pointer-events: none;
-}
+    /* CAMBIO DE COLOR SOLO PARA PC: Azul #0c123f */
+    .btn-primary {
+        background-color: #0c123f; 
+        border-color: #0c123f;
+        box-shadow: 0 4px 15px rgba(12, 18, 63, 0.4);
+    }
 
-/* El Marco de la Imagen (La Ventana) */
-.hero-image-frame {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    /* Forma de ARCO ROMÁNICO */
-    border-radius: 200px 200px 10px 10px; 
-    overflow: hidden;
-    z-index: 2;
-    /* Borde dorado muy fino y elegante */
-    border: 1px solid rgba(184, 155, 94, 0.25);
-    /* Sombra profunda para despegarlo del fondo */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-}
-
-.hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Pequeño zoom out inicial para asegurar llenado */
-    transform: scale(1.01); 
-    display: block;
-}
-
-/* --- TEXTOS EDITORIALES --- */
-.hero-text-content {
-    z-index: 10;
-    max-width: 400px;
-}
-
-.hero-eyebrow {
-    display: block;
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.hero-title {
-    font-family: var(--font-serif);
-    font-size: 2.8rem; /* Grande e impactante */
-    color: var(--text-main);
-    line-height: 1;
-    margin-bottom: 5px;
-    font-weight: normal;
-    text-shadow: 0 10px 20px rgba(0,0,0,0.5);
-}
-
-.hero-subtitle {
-    font-family: var(--font-serif);
-    font-size: 1.2rem;
-    color: var(--text-muted);
-    font-style: italic;
-    margin-bottom: 20px;
-}
-
-.hero-meta-line {
-    width: 40px;
-    height: 1px;
-    background-color: var(--accent);
-    margin: 0 auto 20px auto;
-    opacity: 0.5;
-}
-
-.hero-meta {
-    font-family: var(--font-sans);
-    font-size: 0.8rem;
-    color: #cfd8e3;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
+    .btn-primary:hover {
+        background-color: #151e5e;
+        border-color: #151e5e;
+        box-shadow: 0 6px 20px rgba(12, 18, 63, 0.6);
+    }
 }
 
 /* =========================================
@@ -338,7 +304,7 @@ section {
 }
 
 /* =========================================
-   CARRUSEL DE LIBROS (MÓVIL)
+   CARRUSEL DE LIBROS
    ========================================= */
 .books-section {
     background-color: var(--bg-alt);
@@ -372,7 +338,6 @@ section {
     justify-content: center;
 }
 
-/* Tarjeta de Libro */
 .book-card {
     width: 100%;
     text-align: center;
@@ -428,7 +393,6 @@ section {
     padding: 0 10px;
 }
 
-/* Botones Carrusel */
 .carousel-btn {
     position: absolute;
     top: 35%; 
@@ -450,11 +414,9 @@ section {
 
 .prev-btn { left: 0; }
 .next-btn { right: 0; }
-.carousel-btn.is-hidden { display: none; }
-
 
 /* =========================================
-   OTRAS SECCIONES (WIP & AUTHOR)
+   OTRAS SECCIONES
    ========================================= */
 .wip-section, .author-section {
     padding: 80px 8%;
@@ -476,10 +438,10 @@ section {
 }
 
 /* =========================================
-   FOOTER (ESTILO DAN BROWN)
+   FOOTER
    ========================================= */
 .site-footer {
-    background-color: #080808; /* O usa var(--bg-alt) si prefieres */
+    background-color: #080808; 
     padding: 4rem 2rem;
     text-align: center;
     border-top: 1px solid rgba(184, 155, 94, 0.1);
@@ -534,33 +496,10 @@ section {
     text-transform: uppercase;
 }
 
-/* Ajuste Responsive para Desktop */
 @media (min-width: 768px) {
     .footer-links {
         flex-direction: row;
         justify-content: center;
         gap: 3rem;
     }
-}
-
-
-/* Asegura que el enlace no tenga subrayado ni bordes raros */
-.social-links a {
-    text-decoration: none;
-    display: inline-block;
-    color: inherit; /* Hereda el color de texto definido en tu web */
-    transition: opacity 0.3s ease; /* Pequeño efecto suave al pasar el ratón */
-}
-
-.social-links a:hover {
-    opacity: 0.7; /* Efecto visual sutil al hacer hover */
-}
-
-/* Configuración del tamaño y color del icono */
-.icon-instagram {
-    width: 24px;   /* Tamaño estándar minimalista */
-    height: 24px;
-    fill: currentColor; /* ESTO ES CLAVE: toma el color del texto de tu footer automáticamente */
-    vertical-align: middle;
-    margin-bottom: 5px;
 }

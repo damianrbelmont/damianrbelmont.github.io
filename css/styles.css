@@ -173,23 +173,20 @@ ul {
    ========================================= */
 /* --- ESTILO BASE (Móviles) --- */
 .hero-section {
-    /* Ruta de la imagen MÓVIL */
     background-image: url('../assets/images/libros/lucifer/Hero_MOVIL_Lucifer.png');
     
-    /* Configuración para que se vea bien */
-    background-position: center top; /* Alineada arriba al centro */
+    /* CENTRADO: */
+    background-position: center center;
     background-repeat: no-repeat;
     
-    /* IMPORTANTE: */
-    /* 'cover' recortará los bordes para llenar todo. */
-    /* 'contain' mostrará la imagen entera sin recortes (pero puede dejar huecos). */
-    /* Dado que es una imagen con texto integrado para móvil, prueba 'cover' primero. */
-    background-size: cover; 
+    /* CAMBIO CLAVE: */
+    /* Usamos 'contain' en vez de 'cover'. */
+    /* Esto obliga al navegador a mostrar la imagen ENTERA siempre. */
+    background-size: contain; 
 
-    /* ALTO DE LA SECCIÓN */
-    /* Como el HTML está vacío, necesitamos forzar una altura. */
-    /* 100vh = 100% de la altura de la pantalla del móvil */
-    height: 100vh; 
+    background-color: #0e0e0e; /* Color de fondo para rellenar huecos si los hay */
+    
+    height: 100vh; /* Ocupa toda la pantalla */
     width: 100%;
 }
 

@@ -260,7 +260,7 @@ ul {
         /* 0 arriba/abajo | 15% a los lados */
         /* Cambia 15% por 10% para separarlos más */
         /* Cambia 15% por 25% para juntarlos más */
-        padding: 0 5%; 
+        padding: 5% 8%; 
         
         /* Quitamos el límite de ancho para que usen toda la pantalla */
         max-width: 100%; 

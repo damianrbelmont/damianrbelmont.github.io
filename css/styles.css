@@ -197,8 +197,42 @@ ul {
     gap: 15px;
     padding: 30px 15px;
 
-    border-bottom: 1px solid rgba(184, 155, 94, 0.1);
+    /* border-bottom: 1px solid rgba(184, 155, 94, 0.1); */
     z-index: 20;
+}
+
+/* =========================================
+   LÍNEA SEPARADORA DORADA
+   ========================================= */
+.golden-separator {
+    /* No llega a los bordes (ajusta el 80% si quieres más o menos) */
+    width: 85%;
+    max-width: 1200px;
+    /* Tope para pantallas muy grandes */
+
+    /* Altura de la línea */
+    height: 2px;
+
+    /* Centrado horizontalmente */
+    margin: 0 auto;
+
+    /* EL EFECTO MÁGICO: Degradado de transparente -> dorado -> transparente */
+    /* Usamos var(--accent) para que pille tu color dorado exacto */
+    background: linear-gradient(to right, transparent, var(--accent), transparent);
+
+    /* Opcional: un pequeño "brillo" difuminado alrededor */
+    box-shadow: 0 0 15px rgba(184, 155, 94, 0.4);
+
+    /* Aseguramos que esté por encima del fondo */
+    position: relative;
+    z-index: 25;
+
+    /* Un poco de aire arriba y abajo para que no esté pegada al texto */
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    /* Redondear las puntas para que el difuminado sea más suave */
+    border-radius: 50%;
 }
 
 /* ESTILOS COMUNES DE BOTONES */

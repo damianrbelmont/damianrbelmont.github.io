@@ -103,7 +103,6 @@ ul { list-style: none; }
     padding: 0;
     justify-self: end;
     transition: opacity 0.2s;
-    /* En móvil está visible */
 }
 
 .bar {
@@ -169,11 +168,10 @@ ul { list-style: none; }
 .book-detail-container {
     padding-top: calc(var(--header-height) + 2rem);
     padding-bottom: 4rem;
+    /* Ancho máximo general */
     max-width: 800px;
     margin: 0 auto;
     width: 90%;
-    
-    /* Empujar Footer */
     flex: 1; 
 }
 
@@ -229,7 +227,7 @@ ul { list-style: none; }
     color: #000;
 }
 
-/* Sinopsis */
+/* --- SINOPSIS (MODIFICADA) --- */
 .book-synopsis {
     color: var(--text-main);
     font-family: var(--font-serif);
@@ -237,6 +235,10 @@ ul { list-style: none; }
     line-height: 1.8;
     text-align: justify;
     opacity: 0.9;
+    
+    /* CAMBIO: Columna más estrecha y centrada */
+    max-width: 600px; /* Reducimos ancho */
+    margin: 0 auto;   /* Centramos el bloque */
 }
 
 .book-synopsis p {

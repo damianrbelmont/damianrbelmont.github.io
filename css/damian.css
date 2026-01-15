@@ -7,7 +7,7 @@
     --text-main: #e6e6e6;
     --text-muted: #8a93a0;
     --accent: #b89b5e; /* Dorado */
-    --sepia-text: #d8cdb8; /* Sepia específico solicitado */
+    --sepia-text: #d8cdb8; /* Sepia específico */
     
     --font-serif: 'Georgia', 'Times New Roman', serif; 
     --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
@@ -36,7 +36,7 @@ a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
 /* =========================================
-   HEADER (Exacto a otras páginas)
+   HEADER
    ========================================= */
 .site-header {
     position: fixed;
@@ -84,7 +84,7 @@ ul { list-style: none; }
 
 .site-logo { height: 32px; width: auto; opacity: 0.95; }
 
-/* Menú Derecha */
+/* Botón Hamburguesa (Estilos Base - Visible en Móvil) */
 .menu-toggle {
     background: none;
     border: none;
@@ -102,6 +102,11 @@ ul { list-style: none; }
     height: 2px;
     background-color: var(--accent);
     transition: 0.3s;
+}
+
+/* Menú Escritorio (Oculto por defecto en móvil) */
+.desktop-nav {
+    display: none;
 }
 
 /* =========================================
@@ -153,7 +158,8 @@ ul { list-style: none; }
 .author-main-container {
     padding-top: calc(var(--header-height) + 2rem);
     padding-bottom: 4rem;
-    max-width: 800px;
+    /* En móvil mantenemos un ancho controlado */
+    max-width: 800px; 
     margin: 0 auto;
     width: 90%;
 }
@@ -192,14 +198,14 @@ ul { list-style: none; }
     text-align: left;
 }
 
-/* --- TÍTULO MODIFICADO CON CORMORANT GARAMOND --- */
+/* TÍTULO (Usando Cormorant si está importada en HTML) */
 .author-title {
-    font-family: 'Cormorant Garamond', serif; /* FUENTE NUEVA */
+    font-family: 'Cormorant Garamond', serif; 
     color: var(--accent);
     font-size: 1.8rem;
-    letter-spacing: 0.05em; /* ESPACIADO AJUSTADO */
+    letter-spacing: 0.05em; 
     text-transform: uppercase;
-    font-weight: 600; /* PESO 600 */
+    font-weight: 600; 
     margin-bottom: 2rem;
     line-height: 1.2;
     border-bottom: 1px solid rgba(184, 155, 94, 0.2);
@@ -220,7 +226,7 @@ ul { list-style: none; }
 }
 
 /* =========================================
-   FOOTER (Exacto a otras páginas)
+   FOOTER
    ========================================= */
 .site-footer {
     background-color: #080808;
@@ -276,4 +282,73 @@ ul { list-style: none; }
 
 @media (min-width: 768px) {
     .footer-links { flex-direction: row; justify-content: center; }
+}
+
+/* =========================================
+   MEDIA QUERY: PANTALLAS GRANDES (PC y Tablet Horizontal)
+   ========================================= */
+@media screen and (min-width: 1024px) {
+
+    /* --- GESTIÓN DEL MENÚ PC (Hamburguesa fuera, Texto dentro) --- */
+    
+    /* 1. Ocultar la hamburguesa */
+    .menu-toggle {
+        display: none; 
+    }
+
+    /* 2. Mostrar el menú de texto */
+    .desktop-nav {
+        display: block;
+        justify-self: end; /* Alinear a la derecha del grid */
+    }
+
+    /* 3. Estilos del menú */
+    .desktop-menu {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+    }
+
+    .desktop-menu li {
+        margin: 0;
+    }
+
+    .desktop-menu a {
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--accent); 
+        transition: color 0.3s ease;
+        position: relative;
+    }
+
+    .desktop-menu a:hover {
+        color: #ffffff;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    }
+    
+    /* Línea animada inferior (Opcional, detalle elegante) */
+    .desktop-menu a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--accent);
+        transition: width 0.3s ease;
+    }
+
+    .desktop-menu a:hover::after {
+        width: 100%;
+    }
+
+
+    /* --- ANCHO DE CONTENIDO AL 80% (Solo en PC) --- */
+    /* Sobrescribimos el max-width de 800px */
+    .author-main-container {
+        max-width: 80%; /* ¡Esto expande el contenido! */
+        width: 80%;
+    }
 }

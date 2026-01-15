@@ -15,7 +15,7 @@
 }
 
 /* =========================================
-   RESET Y BASE (MODIFICADO PARA STICKY FOOTER)
+   RESET Y BASE (STICKY FOOTER)
    ========================================= */
 * {
     margin: 0;
@@ -30,10 +30,10 @@ body {
     overflow-x: hidden;
     line-height: 1.6;
 
-    /* --- CAMBIOS PARA EL FOOTER PEGADO --- */
-    min-height: 100vh;      /* 1. Ocupar mínimo toda la altura de la pantalla */
-    display: flex;          /* 2. Usar Flexbox */
-    flex-direction: column; /* 3. Organizar en columna vertical */
+    /* Configuración para pegar el footer abajo */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 a {
@@ -66,6 +66,7 @@ ul {
 
 .header-container {
     width: 90%;
+    /* Flexbox para distribuir elementos */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -101,7 +102,7 @@ ul {
     opacity: 0.95;
 }
 
-/* DERECHA: Botones de Menú */
+/* DERECHA: Menú */
 .menu-toggle {
     background: none;
     border: none;
@@ -118,7 +119,7 @@ ul {
     transform: scale(0.95);
 }
 
-/* Menú Escritorio */
+/* Menú Escritorio (Oculto en móvil) */
 .desktop-nav {
     display: none;
 }
@@ -178,9 +179,7 @@ ul {
     margin: 0 auto;
     text-align: center;
     margin-top: var(--header-height); 
-    
-    /* --- CAMBIO PARA EL FOOTER PEGADO --- */
-    /* Esto hace que el contenedor crezca si sobra espacio */
+    /* Permite que el contenedor crezca para empujar el footer */
     flex: 1; 
 }
 
@@ -264,8 +263,6 @@ ul {
     padding: 4rem 2rem;
     text-align: center;
     border-top: 1px solid rgba(184, 155, 94, 0.1);
-    
-    /* No hace falta margin-top: auto porque ya lo empuja el flex: 1 del main */
 }
 
 .footer-links {
@@ -315,7 +312,7 @@ ul {
 }
 
 /* =========================================
-   MODAL POSEIDÓN
+   MODAL POSEIDÓN (ESTILOS BASE MÓVIL)
    ========================================= */
 .modal {
     display: none; 
@@ -331,7 +328,7 @@ ul {
 
 .modal-content {
     background-color: #111;
-    margin: 40% auto;
+    margin: 40% auto; /* Margen para MÓVIL */
     padding: 2rem;
     border: 1px solid var(--accent);
     width: 80%; 
@@ -365,7 +362,7 @@ ul {
    ========================================= */
 @media screen and (min-width: 1024px) {
 
-    /* --- CAMBIO DE MENÚ (Hamburguesa -> Texto) --- */
+    /* --- 1. MENÚ PC --- */
     .menu-toggle {
         display: none; 
     }
@@ -374,7 +371,6 @@ ul {
         display: block;
     }
 
-    /* Estilos del menú */
     .desktop-menu {
         display: flex;
         gap: 30px;
@@ -413,7 +409,7 @@ ul {
         width: 100%;
     }
 
-    /* Ajustes generales de la rejilla para PC */
+    /* --- 2. GRID NOVELAS --- */
     .books-grid {
         grid-template-columns: repeat(3, 1fr);
         max-width: 900px;
@@ -421,5 +417,15 @@ ul {
     .footer-links {
         flex-direction: row;
         justify-content: center;
+    }
+
+    /* --- 3. CENTRADO PERFECTO DEL MODAL EN PC --- */
+    .modal-content {
+        margin: 0; /* Anulamos el 40% de móvil */
+        
+        position: absolute; /* Lo sacamos del flujo */
+        top: 50%;  /* Mitad vertical */
+        left: 50%; /* Mitad horizontal */
+        transform: translate(-50%, -50%); /* Centrado matemático exacto */
     }
 }

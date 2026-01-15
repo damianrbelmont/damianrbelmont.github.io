@@ -204,35 +204,34 @@ ul {
 /* =========================================
    LÍNEA SEPARADORA DORADA
    ========================================= */
+/* =========================================
+   LÍNEA SEPARADORA DORADA (VERSIÓN VISIBLE)
+   ========================================= */
 .golden-separator {
-    /* No llega a los bordes (ajusta el 80% si quieres más o menos) */
-    width: 85%;
-    max-width: 1200px;
-    /* Tope para pantallas muy grandes */
-
-    /* Altura de la línea */
-    height: 2px;
-
-    /* Centrado horizontalmente */
-    margin: 0 auto;
-
-    /* EL EFECTO MÁGICO: Degradado de transparente -> dorado -> transparente */
-    /* Usamos var(--accent) para que pille tu color dorado exacto */
-    background: linear-gradient(to right, transparent, var(--accent), transparent);
-
-    /* Opcional: un pequeño "brillo" difuminado alrededor */
-    box-shadow: 0 0 15px rgba(184, 155, 94, 0.4);
-
-    /* Aseguramos que esté por encima del fondo */
+    display: block; /* Aseguramos comportamiento de bloque */
+    width: 90%;
+    max-width: 1000px; /* Un poco más corta para concentrar el color */
+    
+    height: 3px; /* Aumentamos 1px para mejor visibilidad */
+    margin: 25px auto; /* Más separación vertical */
+    
+    /* Degradado explícito: Transparente -> Dorado Sólido -> Transparente */
+    /* Usamos '90deg' para asegurar la dirección horizontal */
+    background: linear-gradient(
+        90deg, 
+        rgba(184, 155, 94, 0) 0%, 
+        rgba(184, 155, 94, 1) 45%, 
+        rgba(184, 155, 94, 1) 55%, 
+        rgba(184, 155, 94, 0) 100%
+    );
+    
+    /* Brillo para que destaque sobre el fondo oscuro */
+    box-shadow: 0 0 10px rgba(184, 155, 94, 0.6);
+    
+    border: none;
     position: relative;
-    z-index: 25;
-
-    /* Un poco de aire arriba y abajo para que no esté pegada al texto */
-    margin-top: 10px;
-    margin-bottom: 10px;
-
-    /* Redondear las puntas para que el difuminado sea más suave */
-    border-radius: 50%;
+    z-index: 50; /* Z-index alto para asegurar que flote sobre todo */
+    border-radius: 2px;
 }
 
 /* ESTILOS COMUNES DE BOTONES */

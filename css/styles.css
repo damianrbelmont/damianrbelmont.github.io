@@ -207,31 +207,35 @@ ul {
 /* =========================================
    LÍNEA SEPARADORA DORADA (VERSIÓN VISIBLE)
    ========================================= */
+/* =========================================
+   LÍNEA SEPARADORA (IMAGEN PERSONALIZADA)
+   ========================================= */
 .golden-separator {
-    display: block; /* Aseguramos comportamiento de bloque */
-    width: 90%;
-    max-width: 1000px; /* Un poco más corta para concentrar el color */
+    display: block;
+    width: 95%; /* Ocupa casi todo el ancho */
+    max-width: 1200px; /* Tope para que no se estire demasiado en pantallas gigantes */
+    margin: 20px auto; /* Centrado con aire arriba y abajo */
+
+    /* --- CONFIGURACIÓN DE LA IMAGEN --- */
+    /* Asumiendo que tu archivo css está en la carpeta 'css' y la imagen en 'assets/images' */
+    background-image: url('../assets/images/Linea.png');
     
-    height: 3px; /* Aumentamos 1px para mejor visibilidad */
-    margin: 25px auto; /* Más separación vertical */
+    background-repeat: no-repeat;
+    background-position: center center;
     
-    /* Degradado explícito: Transparente -> Dorado Sólido -> Transparente */
-    /* Usamos '90deg' para asegurar la dirección horizontal */
-    background: linear-gradient(
-        90deg, 
-        rgba(184, 155, 94, 0) 0%, 
-        rgba(184, 155, 94, 1) 45%, 
-        rgba(184, 155, 94, 1) 55%, 
-        rgba(184, 155, 94, 0) 100%
-    );
+    /* 'contain' asegura que la imagen se vea entera sin cortarse */
+    background-size: contain; 
     
-    /* Brillo para que destaque sobre el fondo oscuro */
-    box-shadow: 0 0 10px rgba(184, 155, 94, 0.6);
-    
+    /* --- IMPORTANTE: ALTURA --- */
+    /* Tienes que darle altura a la caja para que la imagen quepa.
+       Si la línea se ve muy fina o pequeña, aumenta este número (ej: 80px, 100px) */
+    height: 60px; 
+
+    /* Limpieza de estilos anteriores */
+    background-color: transparent;
     border: none;
-    position: relative;
-    z-index: 50; /* Z-index alto para asegurar que flote sobre todo */
-    border-radius: 2px;
+    box-shadow: none;
+    z-index: 50;
 }
 
 /* ESTILOS COMUNES DE BOTONES */

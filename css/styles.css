@@ -197,46 +197,11 @@ ul {
     gap: 15px;
     padding: 30px 15px;
 
-    /* border-bottom: 1px solid rgba(184, 155, 94, 0.1); */
+    border-bottom: 1px solid rgba(184, 155, 94, 0.1);
     z-index: 20;
 }
 
-/* =========================================
-   LÍNEA SEPARADORA DORADA
-   ========================================= */
-/* =========================================
-   LÍNEA SEPARADORA DORADA (VERSIÓN VISIBLE)
-   ========================================= */
-/* =========================================
-   LÍNEA SEPARADORA (IMAGEN PERSONALIZADA)
-   ========================================= */
-.golden-separator {
-    display: block;
-    width: 95%; /* Ocupa casi todo el ancho */
-    max-width: 1200px; /* Tope para que no se estire demasiado en pantallas gigantes */
-    margin: 20px auto; /* Centrado con aire arriba y abajo */
 
-    /* --- CONFIGURACIÓN DE LA IMAGEN --- */
-    /* Asumiendo que tu archivo css está en la carpeta 'css' y la imagen en 'assets/images' */
-    background-image: url('../assets/images/Linea.png');
-    
-    background-repeat: no-repeat;
-    background-position: center center;
-    
-    /* 'contain' asegura que la imagen se vea entera sin cortarse */
-    background-size: contain; 
-    
-    /* --- IMPORTANTE: ALTURA --- */
-    /* Tienes que darle altura a la caja para que la imagen quepa.
-       Si la línea se ve muy fina o pequeña, aumenta este número (ej: 80px, 100px) */
-    height: 60px; 
-
-    /* Limpieza de estilos anteriores */
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    z-index: 50;
-}
 
 /* ESTILOS COMUNES DE BOTONES */
 .btn-lucifer {

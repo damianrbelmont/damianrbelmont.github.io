@@ -187,7 +187,7 @@ ul {
     width: 100%;
 
     /* CAMBIO REALIZADO: Ahora usa el color #0a131f */
-    background-color: var(--bg-alt);
+    background-color: #0a131f;
 
     /* Flexbox para centrar botones */
     display: flex;

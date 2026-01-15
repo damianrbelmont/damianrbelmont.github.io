@@ -236,13 +236,15 @@ ul {
 
 /* Botón Secundario: DESCUBRIR (Borde fino) */
 .btn-secondary {
-    background-color: transparent;
-    color: var(--text-muted);
-    border: 1px solid rgba(138, 147, 160, 0.3);
+    background-color: var(--accent);
+    color: #050b14;
+    /* Texto oscuro para contraste */
+    border: 1px solid var(--accent);
+    font-weight: bold;
 }
 
 .btn-secondary:hover {
-    border-color: var(--accent);
+    background-color: transparent;
     color: var(--accent);
     transform: translateY(-2px);
 }

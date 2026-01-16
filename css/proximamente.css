@@ -1,0 +1,195 @@
+/* =========================================
+   VARIABLES
+   ========================================= */
+:root {
+    --bg-color: #050b14;
+    --bg-alt: #0a131f;
+    --text-main: #e6e6e6;
+    --text-muted: #8a93a0;
+    --accent: #b89b5e; /* Dorado */
+    --sepia-text: #d8cdb8; 
+    
+    --font-serif: 'Georgia', 'Times New Roman', serif; 
+    --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+    
+    --header-height: 75px; 
+}
+
+/* =========================================
+   RESET Y BASE (STICKY FOOTER)
+   ========================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-serif);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* =========================================
+   HEADER (FLEXBOX)
+   ========================================= */
+.site-header {
+    position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
+    background-color: rgba(5, 11, 20, 0.95); border-bottom: 1px solid rgba(184, 155, 94, 0.1);
+    z-index: 1000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);
+}
+
+.header-container {
+    width: 90%;
+    display: flex; justify-content: space-between; align-items: center; position: relative;
+}
+
+.author-name-header {
+    font-family: var(--font-serif); font-size: 0.75rem; letter-spacing: 1.5px;
+    text-transform: uppercase; font-weight: bold; color: var(--accent);
+    display: flex; flex-direction: column; line-height: 1.3;
+}
+
+.brand-center {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 10;
+}
+.site-logo { height: 32px; width: auto; opacity: 0.95; }
+
+.menu-toggle {
+    background: none; border: none; cursor: pointer; z-index: 1001;
+    display: flex; flex-direction: column; gap: 5px;
+}
+.bar { width: 25px; height: 2px; background-color: var(--accent); transition: 0.3s; }
+
+.desktop-nav { display: none; }
+
+/* =========================================
+   MENÚ MÓVIL
+   ========================================= */
+.mobile-nav {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color);
+    z-index: 2000; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transform: translateY(-100%); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.mobile-nav.active { transform: translateY(0); }
+.menu-close { position: absolute; top: 20px; right: 5%; background: none; border: none; color: var(--accent); font-size: 2.5rem; cursor: pointer; }
+.nav-list { text-align: center; }
+.nav-list li { margin: 30px 0; }
+.nav-list a {
+    font-family: var(--font-serif); font-size: 1.5rem; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text-muted);
+}
+.nav-list a:hover { color: var(--accent); }
+
+/* =========================================
+   CONTENIDO PRINCIPAL
+   ========================================= */
+.dev-main-container {
+    padding-top: calc(var(--header-height) + 2rem);
+    padding-bottom: 4rem;
+    max-width: 800px; /* Límite para móvil */
+    margin: 0 auto;
+    width: 90%;
+    flex: 1; /* Para empujar el footer */
+}
+
+/* Imagen */
+.dev-image-section {
+    margin-bottom: 2.5rem;
+    width: 100%;
+}
+
+.dev-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 5px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    object-fit: cover;
+    aspect-ratio: 16/9; /* Formato panorámico */
+}
+
+/* Contenido */
+.dev-content-section {
+    text-align: left;
+}
+
+.dev-title {
+    font-family: 'Cormorant Garamond', serif; 
+    color: var(--accent);
+    font-size: 1.8rem;
+    letter-spacing: 0.05em; 
+    text-transform: uppercase;
+    font-weight: 600; 
+    margin-bottom: 2rem;
+    line-height: 1.2;
+    border-bottom: 1px solid rgba(184, 155, 94, 0.2);
+    padding-bottom: 1rem;
+    display: inline-block;
+    width: 100%;
+}
+
+.dev-text {
+    color: var(--sepia-text);
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.dev-text p {
+    margin-bottom: 1.5rem;
+}
+
+.wip-signature {
+    color: var(--accent);
+    font-style: italic;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.site-footer {
+    background-color: #080808; padding: 4rem 2rem; text-align: center; border-top: 1px solid rgba(184, 155, 94, 0.1);
+}
+.footer-links { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 3rem; }
+.footer-links a { color: var(--accent); font-family: var(--font-sans); letter-spacing: 2px; font-size: 0.9rem; text-transform: uppercase; transition: color 0.3s; }
+.footer-links a:hover { color: #fff; }
+.social-icons { display: flex; justify-content: center; gap: 2rem; margin-bottom: 3rem; }
+.social-icons .icon { width: 24px; height: 24px; color: var(--accent); transition: transform 0.3s, color 0.3s; }
+.social-icons a:hover .icon { color: #fff; transform: translateY(-3px); }
+.footer-legal p { color: #444; font-size: 0.7rem; letter-spacing: 1px; font-family: var(--font-sans); text-transform: uppercase; }
+
+@media (min-width: 768px) {
+    .footer-links { flex-direction: row; justify-content: center; }
+}
+
+/* =========================================
+   MEDIA QUERY: PC
+   ========================================= */
+@media screen and (min-width: 1024px) {
+
+    /* MENÚ PC */
+    .menu-toggle { display: none; }
+    .desktop-nav { display: block; }
+    .desktop-menu { display: flex; gap: 30px; align-items: center; }
+    .desktop-menu li { margin: 0; }
+    .desktop-menu a {
+        font-family: var(--font-sans); font-size: 0.8rem; letter-spacing: 2px;
+        text-transform: uppercase; color: var(--accent); transition: color 0.3s ease; position: relative;
+    }
+    .desktop-menu a:hover { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.4); }
+    
+    /* Enlace activo */
+    .active-link { border-bottom: 1px solid var(--accent); }
+
+    /* ANCHO AL 80% */
+    .dev-main-container {
+        max-width: 80%; 
+        width: 80%;
+    }
+}

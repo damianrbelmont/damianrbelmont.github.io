@@ -91,7 +91,7 @@ ul { list-style: none; }
 .dev-main-container {
     padding-top: calc(var(--header-height) + 2rem);
     padding-bottom: 4rem;
-    max-width: 800px; /* Límite inicial (Móvil) */
+    max-width: 800px; /* Límite inicial (Móvil/Tablet vertical) */
     margin: 0 auto;
     width: 90%;
     flex: 1; 
@@ -101,6 +101,10 @@ ul { list-style: none; }
 .dev-image-section {
     margin-bottom: 2.5rem;
     width: 100%;
+    /* Añadido para igualar estructura a Damian */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .dev-photo {
@@ -198,9 +202,9 @@ ul { list-style: none; }
     /* Enlace activo */
     .active-link { border-bottom: 1px solid var(--accent); }
 
-    /* ANCHO AL 80% EN PC */
+    /* ANCHO AL 60% EN PC (Igual que Damian) */
     .dev-main-container {
-        max-width: 80%; 
-        width: 80%;
+        max-width: 60%; 
+        width: 60%;
     }
 }

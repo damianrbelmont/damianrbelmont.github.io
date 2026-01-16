@@ -455,13 +455,15 @@ ul {
         z-index: 5;
         filter: grayscale(100%);
     }
-}
 
-/* AUMENTO DE TAMAÑO TITULOS SECCIONES */
+    /* AUMENTO DE TAMAÑO TITULOS SECCIONES */
 .section-title {
     font-size: 2 rem;
 
 }
+}
+
+
 
 /* =========================================
    RESTO DE SECCIONES

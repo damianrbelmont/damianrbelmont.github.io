@@ -86,15 +86,15 @@ ul { list-style: none; }
 .nav-list a:hover { color: var(--accent); }
 
 /* =========================================
-   CONTENIDO PRINCIPAL
+   CONTENIDO PRINCIPAL (PRÓXIMAMENTE)
    ========================================= */
 .dev-main-container {
     padding-top: calc(var(--header-height) + 2rem);
     padding-bottom: 4rem;
-    max-width: 800px; /* Límite para móvil */
+    max-width: 800px; /* Límite inicial (Móvil) */
     margin: 0 auto;
     width: 90%;
-    flex: 1; /* Para empujar el footer */
+    flex: 1; 
 }
 
 /* Imagen */
@@ -109,7 +109,18 @@ ul { list-style: none; }
     border-radius: 5px; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     object-fit: cover;
-    aspect-ratio: 16/9; /* Formato panorámico */
+    aspect-ratio: 16/9; 
+}
+
+/* Crédito de IA */
+.image-credit {
+    font-family: var(--font-serif);
+    font-size: 0.75rem; 
+    color: var(--text-muted); 
+    font-style: italic; 
+    text-align: left; 
+    margin-top: 10px; 
+    opacity: 0.7;
 }
 
 /* Contenido */
@@ -169,7 +180,7 @@ ul { list-style: none; }
 }
 
 /* =========================================
-   MEDIA QUERY: PC
+   MEDIA QUERY: PC (ANCHO Y MENÚ)
    ========================================= */
 @media screen and (min-width: 1024px) {
 
@@ -187,7 +198,7 @@ ul { list-style: none; }
     /* Enlace activo */
     .active-link { border-bottom: 1px solid var(--accent); }
 
-    /* ANCHO AL 80% */
+    /* ANCHO AL 80% EN PC */
     .dev-main-container {
         max-width: 80%; 
         width: 80%;

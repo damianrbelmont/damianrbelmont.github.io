@@ -198,7 +198,7 @@ ul { list-style: none; }
 /* =========================================
    MEDIA QUERY: PC & TABLET (2 COLUMNAS)
    ========================================= */
-@media screen and (min-width: 768px) { /* A partir de tablet */
+@media screen and (min-width: 1024px) { /* A partir de tablet */
 
     /* MENÚ PC */
     .menu-toggle { display: none; }

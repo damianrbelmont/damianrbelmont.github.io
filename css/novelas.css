@@ -7,232 +7,147 @@
     --text-main: #e6e6e6;
     --text-muted: #8a93a0;
     --accent: #b89b5e; 
-    
     --font-serif: 'Georgia', 'Times New Roman', serif; 
     --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-    
     --header-height: 75px; 
 }
 
 /* =========================================
    RESET Y BASE (STICKY FOOTER)
    ========================================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
     font-family: var(--font-serif);
-    overflow-x: hidden;
     line-height: 1.6;
-
-    /* Configuración para pegar el footer abajo */
+    overflow-x: hidden;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.3s ease;
-}
-
-ul {
-    list-style: none;
-}
+a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+ul { list-style: none; }
 
 /* =========================================
    HEADER (FLEXBOX)
    ========================================= */
 .site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: var(--header-height);
-    background-color: rgba(5, 11, 20, 0.95);
-    border-bottom: 1px solid rgba(184, 155, 94, 0.1);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(10px);
+    position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
+    background-color: rgba(5, 11, 20, 0.95); border-bottom: 1px solid rgba(184, 155, 94, 0.1);
+    z-index: 1000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);
 }
-
 .header-container {
-    width: 90%;
-    /* Flexbox para distribuir elementos */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative; 
+    width: 90%; display: flex; justify-content: space-between; align-items: center; position: relative;
 }
-
-/* IZQUIERDA: Nombre del Autor */
 .author-name {
-    display: flex;
-    flex-direction: column;
-    justify-self: start;
-    font-family: var(--font-serif);
-    font-size: 0.75rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: var(--accent);
-    line-height: 1.3;
+    display: flex; flex-direction: column; justify-self: start;
+    font-family: var(--font-serif); font-size: 0.75rem; letter-spacing: 1.5px;
+    text-transform: uppercase; font-weight: bold; color: var(--accent); line-height: 1.3;
 }
-
-/* CENTRO: Logo Absoluto */
-.brand-center {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-}
-
-.header-logo {
-    height: 32px;
-    width: auto;
-    opacity: 0.95;
-}
-
-/* DERECHA: Menú */
+.brand-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 10; }
+.header-logo { height: 32px; width: auto; opacity: 0.95; }
 .menu-toggle {
-    background: none;
-    border: none;
-    color: var(--accent);
-    font-size: 1.8rem;
-    cursor: pointer;
-    padding: 0;
-    justify-self: end;
-    transition: opacity 0.2s;
+    background: none; border: none; color: var(--accent); font-size: 1.8rem; cursor: pointer; padding: 0; transition: opacity 0.2s;
 }
-
-.menu-toggle:active {
-    opacity: 0.7;
-    transform: scale(0.95);
-}
-
-/* Menú Escritorio (Oculto en móvil) */
-.desktop-nav {
-    display: none;
-}
+.desktop-nav { display: none; }
 
 /* =========================================
    MENÚ MÓVIL
    ========================================= */
 .mobile-nav { 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: var(--bg-color);
-    z-index: 2000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transform: translateY(-100%);
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color);
+    z-index: 2000; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transform: translateY(-100%); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
-
-.mobile-nav.active { 
-    transform: translateY(0);
-}
-
-.menu-close {
-    position: absolute;
-    top: 20px;
-    right: 5%;
-    background: none;
-    border: none;
-    color: var(--accent);
-    font-size: 2.5rem;
-    cursor: pointer;
-    line-height: 1;
-}
-
+.mobile-nav.active { transform: translateY(0); }
+.menu-close { position: absolute; top: 20px; right: 5%; background: none; border: none; color: var(--accent); font-size: 2.5rem; cursor: pointer; }
 .nav-list { text-align: center; }
 .nav-list li { margin: 30px 0; }
 .nav-list a {
-    font-family: var(--font-serif);
-    font-size: 1.5rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
+    font-family: var(--font-serif); font-size: 1.5rem; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text-muted);
 }
 .nav-list a:hover { color: var(--accent); }
 
 /* =========================================
-   CUERPO NOVELAS (GRID)
+   CUERPO: REJILLA DE NOVELAS
    ========================================= */
 .novels-container {
     padding: 3rem 1.5rem;
-    max-width: 1200px;
+    width: 90%;
     margin: 0 auto;
     text-align: center;
     margin-top: var(--header-height); 
-    /* Permite que el contenedor crezca para empujar el footer */
-    flex: 1; 
+    flex: 1; /* Empuja el footer */
 }
 
 .page-title {
     color: var(--accent);
-    font-family: var(--font-serif);
+    font-family: 'Cormorant Garamond', serif; /* Si usas la fuente importada */
     font-size: 2rem;
     margin-bottom: 3rem;
     letter-spacing: 3px;
     font-weight: normal;
     text-transform: uppercase;
+    border-bottom: 1px solid rgba(184, 155, 94, 0.3);
+    display: inline-block;
+    padding-bottom: 10px;
 }
 
-/* Grid Layout */
+/* --- GRID CONFIG --- */
 .books-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 columnas exactas */
-    gap: 20px;
+    /* MÓVIL: 1 columna por defecto */
+    grid-template-columns: 1fr; 
+    gap: 50px; /* Espacio vertical entre libros */
     justify-content: center;
+    max-width: 400px; /* Ancho máximo en móvil */
+    margin: 0 auto;
 }
 
+/* Tarjeta individual */
 .book-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
+.book-item:hover {
+    transform: translateY(-5px);
+}
+
+.book-link-wrapper {
+    display: block;
+    width: 100%;
+}
+
+/* Portada Real */
 .book-cover {
     width: 100%;
     height: auto;
     border-radius: 5px;
     aspect-ratio: 2 / 3;
     object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    transition: transform 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin-bottom: 15px;
 }
 
-.book-item:hover .book-cover {
-    transform: scale(1.02);
-}
-
-/* Placeholder Poseidón */
+/* Placeholder Futuro (?) */
 .book-placeholder {
     width: 100%;
     border-radius: 5px;
     aspect-ratio: 2 / 3;
-    background-color: #111;
-    border: 1px solid #333;
+    background-color: #0e1621;
+    border: 1px solid #2a3b55;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin-bottom: 15px;
     transition: border-color 0.3s;
 }
 
@@ -243,189 +158,72 @@ ul {
 .placeholder-symbol {
     font-size: 4rem;
     color: var(--accent);
-    opacity: 0.5;
+    opacity: 0.3;
+    font-family: var(--font-serif);
 }
 
+/* Textos */
 .book-title {
-    margin-top: 1rem;
-    color: var(--text-muted);
-    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    color: var(--text-main);
+    font-size: 1.1rem;
     letter-spacing: 1px;
     text-transform: uppercase;
-    font-family: var(--font-sans);
+    font-family: var(--font-serif);
+}
+
+.book-meta {
+    color: var(--accent);
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 5px;
 }
 
 /* =========================================
    FOOTER
    ========================================= */
 .site-footer {
-    background-color: #080808;
-    padding: 4rem 2rem;
-    text-align: center;
-    border-top: 1px solid rgba(184, 155, 94, 0.1);
+    background-color: #080808; padding: 4rem 2rem; text-align: center; border-top: 1px solid rgba(184, 155, 94, 0.1);
 }
-
-.footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-}
-
-.footer-links a {
-    color: var(--accent);
-    font-family: var(--font-sans);
-    letter-spacing: 2px;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    transition: color 0.3s;
-}
-
+.footer-links { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 3rem; }
+.footer-links a { color: var(--accent); font-family: var(--font-sans); letter-spacing: 2px; font-size: 0.9rem; text-transform: uppercase; transition: color 0.3s; }
 .footer-links a:hover { color: #fff; }
+.social-icons { display: flex; justify-content: center; gap: 2rem; margin-bottom: 3rem; }
+.social-icons .icon { width: 24px; height: 24px; color: var(--accent); transition: transform 0.3s, color 0.3s; }
+.social-icons a:hover .icon { color: #fff; transform: translateY(-3px); }
+.footer-legal p { color: #444; font-size: 0.7rem; letter-spacing: 1px; font-family: var(--font-sans); text-transform: uppercase; }
 
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 3rem;
-}
-
-.social-icons .icon {
-    width: 24px;
-    height: 24px;
-    color: var(--accent);
-    transition: transform 0.3s, color 0.3s;
-}
-
-.social-icons a:hover .icon {
-    color: #fff;
-    transform: translateY(-3px);
-}
-
-.footer-legal p {
-    color: #444;
-    font-size: 0.7rem;
-    letter-spacing: 1px;
-    line-height: 1.4;
-    font-family: var(--font-sans);
-    text-transform: uppercase;
-}
 
 /* =========================================
-   MODAL POSEIDÓN (ESTILOS BASE MÓVIL)
+   MEDIA QUERY: PC & TABLET (2 COLUMNAS)
    ========================================= */
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 3000; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(0,0,0,0.9); 
-    backdrop-filter: blur(5px);
-}
+@media screen and (min-width: 768px) { /* A partir de tablet */
 
-.modal-content {
-    background-color: #111;
-    margin: 40% auto; /* Margen para MÓVIL */
-    padding: 2rem;
-    border: 1px solid var(--accent);
-    width: 80%; 
-    max-width: 400px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 0 20px rgba(184, 155, 94, 0.2);
-}
-
-.close-modal {
-    color: var(--accent);
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 15px;
-}
-
-.modal-content p {
-    color: var(--text-main);
-    font-family: var(--font-serif);
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    line-height: 1.5;
-}
-
-/* =========================================
-   MEDIA QUERY: PANTALLAS GRANDES (PC y Tablet Horizontal)
-   ========================================= */
-@media screen and (min-width: 1024px) {
-
-    /* --- 1. MENÚ PC --- */
-    .menu-toggle {
-        display: none; 
-    }
-
-    .desktop-nav {
-        display: block;
-    }
-
-    .desktop-menu {
-        display: flex;
-        gap: 30px;
-        align-items: center;
-    }
-
+    /* MENÚ PC */
+    .menu-toggle { display: none; }
+    .desktop-nav { display: block; }
+    .desktop-menu { display: flex; gap: 30px; align-items: center; }
     .desktop-menu li { margin: 0; }
-
     .desktop-menu a {
-        font-family: var(--font-sans);
-        font-size: 0.8rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--accent); 
-        transition: color 0.3s ease;
-        position: relative;
+        font-family: var(--font-sans); font-size: 0.8rem; letter-spacing: 2px;
+        text-transform: uppercase; color: var(--accent); transition: color 0.3s ease; position: relative;
     }
-
-    .desktop-menu a:hover {
-        color: #ffffff;
-        text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
-    }
-    
+    .desktop-menu a:hover { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.4); }
     .desktop-menu a::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 1px;
-        bottom: -5px;
-        left: 0;
-        background-color: var(--accent);
-        transition: width 0.3s ease;
+        content: ''; position: absolute; width: 0; height: 1px; bottom: -5px; left: 0;
+        background-color: var(--accent); transition: width 0.3s ease;
     }
+    .desktop-menu a:hover::after { width: 100%; }
+    .active-link { border-bottom: 1px solid var(--accent); }
 
-    .desktop-menu a:hover::after {
-        width: 100%;
-    }
+    /* FOOTER */
+    .footer-links { flex-direction: row; justify-content: center; }
 
-    /* --- 2. GRID NOVELAS --- */
+    /* --- GRID 2 COLUMNAS --- */
     .books-grid {
-        grid-template-columns: repeat(3, 1fr);
-        max-width: 900px;
-    }
-    .footer-links {
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    /* --- 3. CENTRADO PERFECTO DEL MODAL EN PC --- */
-    .modal-content {
-        margin: 0; /* Anulamos el 40% de móvil */
-        
-        position: absolute; /* Lo sacamos del flujo */
-        top: 50%;  /* Mitad vertical */
-        left: 50%; /* Mitad horizontal */
-        transform: translate(-50%, -50%); /* Centrado matemático exacto */
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+        gap: 60px; /* Más espacio entre ellas */
+        max-width: 800px; /* Ancho total controlado para que no se separen demasiado */
     }
 }

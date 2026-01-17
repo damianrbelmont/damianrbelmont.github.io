@@ -348,4 +348,14 @@ ul { list-style: none; }
         max-width: 60%; 
         width: 60%;
     }
+
+    /* =========================================
+   Añade esto DENTRO del bloque @media screen and (min-width: 1024px)
+   al final de css/damian.css
+   ========================================= */
+
+    /* Estilo para la página activa */
+    .active-link {
+        border-bottom: 1px solid var(--accent);
+    }
 }

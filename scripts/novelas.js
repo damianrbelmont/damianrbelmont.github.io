@@ -1,57 +1,32 @@
-document.addEventListener('DOMContentLoaded', () => {
+/* =========================================
+   LÓGICA DE MODALES (Catálogo de Novelas)
+   ========================================= */
 
-    /* =========================================
-       1. FUNCIONALIDAD DEL MENÚ HAMBURGUESA
-       (Específico para la página de Novelas)
-    ========================================= */
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mainNav = document.querySelector('.main-nav');
-
-    if (menuToggle && mainNav) {
-        menuToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-            
-            // Animación de las barras (X)
-            const bars = menuToggle.querySelectorAll('.bar');
-            if (mainNav.classList.contains('active')) {
-                // Convertir en X
-                bars[0].style.transform = "rotate(-45deg) translate(-5px, 6px)";
-                bars[1].style.opacity = "0";
-                bars[2].style.transform = "rotate(45deg) translate(-5px, -6px)";
-            } else {
-                // Volver a 3 rayas
-                bars[0].style.transform = "none";
-                bars[1].style.opacity = "1";
-                bars[2].style.transform = "none";
-            }
-        });
+// 1. FUNCIÓN PARA ABRIR EL MODAL
+// Se llama desde el HTML con onclick="openModal('id-del-modal')"
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('active'); // Muestra el modal (CSS display: flex)
+        document.body.style.overflow = 'hidden'; // Bloquea el scroll de la web de fondo
     }
+}
 
-    /* =========================================
-       2. MODAL DE POSEIDÓN
-    ========================================= */
-    const modal = document.getElementById("modal-poseidon");
-    const trigger = document.getElementById("poseidon-trigger");
-    const closeBtn = document.querySelector(".close-modal");
+// 2. FUNCIÓN PARA CERRAR EL MODAL
+// Se llama desde la "X" del HTML
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active'); // Oculta el modal
+        document.body.style.overflow = ''; // Reactiva el scroll
+    }
+}
 
-    if (modal && trigger && closeBtn) {
-        
-        // Abrir modal
-        trigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            modal.style.display = "block";
-        });
-
-        // Cerrar con la X
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = "none";
-        });
-
-        // Cerrar clicando fuera
-        window.addEventListener('click', (e) => {
-            if (e.target == modal) {
-                modal.style.display = "none";
-            }
-        });
+// 3. CERRAR AL HACER CLIC FUERA (EN EL FONDO OSCURO)
+window.addEventListener('click', (event) => {
+    // Si el elemento clickeado es el fondo oscuro (overlay)
+    if (event.target.classList.contains('modal-overlay')) {
+        event.target.classList.remove('active');
+        document.body.style.overflow = ''; // Reactiva el scroll
     }
 });

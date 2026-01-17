@@ -59,7 +59,7 @@
                 </a>
             </article>
 
-            <article class="book-item future-project">
+            <article class="book-item future-project" onclick="openModal('modal-tech')" style="cursor: pointer;">
                 <div class="book-placeholder">
                     <span class="placeholder-symbol">?</span>
                 </div>
@@ -67,7 +67,7 @@
                 <p class="book-meta">2026 | THRILLER TECNOLÓGICO</p>
             </article>
 
-            <article class="book-item future-project">
+            <article class="book-item future-project" onclick="openModal('modal-fantasy1')" style="cursor: pointer;">
                 <div class="book-placeholder">
                     <span class="placeholder-symbol">?</span>
                 </div>
@@ -75,7 +75,7 @@
                 <p class="book-meta">FANTASÍA ÉPICA VOL. 1</p>
             </article>
 
-            <article class="book-item future-project">
+            <article class="book-item future-project" onclick="openModal('modal-fantasy2')" style="cursor: pointer;">
                 <div class="book-placeholder">
                     <span class="placeholder-symbol">?</span>
                 </div>
@@ -104,6 +104,7 @@
             </a>
             <a href="https://www.facebook.com/share/1BuDBrXJRR/" target="_blank" rel="noopener noreferrer"
                 aria-label="Facebook">
+
                 <svg class="icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
@@ -116,7 +117,38 @@
         </div>
     </footer>
 
+    <div id="modal-tech" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal-tech')">&times;</span>
+            <h3 class="modal-title">PRÓXIMO LANZAMIENTO</h3>
+            <div class="modal-text">
+                <p>En esta novela, la humanidad se enfrenta al cambio más drástico en toda la historia de la civilización humana. Descubre si Poseidón será capaz de imponer su autoridad, y si todos los métodos son válidos para alcanzar el fin deseado.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-fantasy1" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal-fantasy1')">&times;</span>
+            <h3 class="modal-title">FANTASÍA ÉPICA VOL. 1</h3>
+            <div class="modal-text">
+                <p>Bienvenido a un mundo de fantasía llamado Nimroel. En este volumen 1 se desencadenarán fuerzas oscuras que llevarán a los pueblos de Nimroel a la guerra y a sus héroes a tomar terribles decisiones...que se desencadenarán en el volumen 2.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-fantasy2" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal-fantasy2')">&times;</span>
+            <h3 class="modal-title">FANTASÍA ÉPICA VOL. 2</h3>
+            <div class="modal-text">
+                <p>Descubre la continuación del viaje de nuestros héroes hacia la confrontación final con el mal que amenaza todo Nimroel. La oscuridad o el fuego se impondrán al final de esta novela.</p>
+            </div>
+        </div>
+    </div>
+
     <script src="../scripts/script.js"></script>
+    <script src="../scripts/novelas.js"></script>
 </body>
 
 </html>

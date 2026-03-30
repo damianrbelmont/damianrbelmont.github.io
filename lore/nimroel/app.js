@@ -17,7 +17,7 @@ async function loadEntity(id) {
         renderContent(data);
         return;
       }
-    } catch (e) {}
+    } catch (e) { }
   }
 
   document.getElementById("content").innerHTML = "<h1>No encontrado</h1>";
@@ -127,7 +127,7 @@ async function getEntityName(id) {
         const data = await res.json();
         return data.name;
       }
-    } catch (e) {}
+    } catch (e) { }
   }
 
   return formatName(id);
@@ -162,10 +162,10 @@ async function getBacklinks(currentId) {
               results.push(data.id);
             }
           }
-        } catch (e) {}
+        } catch (e) { }
       }
     }
-  } catch (e) {}
+  } catch (e) { }
 
   return [...new Set(results)];
 }
@@ -234,14 +234,73 @@ async function initSearch() {
 
     if (!query) return;
 
-    const filtered = entities.filter(e =>
-      e.name.toLowerCase().includes(query)
-    );
+    const filtered = entities
+      .map(e => {
+        const name = e.name.toLowerCase();
+
+        let score = 0;
+
+        if (name.startsWith(query)) score += 3;
+        else if (name.includes(query)) score += 1;
+
+        return { ...e, score };
+      })
+      .filter(e => e.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 5);
 
     for (let item of filtered) {
       const li = document.createElement("li");
       li.innerHTML = `<a href="?id=${item.id}">${item.name}</a>`;
+      li.addEventListener("click", () => {
+        input.value = "";
+        resultsContainer.innerHTML = "";
+      });
       resultsContainer.appendChild(li);
     }
   });
+}
+
+initTree();
+
+async function initTree() {
+  const container = document.getElementById("tree");
+  if (!container) return;
+
+  const res = await fetch("data/index.json");
+  const index = await res.json();
+
+  const sections = [
+    { key: "characters", label: "Personajes" },
+    { key: "locations", label: "Lugares" },
+    { key: "organizations", label: "Organizaciones" }
+  ];
+
+  let html = "";
+
+  for (let section of sections) {
+    const ids = index[section.key] || [];
+
+    if (ids.length === 0) continue;
+
+    html += `<p><strong>${section.label}</strong></p><ul>`;
+
+    const items = [];
+
+    for (let id of ids) {
+      const name = await getEntityName(id);
+      items.push({ id, name });
+    }
+
+    // ordenar por nombre
+    items.sort((a, b) => a.name.localeCompare(b.name));
+
+    for (let item of items) {
+      html += `<li><a href="?id=${item.id}">${item.name}</a></li>`;
+    }
+
+    html += `</ul>`;
+  }
+
+  container.innerHTML = html;
 }

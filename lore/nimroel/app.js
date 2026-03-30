@@ -137,24 +137,35 @@ async function getEntityName(id) {
 async function getBacklinks(currentId) {
   const results = [];
 
-  const files = ["clarisse", "elowen"]; // ⚠️ temporal
+  try {
+    const res = await fetch("data/index.json");
+    const index = await res.json();
 
-  for (let path of paths) {
-    for (let file of files) {
-      try {
-        const res = await fetch(`${path}${file}.json`);
-        if (res.ok) {
-          const data = await res.json();
+    const allIds = [
+      ...(index.characters || []),
+      ...(index.locations || []),
+      ...(index.organizations || [])
+    ];
 
-          const text = JSON.stringify(data);
+    for (let id of allIds) {
+      if (id === currentId) continue;
 
-          if (text.includes(currentId) && data.id !== currentId) {
-            results.push(data.id);
+      for (let path of paths) {
+        try {
+          const res = await fetch(`${path}${id}.json`);
+          if (res.ok) {
+            const data = await res.json();
+
+            const text = JSON.stringify(data);
+
+            if (text.includes(currentId)) {
+              results.push(data.id);
+            }
           }
-        }
-      } catch (e) {}
+        } catch (e) {}
+      }
     }
-  }
+  } catch (e) {}
 
   return [...new Set(results)];
 }
@@ -188,3 +199,49 @@ function getIdFromURL() {
 
 // 🔹 Init
 loadEntity(getIdFromURL());
+
+initSearch();
+
+async function initSearch() {
+  const input = document.getElementById("search");
+  const resultsContainer = document.getElementById("searchResults");
+
+  if (!input) return;
+
+  // 🔹 Cargar index
+  const res = await fetch("data/index.json");
+  const index = await res.json();
+
+  const allIds = [
+    ...(index.characters || []),
+    ...(index.locations || []),
+    ...(index.organizations || [])
+  ];
+
+  // 🔹 Obtener nombres reales
+  const entities = [];
+
+  for (let id of allIds) {
+    const name = await getEntityName(id);
+    entities.push({ id, name });
+  }
+
+  // 🔹 Evento de búsqueda
+  input.addEventListener("input", () => {
+    const query = input.value.toLowerCase();
+
+    resultsContainer.innerHTML = "";
+
+    if (!query) return;
+
+    const filtered = entities.filter(e =>
+      e.name.toLowerCase().includes(query)
+    );
+
+    for (let item of filtered) {
+      const li = document.createElement("li");
+      li.innerHTML = `<a href="?id=${item.id}">${item.name}</a>`;
+      resultsContainer.appendChild(li);
+    }
+  });
+}

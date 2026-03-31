@@ -1,34 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Nimroel Lore</title>
   <meta name="robots" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../../css/styles.css">
+<link rel="stylesheet" href="../../css/damian.css">
+<link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<div class="layout">
-  <aside class="left">
-    <h3>Lore</h3>
+  <header class="site-header">
+  <div class="header-container">
 
-    <!-- 🔍 Buscador -->
-    <input type="text" id="search" placeholder="Buscar..." autocomplete="off">
-    <ul id="searchResults"></ul>
+    <div class="author-name">
+      Damian R.<br>Belmont
+    </div>
 
-    <div id="tree" style="margin-top: 16px;"></div>
-  </aside>
+    <img src="../../assets/images/logo.png" class="header-logo">
 
-  <main class="center" id="content">
-    <!-- Aquí se renderiza el contenido dinámico -->
-  </main>
+    <nav class="desktop-nav">
+      <ul class="desktop-menu">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/damian/">Damian</a></li>
+        <li><a href="/novelas/">Novelas</a></li>
+        <li><a href="/novelas/proximamente/">Próximamente</a></li>
+      </ul>
+    </nav>
 
-  <aside class="right" id="sidebar">
-    <!-- Aquí se renderiza la ficha dinámica -->
-  </aside>
-</div>
+  </div>
+</header>
 
-<script src="app.js"></script>
+<section class="lore-hero">
+  <div class="lore-hero-overlay">
+    <h1>Nimroel</h1>
+    <p>Archivo del mundo</p>
+  </div>
+</section>
+
+  <div class="layout">
+    <aside class="left">
+      <h3>Lore</h3>
+
+      <!-- 🔍 Buscador -->
+      <input type="text" id="search" placeholder="Buscar..." autocomplete="off">
+      <ul id="searchResults"></ul>
+
+      <div id="tree" style="margin-top: 16px;"></div>
+    </aside>
+
+    <main class="center" id="content">
+      <!-- Aquí se renderiza el contenido dinámico -->
+    </main>
+
+    <aside class="right" id="sidebar">
+      <!-- Aquí se renderiza la ficha dinámica -->
+    </aside>
+  </div>
+
+  <script src="app.js"></script>
 </body>
+
 </html>

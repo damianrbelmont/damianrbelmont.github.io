@@ -1,113 +1,342 @@
-/* RESET BÁSICO */
+/* =========================================
+   VARIABLES Y PALETA DE COLOR
+   ========================================= */
+:root {
+  --bg-color: #050b14;
+  --bg-alt: #0a131f;
+  --text-main: #e6e6e6;
+  --text-muted: #8a93a0;
+  --accent: #b89b5e;
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --header-height: 75px;
+}
+
+/* =========================================
+   RESET Y BASE
+   ========================================= */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* BASE */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #0f0f0f;
-  color: #eaeaea;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* LAYOUT PRINCIPAL */
-.layout {
-  display: grid;
-  grid-template-columns: 250px 1fr 300px;
-  gap: 16px;
-  padding: 16px;
-  min-height: 100vh;
-}
-
-/* COLUMNAS */
-.left {
-  background: #1a1a1a;
-  padding: 16px;
-  border-radius: 8px;
-}
-
-.center {
-  background: #1f1f1f;
-  padding: 24px;
-  border-radius: 8px;
-  line-height: 1.6;
-}
-
-.right {
-  background: #1a1a1a;
-  padding: 16px;
-  border-radius: 8px;
-  position: sticky;
-  top: 16px;
-  height: fit-content;
-}
-
-/* TITULOS */
-h1 {
-  margin-bottom: 10px;
-}
-
-h2 {
-  margin-bottom: 10px;
-}
-
-/* TEXTO */
-p {
-  margin-bottom: 12px;
-}
-
-/* LINKS (estilo wiki) */
 a {
-  color: #4ea1ff;
   text-decoration: none;
+  color: var(--accent);
+  transition: color 0.3s ease;
 }
 
 a:hover {
-  text-decoration: underline;
+  color: #fff;
 }
 
-/* IMÁGENES */
-img {
+ul {
+  list-style: none;
+}
+
+/* =========================================
+   🔥 LORE — BASE (MÓVIL + TABLET VERTICAL)
+   ========================================= */
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  width: 90%;
+  margin: 0 auto;
+
+  padding-top: calc(var(--header-height) + 2rem);
+  padding-bottom: 4rem;
+}
+
+/* =========================================
+   CONTENIDO CENTRAL (EDITORIAL)
+   ========================================= */
+
+.center {
   max-width: 100%;
-  height: auto;
-  margin-top: 10px;
-  border-radius: 6px;
 }
 
-/* SIDEBAR */
+.center h1 {
+  font-family: var(--font-serif);
+  color: var(--accent);
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  margin-bottom: 1.2rem;
+
+  border-bottom: 1px solid rgba(184, 155, 94, 0.2);
+  padding-bottom: 8px;
+}
+
+.center p {
+  color: #d8cdb8;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+/* 🔥 IMÁGENES */
+.center img {
+  display: block;
+  max-width: 85%;
+  margin: 20px auto;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* =========================================
+   SIDEBAR DERECHA
+   ========================================= */
+
+.right {
+  border: 1px solid rgba(184, 155, 94, 0.1);
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.right h2 {
+  font-size: 0.95rem;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
 .right p {
-  font-size: 14px;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
 }
 
-/* RESPONSIVE TABLET */
-@media (max-width: 1024px) {
-  .layout {
-    grid-template-columns: 200px 1fr;
-  }
+/* =========================================
+   SIDEBAR IZQUIERDA
+   ========================================= */
 
-  .right {
-    grid-column: span 2;
-  }
+.left h3 {
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
-/* RESPONSIVE MÓVIL */
-@media (max-width: 768px) {
+.left ul li {
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+/* =========================================
+   BUSCADOR
+   ========================================= */
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+
+  background: var(--bg-alt);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white;
+}
+
+#searchResults li {
+  margin-bottom: 5px;
+}
+
+/* =========================================
+   HEADER (COMPARTIDO)
+   ========================================= */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: rgba(5, 11, 20, 0.95);
+  border-bottom: 1px solid rgba(184, 155, 94, 0.1);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.header-container {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.author-name {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.header-logo {
+  height: 32px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.desktop-nav {
+  display: none;
+}
+
+/* =========================================
+   🔥 MEDIA QUERY — PC + TABLET HORIZONTAL
+   ========================================= */
+
+@media screen and (min-width: 1024px) {
+
+  /* LAYOUT */
   .layout {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: 220px minmax(600px, 700px) 260px;
+  justify-content: center;
+  gap: 40px;
+}
 
-  .left {
-    order: 3;
-  }
-
+  /* CENTRO */
   .center {
-    order: 1;
+    max-width: 750px;
   }
 
-  .right {
-    order: 2;
-    position: static;
+  .center h1 {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
   }
+
+  .center p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  /* SIDEBAR IZQUIERDA */
+  .left {
+    font-size: 0.95rem;
+  }
+
+  .left h3 {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  .left ul li {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  /* SIDEBAR DERECHA */
+  .right {
+    font-size: 0.95rem;
+    padding: 20px;
+  }
+
+  .right h2 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  .right p {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  /* HEADER */
+  .menu-toggle {
+    display: none;
+  }
+
+  .desktop-nav {
+    display: block;
+  }
+
+  .desktop-menu {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .desktop-menu a {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .desktop-menu a:hover {
+    color: white;
+    text-shadow: 0 0 8px rgba(255,255,255,0.4);
+  }
+}
+
+.lore-hero {
+  width: 100%;
+  height: 280px;
+
+  background-image: url("../../assets/images/lore/hero-nimroel.jpg");
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+
+.lore-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 11, 20, 0.6);
+}
+
+.lore-hero-overlay {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+.lore-hero h1 {
+  font-family: var(--font-serif);
+  color: var(--accent);
+  font-size: 2.2rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.lore-hero p {
+  color: var(--text-muted);
+  margin-top: 10px;
 }

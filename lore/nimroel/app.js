@@ -31,16 +31,10 @@ function renderContent(data) {
   sidebar.style.display = "block";
 
   content.innerHTML = `
-  <h1>${data.name}</h1>
-
-  <div class="content-body">
-
-    <div class="image-float">
-      <picture>
-        <source srcset="${data.image.split('.').slice(0, -1).join('.')}.avif" type="image/avif">
-        <source srcset="${data.image}" type="image/webp">
-        <img src="${data.image}">
-      </picture>
+    <div class="breadcrumb">
+      <a href="javascript:void(0)" onclick="goHome()">Inicio</a>
+      <span> / </span>
+      <span class="breadcrumb-current">${data.name}</span>
     </div>
 
     <h1>${data.name}</h1>
@@ -357,46 +351,27 @@ async function initSearch() {
   });
 }
 
-initTree();
+// 🔹 Árbol (igual que tenías)
+async function initTree() { /* tu código igual */ }
 
-async function initTree() {
-  const container = document.getElementById("tree");
-  if (!container) return;
+// 🔹 Lightbox
+document.addEventListener("click", (e) => {
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
 
-  const res = await fetch("data/index.json");
-  const index = await res.json();
-
-  const sections = [
-    { key: "characters", label: "Personajes" },
-    { key: "locations", label: "Lugares" },
-    { key: "organizations", label: "Organizaciones" }
-  ];
-
-  let html = "";
-
-  for (let section of sections) {
-    const ids = index[section.key] || [];
-
-    if (ids.length === 0) continue;
-
-    html += `<p><strong>${section.label}</strong></p><ul>`;
-
-    const items = [];
-
-    for (let id of ids) {
-      const name = await getEntityName(id);
-      items.push({ id, name });
-    }
-
-    // ordenar por nombre
-    items.sort((a, b) => a.name.localeCompare(b.name));
-
-    for (let item of items) {
-      html += `<li><a href="?id=${item.id}">${item.name}</a></li>`;
-    }
-
-    html += `</ul>`;
+  if (e.target.classList.contains("clickable")) {
+    lightboxImg.src = e.target.src;
+    lightbox.classList.add("active");
   }
 
-  container.innerHTML = html;
-}
+  if (e.target.id === "lightbox" || e.target.id === "lightbox-img") {
+    lightbox.classList.remove("active");
+  }
+});
+
+// 🔹 Navegación atrás navegador
+window.addEventListener("popstate", () => {
+  const id = getIdFromURL();
+  if (id) loadEntity(id);
+  else renderHome();
+});

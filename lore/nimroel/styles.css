@@ -340,3 +340,131 @@ input {
   color: var(--text-muted);
   margin-top: 10px;
 }
+
+/* =========================================
+   IMAGEN FLOTANTE (ESTILO WIKI)
+   ========================================= */
+
+.content-body {
+  position: relative;
+}
+
+/* Imagen a la derecha */
+.image-float {
+  float: right;
+  width: 280px;
+  margin: 0 0 20px 25px;
+}
+
+/* Imagen interna */
+.image-float img {
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+/* Limpieza del float */
+.content-body::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* =========================================
+   FIX MÓVIL — IMAGEN NO FLOTANTE
+   ========================================= */
+
+@media screen and (max-width: 1024px) {
+
+  .image-float {
+    float: none;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .image-float img {
+    max-width: 100%;
+  }
+
+}
+
+ /* =========================================
+   HERO NIMROEL (VERSIÓN FINAL PRO)
+   ========================================= */
+
+.hero {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: calc(var(--header-height) + 2rem);
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+/* Imagen */
+.hero-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/6;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay oscuro elegante */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(5, 11, 20, 0.75),
+    rgba(5, 11, 20, 0.4),
+    rgba(5, 11, 20, 0.85)
+  );
+}
+
+/* TEXTO ENCIMA */
+.hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  z-index: 2;
+  padding: 0 20px;
+}
+
+/* Título */
+.hero-content h1 {
+  font-family: var(--font-serif);
+  color: var(--accent);
+  font-size: 2rem;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+}
+
+/* Subtítulo */
+.hero-content p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+
+/* DESKTOP */
+@media screen and (min-width: 1024px) {
+
+  .hero {
+    max-width: 60%;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+}

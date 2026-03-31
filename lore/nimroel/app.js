@@ -28,11 +28,23 @@ function renderContent(data) {
   const content = document.getElementById("content");
 
   content.innerHTML = `
-    <h1>${data.name}</h1>
+  <h1>${data.name}</h1>
+
+  <div class="content-body">
+
+    <div class="image-float">
+      <picture>
+        <source srcset="${data.image.split('.').slice(0, -1).join('.')}.avif" type="image/avif">
+        <source srcset="${data.image}" type="image/webp">
+        <img src="${data.image}">
+      </picture>
+    </div>
+
     <p>${data.summary}</p>
     <p id="desc"></p>
-    <img src="${data.image}" style="max-width:300px;">
-  `;
+
+  </div>
+`;
 
   // Links dinámicos
   parseLinks(data.description).then(parsed => {

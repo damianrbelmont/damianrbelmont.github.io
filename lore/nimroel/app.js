@@ -36,7 +36,7 @@ function renderContent(data) {
       <picture>
         <source srcset="${data.image.split('.').slice(0, -1).join('.')}.avif" type="image/avif">
         <source srcset="${data.image}" type="image/webp">
-        <img src="${data.image}" class="main-image clickable" alt="${data.name}">
+        <img src="${data.image}">
       </picture>
     </div>
 
@@ -316,24 +316,3 @@ async function initTree() {
 
   container.innerHTML = html;
 }
-
-
-// =========================================
-// LIGHTBOX IMÁGENES
-// =========================================
-
-document.addEventListener("click", (e) => {
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
-
-  // Abrir lightbox
-  if (e.target.classList.contains("clickable")) {
-    lightboxImg.src = e.target.src;
-    lightbox.classList.add("active");
-  }
-
-  // Cerrar lightbox (click fuera o en la imagen)
-  if (e.target.id === "lightbox" || e.target.id === "lightbox-img") {
-    lightbox.classList.remove("active");
-  }
-});

@@ -17,15 +17,18 @@ async function loadEntity(id) {
         renderContent(data);
         return;
       }
-    } catch (e) { }
+    } catch (e) {}
   }
 
   document.getElementById("content").innerHTML = "<h1>No encontrado</h1>";
 }
 
-// 🔹 Render principal
+// 🔹 Render ficha con breadcrumb
 function renderContent(data) {
   const content = document.getElementById("content");
+  const sidebar = document.getElementById("sidebar");
+
+  sidebar.style.display = "block";
 
   content.innerHTML = `
   <h1>${data.name}</h1>
@@ -40,13 +43,24 @@ function renderContent(data) {
       </picture>
     </div>
 
-    <p>${data.summary}</p>
-    <p id="desc"></p>
+    <h1>${data.name}</h1>
 
-  </div>
-`;
+    <div class="content-body">
 
-  // Links dinámicos
+      <div class="image-float">
+        <picture>
+          <source srcset="${data.image.replace('.webp', '.avif')}" type="image/avif">
+          <source srcset="${data.image}" type="image/webp">
+          <img src="${data.image}" class="main-image clickable" alt="${data.name}">
+        </picture>
+      </div>
+
+      <p>${data.summary}</p>
+      <p id="desc"></p>
+
+    </div>
+  `;
+
   parseLinks(data.description).then(parsed => {
     document.getElementById("desc").innerHTML = parsed;
   });
@@ -54,7 +68,53 @@ function renderContent(data) {
   renderSidebar(data);
 }
 
-// 🔹 Sidebar completa (incluye backlinks)
+// 🔹 HOME
+function renderHome() {
+  const content = document.getElementById("content");
+  const sidebar = document.getElementById("sidebar");
+
+  sidebar.style.display = "none";
+  sidebar.innerHTML = "";
+
+  content.innerHTML = `
+    <h1>Nimroel</h1>
+
+    <p class="home-intro">
+      Nimroel no es un mundo. Es una historia que se recuerda.
+    </p>
+
+    <div class="home-grid">
+
+      <a href="javascript:void(0)" onclick="filterSection('characters')" class="home-card">
+        <img src="assets/images/home/personajes.webp">
+        <span>Personajes</span>
+      </a>
+
+      <a href="javascript:void(0)" onclick="filterSection('locations')" class="home-card">
+        <img src="assets/images/home/lugares.webp">
+        <span>Lugares</span>
+      </a>
+
+      <a href="javascript:void(0)" onclick="filterSection('organizations')" class="home-card">
+        <img src="assets/images/home/organizaciones.webp">
+        <span>Organizaciones</span>
+      </a>
+
+      <a href="javascript:void(0)" class="home-card">
+        <img src="assets/images/home/eventos.webp">
+        <span>Eventos</span>
+      </a>
+
+      <a href="javascript:void(0)" class="home-card">
+        <img src="assets/images/home/objetos.webp">
+        <span>Objetos</span>
+      </a>
+
+    </div>
+  `;
+}
+
+// 🔹 Sidebar
 function renderSidebar(data) {
   const sidebar = document.getElementById("sidebar");
 
@@ -67,9 +127,7 @@ function renderSidebar(data) {
 
     ${data.birthplace ? `
       <p><strong>Origen:</strong> 
-        <a href="?id=${data.birthplace}">
-          ${formatName(data.birthplace)}
-        </a>
+        <a href="?id=${data.birthplace}">${formatName(data.birthplace)}</a>
       </p>
     ` : ""}
 
@@ -94,10 +152,9 @@ function renderSidebar(data) {
     <div id="backlinks"></div>
   `;
 
-  // 🔥 Backlinks (dinámicos)
   getBacklinks(data.id).then(backlinks => {
     if (backlinks.length > 0) {
-      const html = `
+      document.getElementById("backlinks").innerHTML = `
         <p><strong>Mencionado en:</strong></p>
         <ul>
           ${backlinks.map(id => `
@@ -105,16 +162,42 @@ function renderSidebar(data) {
           `).join("")}
         </ul>
       `;
-
-      document.getElementById("backlinks").innerHTML = html;
     }
   });
 }
 
-// 🔹 Parsear [[links]]
+// 🔹 HOME navegación
+function goHome() {
+  window.history.pushState({}, "", window.location.pathname);
+  renderHome();
+}
+
+// 🔹 Filtrar árbol
+function filterSection(type) {
+  const tree = document.getElementById("tree");
+  const sections = tree.querySelectorAll("p, ul");
+
+  sections.forEach(el => el.style.display = "none");
+
+  const labels = {
+    characters: "Personajes",
+    locations: "Lugares",
+    organizations: "Organizaciones"
+  };
+
+  const title = labels[type];
+
+  tree.querySelectorAll("p").forEach(p => {
+    if (p.textContent === title) {
+      p.style.display = "block";
+      p.nextElementSibling.style.display = "block";
+    }
+  });
+}
+
+// 🔹 Parse links
 async function parseLinks(text) {
   const matches = [...text.matchAll(/\[\[(.*?)\]\]/g)];
-
   let result = text;
 
   for (let match of matches) {
@@ -130,7 +213,7 @@ async function parseLinks(text) {
   return result;
 }
 
-// 🔹 Obtener nombre real
+// 🔹 Utils
 async function getEntityName(id) {
   for (let path of paths) {
     try {
@@ -139,13 +222,28 @@ async function getEntityName(id) {
         const data = await res.json();
         return data.name;
       }
-    } catch (e) { }
+    } catch (e) {}
   }
-
   return formatName(id);
 }
 
-// 🔹 Backlinks (temporal con lista manual)
+function formatName(id) {
+  return id.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function formatType(type) {
+  const types = {
+    character: "Personaje",
+    location: "Lugar",
+    organization: "Organización",
+    event: "Evento",
+    artifact: "Artefacto",
+    creature: "Criatura"
+  };
+  return types[type] || type;
+}
+
+// 🔹 Backlinks
 async function getBacklinks(currentId) {
   const results = [];
 
@@ -167,60 +265,42 @@ async function getBacklinks(currentId) {
           const res = await fetch(`${path}${id}.json`);
           if (res.ok) {
             const data = await res.json();
-
-            const text = JSON.stringify(data);
-
-            if (text.includes(currentId)) {
+            if (JSON.stringify(data).includes(currentId)) {
               results.push(data.id);
             }
           }
-        } catch (e) { }
+        } catch (e) {}
       }
     }
-  } catch (e) { }
+  } catch (e) {}
 
   return [...new Set(results)];
-}
-
-// 🔹 Formatear nombre
-function formatName(id) {
-  return id
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, l => l.toUpperCase());
-}
-
-// 🔹 Tipos bonitos
-function formatType(type) {
-  const types = {
-    character: "Personaje",
-    location: "Lugar",
-    organization: "Organización",
-    event: "Evento",
-    artifact: "Artefacto",
-    creature: "Criatura"
-  };
-
-  return types[type] || type;
 }
 
 // 🔹 URL
 function getIdFromURL() {
   const params = new URLSearchParams(window.location.search);
-  return params.get("id") || "clarisse";
+  return params.get("id");
 }
 
-// 🔹 Init
-loadEntity(getIdFromURL());
+// 🔹 INIT
+document.addEventListener("DOMContentLoaded", () => {
+  const id = getIdFromURL();
 
-initSearch();
+  if (id) loadEntity(id);
+  else renderHome();
 
+  initSearch();
+  initTree();
+});
+
+// 🔹 🔥 BUSCADOR CORREGIDO (SPA)
 async function initSearch() {
   const input = document.getElementById("search");
   const resultsContainer = document.getElementById("searchResults");
 
   if (!input) return;
 
-  // 🔹 Cargar index
   const res = await fetch("data/index.json");
   const index = await res.json();
 
@@ -230,7 +310,6 @@ async function initSearch() {
     ...(index.organizations || [])
   ];
 
-  // 🔹 Obtener nombres reales
   const entities = [];
 
   for (let id of allIds) {
@@ -238,10 +317,8 @@ async function initSearch() {
     entities.push({ id, name });
   }
 
-  // 🔹 Evento de búsqueda
   input.addEventListener("input", () => {
     const query = input.value.toLowerCase();
-
     resultsContainer.innerHTML = "";
 
     if (!query) return;
@@ -249,7 +326,6 @@ async function initSearch() {
     const filtered = entities
       .map(e => {
         const name = e.name.toLowerCase();
-
         let score = 0;
 
         if (name.startsWith(query)) score += 3;
@@ -263,11 +339,19 @@ async function initSearch() {
 
     for (let item of filtered) {
       const li = document.createElement("li");
-      li.innerHTML = `<a href="?id=${item.id}">${item.name}</a>`;
-      li.addEventListener("click", () => {
+
+      li.innerHTML = `<a href="?id=${item.id}" class="search-link">${item.name}</a>`;
+
+      const link = li.querySelector(".search-link");
+
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.history.pushState({}, "", `?id=${item.id}`);
+        loadEntity(item.id);
         input.value = "";
         resultsContainer.innerHTML = "";
       });
+
       resultsContainer.appendChild(li);
     }
   });

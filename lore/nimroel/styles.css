@@ -573,3 +573,22 @@ input {
   transform: translateY(-4px) scale(1.03);
   box-shadow: 0 15px 35px rgba(0,0,0,0.5);
 }
+
+.breadcrumb {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+
+.breadcrumb a {
+  color: var(--accent);
+}
+
+.breadcrumb a:hover {
+  color: #fff;
+}
+
+.breadcrumb-current {
+  color: var(--text-muted);
+}

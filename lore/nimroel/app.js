@@ -23,6 +23,130 @@ const INDEX_DOC_REF = doc(db, "meta", "index");
 const entityCache = new Map();
 let indexCache = null;
 
+function getFirstStringValueFromPaths(source, paths) {
+  for (const path of paths) {
+    const parts = path.split(".");
+    let current = source;
+    let valid = true;
+
+    for (const part of parts) {
+      if (!current || typeof current !== "object" || !(part in current)) {
+        valid = false;
+        break;
+      }
+      current = current[part];
+    }
+
+    if (valid && typeof current === "string" && current.trim()) {
+      return current.trim();
+    }
+  }
+  return "";
+}
+
+function getJoinedSectionText(source) {
+  const sections = source?.content?.sections;
+  if (!Array.isArray(sections)) return "";
+
+  const texts = sections
+    .map((section) => (section?.text || "").toString().trim())
+    .filter(Boolean);
+  return texts.join("\n\n");
+}
+
+function getFallbackImage(source) {
+  const direct = getFirstStringValueFromPaths(source, [
+    "image",
+    "portrait",
+    "thumbnail",
+    "cover",
+    "media.image",
+    "media.portrait",
+    "assets.image"
+  ]);
+  if (direct) return direct;
+
+  let foundImage = "";
+  const stack = [source];
+  while (stack.length > 0 && !foundImage) {
+    const current = stack.pop();
+    if (!current || typeof current !== "object") continue;
+
+    Object.values(current).forEach((value) => {
+      if (typeof value === "string") {
+        const looksLikeImage = /(assets\/images\/|https?:\/\/).+\.(webp|avif|png|jpg|jpeg|gif)$/i.test(value.trim());
+        if (looksLikeImage && !foundImage) {
+          foundImage = value.trim();
+        }
+      } else if (typeof value === "object") {
+        stack.push(value);
+      }
+    });
+  }
+
+  return foundImage;
+}
+
+function normalizeEntityData(raw) {
+  const data = { ...raw };
+  const joinedSections = getJoinedSectionText(raw);
+
+  // Prefer the new Firebase schema first.
+  data.summary = getFirstStringValueFromPaths(raw, [
+    "content.summary",
+    "content.intro",
+    "overview",
+    "summary",
+    "synopsis",
+    "bio"
+  ]) || data.summary || "";
+
+  data.description = getFirstStringValueFromPaths(raw, [
+    "content.description",
+    "content.body",
+    "description",
+    "details"
+  ]) || joinedSections || data.description || "";
+
+  if (!data.summary && data.description) {
+    data.summary = data.description.split("\n")[0].slice(0, 220);
+  }
+
+  data.image = getFirstStringValueFromPaths(raw, [
+    "media.image",
+    "media.cover",
+    "assets.image",
+    "image",
+    "portrait",
+    "thumbnail",
+    "cover"
+  ]) || data.image || getFallbackImage(raw);
+
+  if (typeof data.type === "string") {
+    const normalizedType = data.type.trim().toLowerCase();
+    const typeAliases = {
+      characters: "character",
+      locations: "location",
+      organizations: "organization"
+    };
+    data.type = typeAliases[normalizedType] || normalizedType;
+  }
+
+  if (!Array.isArray(data.affiliation) && typeof data.affiliation === "string") {
+    data.affiliation = [data.affiliation];
+  }
+
+  if (!Array.isArray(data.related) && Array.isArray(data.relations)) {
+    data.related = data.relations;
+  }
+
+  if (!data.birthplace) {
+    data.birthplace = getFirstStringValueFromPaths(raw, ["birthplace", "origin", "placeOfBirth"]);
+  }
+
+  return data;
+}
+
 function getEntityRef(id) {
   return doc(db, "items", id);
 }
@@ -88,7 +212,7 @@ async function getEntityById(id) {
     return null;
   }
 
-  const entity = { id: cleanId, ...snap.data() };
+  const entity = normalizeEntityData({ id: cleanId, ...snap.data() });
   entityCache.set(cleanId, entity);
   return entity;
 }

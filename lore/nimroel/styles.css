@@ -370,6 +370,32 @@ input {
   clear: both;
 }
 
+.wiki-summary p {
+  margin-bottom: 1.1rem;
+}
+
+.wiki-sections {
+  margin-top: 1.4rem;
+}
+
+.wiki-section {
+  margin-top: 1.8rem;
+}
+
+.wiki-section-title {
+  font-family: var(--font-serif);
+  color: var(--accent);
+  font-size: 1.35rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(184, 155, 94, 0.2);
+  padding-bottom: 6px;
+}
+
+.wiki-section-text p {
+  margin-bottom: 1rem;
+}
+
 /* =========================================
    FIX MÓVIL — IMAGEN NO FLOTANTE
    ========================================= */

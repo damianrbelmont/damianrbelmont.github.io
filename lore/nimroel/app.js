@@ -90,6 +90,11 @@ function getFallbackImage(source) {
 function normalizeEntityData(raw) {
   const data = { ...raw };
   const joinedSections = getJoinedSectionText(raw);
+  const rawSections = Array.isArray(raw?.content?.sections)
+    ? raw.content.sections
+    : Array.isArray(raw?.sections)
+      ? raw.sections
+      : [];
 
   // Prefer the new Firebase schema first.
   data.summary = getFirstStringValueFromPaths(raw, [
@@ -143,6 +148,21 @@ function normalizeEntityData(raw) {
   if (!data.birthplace) {
     data.birthplace = getFirstStringValueFromPaths(raw, ["birthplace", "origin", "placeOfBirth"]);
   }
+
+  data.sections = rawSections
+    .map((section, index) => {
+      const id = (section?.id || `section_${index + 1}`).toString();
+      const title = (section?.title || section?.tittle || formatName(id)).toString().trim();
+      const text = (section?.text || section?.description || "").toString().trim();
+      return {
+        id,
+        title: title || `Seccion ${index + 1}`,
+        text,
+        order: Number.isFinite(Number(section?.order)) ? Number(section.order) : index
+      };
+    })
+    .filter((section) => section.text)
+    .sort((a, b) => a.order - b.order);
 
   return data;
 }
@@ -282,6 +302,24 @@ async function parseLinks(text) {
   return result;
 }
 
+async function renderRichText(targetElement, text) {
+  if (!targetElement) return;
+  const parsed = await parseLinks((text || "").toString());
+  const paragraphs = parsed
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+
+  if (paragraphs.length === 0) {
+    targetElement.innerHTML = "";
+    return;
+  }
+
+  targetElement.innerHTML = paragraphs
+    .map((paragraph) => `<p>${paragraph.replace(/\n/g, "<br>")}</p>`)
+    .join("");
+}
+
 async function getBacklinks(currentId) {
   const results = [];
 
@@ -364,6 +402,11 @@ function renderContent(data) {
 
   const image = data.image || "";
   const avif = image.endsWith(".webp") ? image.replace(".webp", ".avif") : image;
+  const sectionsToRender = Array.isArray(data.sections) && data.sections.length > 0
+    ? data.sections
+    : (data.description
+      ? [{ id: "descripcion", title: "Descripcion", text: data.description, order: 0 }]
+      : []);
 
   content.innerHTML = `
     <div class="breadcrumb">
@@ -385,13 +428,30 @@ function renderContent(data) {
         </div>
       ` : ""}
 
-      <p>${data.summary || ""}</p>
-      <p id="desc"></p>
+      <div class="wiki-summary" id="summaryBlock"></div>
+      <div class="wiki-sections" id="sectionsBlock"></div>
     </div>
   `;
 
-  parseLinks(data.description || "").then((parsed) => {
-    document.getElementById("desc").innerHTML = parsed;
+  const summaryBlock = document.getElementById("summaryBlock");
+  renderRichText(summaryBlock, data.summary || "");
+
+  const sectionsBlock = document.getElementById("sectionsBlock");
+  sectionsToRender.forEach((section, index) => {
+    const sectionElement = document.createElement("section");
+    sectionElement.className = "wiki-section";
+
+    const titleElement = document.createElement("h2");
+    titleElement.className = "wiki-section-title";
+    titleElement.textContent = section.title || `Seccion ${index + 1}`;
+    sectionElement.appendChild(titleElement);
+
+    const textElement = document.createElement("div");
+    textElement.className = "wiki-section-text";
+    sectionElement.appendChild(textElement);
+
+    sectionsBlock.appendChild(sectionElement);
+    renderRichText(textElement, section.text || "");
   });
 
   renderSidebar(data);

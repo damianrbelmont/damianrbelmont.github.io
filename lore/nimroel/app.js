@@ -515,13 +515,13 @@ async function renderSidebar(data) {
   const aliases = uniqueStrings(data.aliases || []);
   const affiliations = await resolveRelationLabels(data.affiliation || []);
 
-  const relationOrder = ["characters", "events", "locations", "organizations", "others"];
+  const relationOrder = ["characters", "locations", "events", "organizations", "others"];
   const relationLabels = {
-    characters: "Relaciones: Personajes",
-    events: "Relaciones: Eventos",
-    locations: "Relaciones: Localizaciones",
-    organizations: "Relaciones: Organizaciones",
-    others: "Relaciones"
+    characters: "Personajes",
+    locations: "Localizaciones",
+    events: "Eventos",
+    organizations: "Organizaciones",
+    others: "Otros"
   };
 
   const resolvedRelations = {};
@@ -543,7 +543,33 @@ async function renderSidebar(data) {
     extraBlocks.push(`<p><strong>Raza:</strong> ${escapeHtml(data.race)}</p>`);
   }
 
+  const relationGroupsHtml = relationOrder
+    .map((key) => {
+      const items = resolvedRelations[key];
+      if (!items || items.length === 0) return "";
+      return `
+        <div class="sidebar-rel-group">
+          <p class="sidebar-rel-label"><strong>${relationLabels[key]}:</strong></p>
+          ${renderRelationList(items)}
+        </div>
+      `;
+    })
+    .join("");
+
+  const image = data.image || "";
+  const avif = image.endsWith(".webp") ? image.replace(".webp", ".avif") : image;
+
   sidebar.innerHTML = `
+    ${image ? `
+      <div class="sidebar-infobox-image">
+        <picture>
+          <source srcset="${avif}" type="image/avif">
+          <source srcset="${image}" type="image/webp">
+          <img src="${image}" class="clickable" alt="${escapeHtml(data.name || data.id)}">
+        </picture>
+      </div>
+    ` : ""}
+
     <h2>${data.name}</h2>
 
     <div class="sidebar-block">
@@ -568,16 +594,12 @@ async function renderSidebar(data) {
       </div>
     ` : ""}
 
-    ${relationOrder.map((key) => {
-      const items = resolvedRelations[key];
-      if (!items || items.length === 0) return "";
-      return `
-        <div class="sidebar-block">
-          <p><strong>${relationLabels[key]}:</strong></p>
-          ${renderRelationList(items)}
-        </div>
-      `;
-    }).join("")}
+    ${relationGroupsHtml ? `
+      <div class="sidebar-block">
+        <p><strong>Relaciones</strong></p>
+        ${relationGroupsHtml}
+      </div>
+    ` : ""}
 
     <div id="backlinks"></div>
   `;
@@ -602,8 +624,6 @@ function renderContent(data) {
 
   sidebar.style.display = "block";
 
-  const image = data.image || "";
-  const avif = image.endsWith(".webp") ? image.replace(".webp", ".avif") : image;
   const sectionsToRender = Array.isArray(data.sections) && data.sections.length > 0
     ? data.sections
     : (data.description
@@ -620,16 +640,6 @@ function renderContent(data) {
     <h1>${data.name || formatName(data.id)}</h1>
 
     <div class="content-body">
-      ${image ? `
-        <div class="image-float">
-          <picture>
-            <source srcset="${avif}" type="image/avif">
-            <source srcset="${image}" type="image/webp">
-            <img src="${image}" class="main-image clickable" alt="${data.name || data.id}">
-          </picture>
-        </div>
-      ` : ""}
-
       <div class="wiki-summary" id="summaryBlock"></div>
       <div class="wiki-sections" id="sectionsBlock"></div>
     </div>

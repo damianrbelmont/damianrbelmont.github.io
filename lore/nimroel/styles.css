@@ -82,8 +82,8 @@ ul {
 
 .center p {
   color: #d8cdb8;
-  font-size: 1rem;
-  line-height: 1.8;
+  font-size: 1.06rem;
+  line-height: 1.9;
   margin-bottom: 1rem;
 }
 
@@ -102,20 +102,35 @@ ul {
 
 .right {
   border: 1px solid rgba(184, 155, 94, 0.1);
-  padding: 15px;
+  padding: 16px;
   border-radius: 4px;
   margin-top: 20px;
 }
 
 .right h2 {
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   color: var(--accent);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .right p {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   margin-bottom: 6px;
+}
+
+.sidebar-infobox-image {
+  margin-bottom: 14px;
+  border: 1px solid rgba(184, 155, 94, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.sidebar-infobox-image img {
+  width: 100%;
+  display: block;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .sidebar-block + .sidebar-block {
@@ -129,12 +144,20 @@ ul {
 }
 
 .sidebar-list li {
-  margin-bottom: 4px;
+  margin-bottom: 5px;
   line-height: 1.5;
 }
 
 .sidebar-list a {
   color: var(--accent);
+}
+
+.sidebar-rel-group + .sidebar-rel-group {
+  margin-top: 10px;
+}
+
+.sidebar-rel-label {
+  margin-bottom: 4px;
 }
 
 /* =========================================
@@ -237,24 +260,24 @@ input {
 
   /* LAYOUT */
   .layout {
-  grid-template-columns: 220px minmax(600px, 700px) 260px;
+  grid-template-columns: 220px minmax(720px, 860px) 320px;
   justify-content: center;
-  gap: 40px;
+  gap: 34px;
 }
 
   /* CENTRO */
   .center {
-    max-width: 750px;
+    max-width: 860px;
   }
 
   .center h1 {
-    font-size: 2.2rem;
+    font-size: 2.35rem;
     margin-bottom: 2rem;
   }
 
   .center p {
-    font-size: 1.15rem;
-    line-height: 1.9;
+    font-size: 1.23rem;
+    line-height: 2;
     text-align: justify;
     hyphens: auto;
   }
@@ -276,17 +299,17 @@ input {
 
   /* SIDEBAR DERECHA */
   .right {
-    font-size: 0.95rem;
+    font-size: 1rem;
     padding: 20px;
   }
 
   .right h2 {
-    font-size: 1.1rem;
+    font-size: 1.45rem;
     margin-bottom: 15px;
   }
 
   .right p {
-    font-size: 0.95rem;
+    font-size: 1rem;
     margin-bottom: 8px;
   }
 

@@ -118,6 +118,25 @@ ul {
   margin-bottom: 6px;
 }
 
+.sidebar-block + .sidebar-block {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(184, 155, 94, 0.12);
+}
+
+.sidebar-list {
+  margin-top: 6px;
+}
+
+.sidebar-list li {
+  margin-bottom: 4px;
+  line-height: 1.5;
+}
+
+.sidebar-list a {
+  color: var(--accent);
+}
+
 /* =========================================
    SIDEBAR IZQUIERDA
    ========================================= */

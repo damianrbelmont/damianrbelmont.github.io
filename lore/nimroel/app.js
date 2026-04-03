@@ -44,6 +44,55 @@ function getFirstStringValueFromPaths(source, paths) {
   return "";
 }
 
+function getFirstValueFromPaths(source, paths) {
+  for (const path of paths) {
+    const parts = path.split(".");
+    let current = source;
+    let valid = true;
+
+    for (const part of parts) {
+      if (!current || typeof current !== "object" || !(part in current)) {
+        valid = false;
+        break;
+      }
+      current = current[part];
+    }
+
+    if (valid && current !== undefined && current !== null) {
+      return current;
+    }
+  }
+  return undefined;
+}
+
+function toArray(value) {
+  if (Array.isArray(value)) return value;
+  if (value === undefined || value === null || value === "") return [];
+  return [value];
+}
+
+function uniqueStrings(values) {
+  const set = new Set();
+  values.forEach((value) => {
+    const clean = (value || "").toString().trim();
+    if (clean) set.add(clean);
+  });
+  return [...set];
+}
+
+function extractTextValues(value) {
+  return toArray(value).flatMap((item) => {
+    if (typeof item === "string" || typeof item === "number") {
+      return [item.toString()];
+    }
+    if (item && typeof item === "object") {
+      const candidate = item.id || item.slug || item.ref || item.name || item.title || item.label;
+      if (candidate) return [candidate.toString()];
+    }
+    return [];
+  });
+}
+
 function getJoinedSectionText(source) {
   const sections = source?.content?.sections;
   if (!Array.isArray(sections)) return "";
@@ -149,6 +198,81 @@ function normalizeEntityData(raw) {
     data.birthplace = getFirstStringValueFromPaths(raw, ["birthplace", "origin", "placeOfBirth"]);
   }
 
+  data.birthDate = getFirstStringValueFromPaths(raw, [
+    "extra.birthDate",
+    "extra.birth_date",
+    "extra.fechaNacimiento",
+    "extra.fecha_nacimiento",
+    "birthDate",
+    "birth_date",
+    "fechaNacimiento",
+    "fecha_nacimiento"
+  ]);
+
+  data.deathDate = getFirstStringValueFromPaths(raw, [
+    "extra.deathDate",
+    "extra.death_date",
+    "extra.fechaMuerte",
+    "extra.fecha_muerte",
+    "deathDate",
+    "death_date",
+    "fechaMuerte",
+    "fecha_muerte"
+  ]);
+
+  data.aliases = uniqueStrings([
+    ...extractTextValues(getFirstValueFromPaths(raw, ["extra.aliases", "extra.alias", "extra.aka", "aliases", "alias"])),
+    ...extractTextValues(raw.alias)
+  ]);
+
+  data.affiliation = uniqueStrings([
+    ...extractTextValues(getFirstValueFromPaths(raw, ["extra.affiliations", "extra.affiliation", "affiliations", "affiliation"])),
+    ...extractTextValues(data.affiliation)
+  ]);
+
+  const rawRelations = getFirstValueFromPaths(raw, ["extra.relations", "relations"]);
+  const relationMap = {
+    characters: [],
+    events: [],
+    locations: [],
+    organizations: [],
+    others: []
+  };
+
+  const keyAlias = {
+    characters: "characters",
+    character: "characters",
+    personajes: "characters",
+    events: "events",
+    event: "events",
+    eventos: "events",
+    locations: "locations",
+    location: "locations",
+    lugares: "locations",
+    localizaciones: "locations",
+    organizations: "organizations",
+    organization: "organizations",
+    organizaciones: "organizations"
+  };
+
+  if (Array.isArray(rawRelations) || typeof rawRelations === "string") {
+    relationMap.others = uniqueStrings(extractTextValues(rawRelations));
+  } else if (rawRelations && typeof rawRelations === "object") {
+    Object.entries(rawRelations).forEach(([key, value]) => {
+      const normalizedKey = keyAlias[(key || "").toString().toLowerCase()] || "others";
+      relationMap[normalizedKey] = uniqueStrings([
+        ...relationMap[normalizedKey],
+        ...extractTextValues(value)
+      ]);
+    });
+  }
+
+  if (Array.isArray(data.related)) {
+    relationMap.others = uniqueStrings([...relationMap.others, ...extractTextValues(data.related)]);
+  }
+
+  data.relationsByType = relationMap;
+
   data.sections = rawSections
     .map((section, index) => {
       const id = (section?.id || `section_${index + 1}`).toString();
@@ -165,6 +289,48 @@ function normalizeEntityData(raw) {
     .sort((a, b) => a.order - b.order);
 
   return data;
+}
+
+function escapeHtml(value) {
+  return (value || "")
+    .toString()
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function isLikelyEntityId(value) {
+  const text = (value || "").toString().trim();
+  if (!text) return false;
+  return /^[a-z0-9_:-]+$/i.test(text) && !/\s/.test(text);
+}
+
+async function resolveRelationLabels(ids) {
+  const cleanIds = uniqueStrings(ids);
+  const resolved = await Promise.all(cleanIds.map(async (id) => {
+    if (!isLikelyEntityId(id)) {
+      return { id: "", label: id, linkable: false };
+    }
+    const name = await getEntityName(id);
+    return { id, label: name || formatName(id), linkable: true };
+  }));
+  return resolved;
+}
+
+function renderRelationList(items) {
+  if (!items || items.length === 0) return "";
+  return `
+    <ul class="sidebar-list">
+      ${items.map((item) => `
+        <li>${item.linkable
+          ? `<a href="?id=${encodeURIComponent(item.id)}">${escapeHtml(item.label)}</a>`
+          : `<span>${escapeHtml(item.label)}</span>`
+        }</li>
+      `).join("")}
+    </ul>
+  `;
 }
 
 function getEntityRef(id) {
@@ -343,39 +509,75 @@ async function getBacklinks(currentId) {
   return [...new Set(results)];
 }
 
-function renderSidebar(data) {
+async function renderSidebar(data) {
   const sidebar = document.getElementById("sidebar");
+
+  const aliases = uniqueStrings(data.aliases || []);
+  const affiliations = await resolveRelationLabels(data.affiliation || []);
+
+  const relationOrder = ["characters", "events", "locations", "organizations", "others"];
+  const relationLabels = {
+    characters: "Relaciones: Personajes",
+    events: "Relaciones: Eventos",
+    locations: "Relaciones: Localizaciones",
+    organizations: "Relaciones: Organizaciones",
+    others: "Relaciones"
+  };
+
+  const resolvedRelations = {};
+  for (const key of relationOrder) {
+    resolvedRelations[key] = await resolveRelationLabels((data.relationsByType && data.relationsByType[key]) || []);
+  }
+
+  const extraBlocks = [];
+  if (data.birthDate) {
+    extraBlocks.push(`<p><strong>Fecha de nacimiento:</strong> ${escapeHtml(data.birthDate)}</p>`);
+  }
+  if (data.deathDate) {
+    extraBlocks.push(`<p><strong>Fecha de muerte:</strong> ${escapeHtml(data.deathDate)}</p>`);
+  }
+  if (aliases.length > 0) {
+    extraBlocks.push(`<p><strong>Alias:</strong> ${escapeHtml(aliases.join(", "))}</p>`);
+  }
+  if (data.race) {
+    extraBlocks.push(`<p><strong>Raza:</strong> ${escapeHtml(data.race)}</p>`);
+  }
 
   sidebar.innerHTML = `
     <h2>${data.name}</h2>
 
-    <p><strong>Tipo:</strong> ${formatType(data.type)}</p>
+    <div class="sidebar-block">
+      <p><strong>Tipo:</strong> ${formatType(data.type)}</p>
+      ${data.birthplace ? `
+        <p><strong>Origen:</strong>
+          <a href="?id=${encodeURIComponent(data.birthplace)}">${escapeHtml(formatName(data.birthplace))}</a>
+        </p>
+      ` : ""}
+    </div>
 
-    ${data.race ? `<p><strong>Raza:</strong> ${data.race}</p>` : ""}
-
-    ${data.birthplace ? `
-      <p><strong>Origen:</strong>
-        <a href="?id=${data.birthplace}">${formatName(data.birthplace)}</a>
-      </p>
+    ${extraBlocks.length > 0 ? `
+      <div class="sidebar-block">
+        ${extraBlocks.join("")}
+      </div>
     ` : ""}
 
-    ${data.affiliation ? `
-      <p><strong>Afiliacion:</strong></p>
-      <ul>
-        ${data.affiliation.map(id => `
-          <li><a href="?id=${id}">${formatName(id)}</a></li>
-        `).join("")}
-      </ul>
+    ${affiliations.length > 0 ? `
+      <div class="sidebar-block">
+        <p><strong>Afiliacion:</strong></p>
+        ${renderRelationList(affiliations)}
+      </div>
     ` : ""}
 
-    ${data.related ? `
-      <p><strong>Relacionados:</strong></p>
-      <ul>
-        ${data.related.map(id => `
-          <li><a href="?id=${id}">${formatName(id)}</a></li>
-        `).join("")}
-      </ul>
-    ` : ""}
+    ${relationOrder.map((key) => {
+      const items = resolvedRelations[key];
+      if (!items || items.length === 0) return "";
+      return `
+        <div class="sidebar-block">
+          <p><strong>${relationLabels[key]}:</strong></p>
+          ${renderRelationList(items)}
+        </div>
+      `;
+    }).join("")}
 
     <div id="backlinks"></div>
   `;
@@ -454,7 +656,9 @@ function renderContent(data) {
     renderRichText(textElement, section.text || "");
   });
 
-  renderSidebar(data);
+  renderSidebar(data).catch((error) => {
+    console.error("Sidebar render error:", error);
+  });
 }
 
 async function loadEntity(id) {

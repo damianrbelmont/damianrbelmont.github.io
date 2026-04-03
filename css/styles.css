@@ -160,7 +160,7 @@ ul {
    ========================================= */
 .hero-section {
     position: relative;
-    background-image: url('../assets/images/libros/lucifer/Hero_MOVIL_Lucifer.png');
+    background-image: url('../assets/images/libros/lucifer/Hero_MOVIL_Lucifer.webp');
     background-position: top center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -399,7 +399,7 @@ ul {
 
     /* Hero PC */
     .hero-section {
-        background-image: url('../assets/images/libros/lucifer/HeroPC_Lucifer.png');
+        background-image: url('../assets/images/libros/lucifer/HeroPC_Lucifer.webp');
         background-position: center;
         aspect-ratio: 2752 / 1536;
     }

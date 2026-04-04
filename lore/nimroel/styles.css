@@ -65,6 +65,7 @@ ul {
 
 .center {
   max-width: 100%;
+  margin: 0 auto;
 }
 
 .lore-search-block {
@@ -124,7 +125,10 @@ ul {
   border: 1px solid rgba(184, 155, 94, 0.1);
   padding: 16px;
   border-radius: 4px;
-  margin-top: 20px;
+  margin: 16px 0 20px;
+  width: 100%;
+  float: none;
+  clear: both;
 }
 
 .right h2 {
@@ -285,16 +289,16 @@ input {
 
   /* LAYOUT */
   .layout {
-  grid-template-columns: minmax(680px, 860px) minmax(280px, 320px);
-  justify-content: center;
-  gap: 36px;
-  align-items: start;
-  width: min(1380px, 96%);
+    grid-template-columns: 1fr;
+    justify-content: center;
+    gap: 24px;
+    align-items: start;
+    width: min(1320px, 94%);
   }
 
   /* CENTRO */
   .center {
-    max-width: 860px;
+    max-width: 1120px;
     margin: 0 auto;
   }
 
@@ -329,7 +333,10 @@ input {
   .right {
     font-size: 1rem;
     padding: 20px;
-    margin-top: 0;
+    width: min(360px, 34%);
+    margin: 0 0 24px 30px;
+    float: right;
+    clear: none;
   }
 
   .right h2 {
@@ -495,7 +502,7 @@ input {
 
 .wiki-section-arrow {
   color: var(--accent);
-  font-size: 1.2rem;
+  font-size: 1.55rem;
   line-height: 1;
   margin-left: 2px;
 }
@@ -527,6 +534,13 @@ input {
 }
 
 @media screen and (min-width: 768px) {
+  .right {
+    width: min(340px, 38%);
+    margin: 0 0 22px 26px;
+    float: right;
+    clear: none;
+  }
+
   .wiki-toc {
     display: block;
     margin-top: 1.2rem;

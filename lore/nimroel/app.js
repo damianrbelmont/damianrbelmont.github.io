@@ -645,7 +645,7 @@ function renderContent(data) {
       ? [{ id: "descripcion", title: "Descripcion", text: data.description, order: 0 }]
       : []);
 
-  const enableIndexAndCollapse = isDesktopOrTablet();
+  const showToc = isDesktopOrTablet();
   const usedIds = new Set();
   const preparedSections = sectionsToRender.map((section, index) => {
     const baseSlug = slugifySectionId(section.id || section.title, index);
@@ -662,7 +662,7 @@ function renderContent(data) {
     };
   });
 
-  const tocHtml = (enableIndexAndCollapse && preparedSections.length > 0)
+  const tocHtml = (showToc && preparedSections.length > 0)
     ? `
       <nav class="wiki-toc" id="wikiToc" aria-label="Indice de secciones">
         <p class="wiki-toc-title">Indice</p>
@@ -691,54 +691,50 @@ function renderContent(data) {
     </div>
   `;
 
+  const contentBody = content.querySelector(".content-body");
+  const sectionsBlock = document.getElementById("sectionsBlock");
+  sidebar.style.display = "block";
+
+  if (showToc) {
+    // Desktop/tablet: sidebar behaves like a floating infobox.
+    contentBody.prepend(sidebar);
+  } else {
+    // Mobile: summary first, then sidebar block, then sections.
+    contentBody.insertBefore(sidebar, sectionsBlock);
+  }
+
   const summaryBlock = document.getElementById("summaryBlock");
   renderRichText(summaryBlock, data.summary || "");
 
-  const sectionsBlock = document.getElementById("sectionsBlock");
   preparedSections.forEach((section, index) => {
     const sectionElement = document.createElement("section");
     sectionElement.className = "wiki-section";
     sectionElement.id = section.uiId;
 
-    if (enableIndexAndCollapse) {
-      const toggle = document.createElement("button");
-      toggle.type = "button";
-      toggle.className = "wiki-section-toggle";
-      toggle.setAttribute("aria-expanded", "true");
-      toggle.innerHTML = `
-        <span class="wiki-section-title">${escapeHtml(section.title || `Seccion ${index + 1}`)}</span>
-        <span class="wiki-section-arrow" aria-hidden="true">▴</span>
-      `;
-      sectionElement.appendChild(toggle);
-
-      const textElement = document.createElement("div");
-      textElement.className = "wiki-section-body wiki-section-text";
-      sectionElement.appendChild(textElement);
-
-      toggle.addEventListener("click", () => {
-        const expanded = toggle.getAttribute("aria-expanded") === "true";
-        const nextExpanded = !expanded;
-        toggle.setAttribute("aria-expanded", String(nextExpanded));
-        sectionElement.classList.toggle("is-collapsed", !nextExpanded);
-        const arrow = toggle.querySelector(".wiki-section-arrow");
-        if (arrow) {
-          arrow.textContent = nextExpanded ? "▴" : "▾";
-        }
-      });
-
-      sectionsBlock.appendChild(sectionElement);
-      renderRichText(textElement, section.text || "");
-      return;
-    }
-
-    const titleElement = document.createElement("h2");
-    titleElement.className = "wiki-section-title";
-    titleElement.textContent = section.title || `Seccion ${index + 1}`;
-    sectionElement.appendChild(titleElement);
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "wiki-section-toggle";
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.innerHTML = `
+      <span class="wiki-section-title">${escapeHtml(section.title || `Seccion ${index + 1}`)}</span>
+      <span class="wiki-section-arrow" aria-hidden="true">&#9652;</span>
+    `;
+    sectionElement.appendChild(toggle);
 
     const textElement = document.createElement("div");
-    textElement.className = "wiki-section-text";
+    textElement.className = "wiki-section-body wiki-section-text";
     sectionElement.appendChild(textElement);
+
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      const nextExpanded = !expanded;
+      toggle.setAttribute("aria-expanded", String(nextExpanded));
+      sectionElement.classList.toggle("is-collapsed", !nextExpanded);
+      const arrow = toggle.querySelector(".wiki-section-arrow");
+      if (arrow) {
+        arrow.innerHTML = nextExpanded ? "&#9652;" : "&#9662;";
+      }
+    });
 
     sectionsBlock.appendChild(sectionElement);
     renderRichText(textElement, section.text || "");
@@ -889,3 +885,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   await initSearch();
   await initTree();
 });
+

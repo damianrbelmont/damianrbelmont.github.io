@@ -483,8 +483,8 @@ input {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 12px;
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(184, 155, 94, 0.2);
@@ -495,8 +495,9 @@ input {
 
 .wiki-section-arrow {
   color: var(--accent);
-  font-size: 0.85rem;
+  font-size: 1.2rem;
   line-height: 1;
+  margin-left: 2px;
 }
 
 .wiki-section-title {
@@ -505,8 +506,12 @@ input {
   font-size: 1.35rem;
   letter-spacing: 1px;
   margin-bottom: 0.8rem;
-  border-bottom: 1px solid rgba(184, 155, 94, 0.2);
-  padding-bottom: 6px;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.wiki-section-toggle .wiki-section-title {
+  margin-bottom: 0;
 }
 
 .wiki-section-text p {

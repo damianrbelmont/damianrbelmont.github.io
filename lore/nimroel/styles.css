@@ -746,6 +746,11 @@ input {
   text-align: center;
 }
 
+.home-card picture {
+  width: 100%;
+  display: block;
+}
+
 /* IMAGEN UNIFORME */
 .home-card img {
   width: 100%;
@@ -769,6 +774,29 @@ input {
 .home-card:hover img {
   transform: translateY(-4px) scale(1.03);
   box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+body.is-home-view .center {
+  max-width: min(1320px, 96%);
+}
+
+body.is-home-view .home-intro {
+  max-width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  body.is-home-view #content > h1 {
+    font-size: 2.6rem;
+  }
+
+  body.is-home-view .home-intro {
+    max-width: min(1060px, 96%);
+    font-size: 1.12rem;
+  }
+
+  body.is-home-view .home-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .breadcrumb {

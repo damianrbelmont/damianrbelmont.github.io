@@ -426,6 +426,7 @@ async function getEntityName(id) {
 function renderHome() {
   const content = document.getElementById("content");
   const sidebar = document.getElementById("sidebar");
+  document.body.classList.add("is-home-view");
 
   sidebar.style.display = "none";
   sidebar.innerHTML = "";
@@ -461,6 +462,15 @@ function renderHome() {
       <a href="javascript:void(0)" class="home-card">
         <img src="assets/images/home/objetos.webp">
         <span>Objetos</span>
+      </a>
+
+      <a href="javascript:void(0)" onclick="filterSection('creatures')" class="home-card">
+        <picture>
+          <source srcset="assets/images/home/criaturas.avif" type="image/avif">
+          <source srcset="assets/images/home/criaturas.webp" type="image/webp">
+          <img src="assets/images/home/criaturas.webp" alt="Criaturas">
+        </picture>
+        <span>Criaturas</span>
       </a>
     </div>
   `;
@@ -636,6 +646,7 @@ async function renderSidebar(data) {
 function renderContent(data) {
   const content = document.getElementById("content");
   const sidebar = document.getElementById("sidebar");
+  document.body.classList.remove("is-home-view");
 
   sidebar.style.display = "block";
 
@@ -746,6 +757,7 @@ function renderContent(data) {
 }
 
 async function loadEntity(id) {
+  document.body.classList.remove("is-home-view");
   try {
     const entity = await getEntityById(id);
     if (!entity) {
@@ -773,7 +785,8 @@ function filterSection(type) {
   const labels = {
     characters: "Personajes",
     locations: "Lugares",
-    organizations: "Organizaciones"
+    organizations: "Organizaciones",
+    creatures: "Criaturas"
   };
 
   const title = labels[type];

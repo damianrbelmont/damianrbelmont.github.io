@@ -68,10 +68,10 @@ ul {
 }
 
 .lore-search-block {
-  border: 1px solid rgba(184, 155, 94, 0.12);
-  background: rgba(10, 19, 31, 0.55);
-  border-radius: 4px;
-  padding: 14px;
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
   margin-bottom: 18px;
 }
 

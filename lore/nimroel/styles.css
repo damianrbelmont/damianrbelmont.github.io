@@ -52,7 +52,7 @@ ul {
   grid-template-columns: 1fr;
   gap: 20px;
 
-  width: 90%;
+  width: min(1400px, 94%);
   margin: 0 auto;
 
   padding-top: calc(var(--header-height) + 2rem);
@@ -65,6 +65,26 @@ ul {
 
 .center {
   max-width: 100%;
+}
+
+.lore-search-block {
+  border: 1px solid rgba(184, 155, 94, 0.12);
+  background: rgba(10, 19, 31, 0.55);
+  border-radius: 4px;
+  padding: 14px;
+  margin-bottom: 18px;
+}
+
+.lore-search-block h3 {
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.tree-hidden {
+  display: none;
 }
 
 .center h1 {
@@ -192,7 +212,12 @@ input {
 }
 
 #searchResults li {
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+}
+
+#searchResults a {
+  display: block;
+  padding: 4px 2px;
 }
 
 /* =========================================
@@ -260,14 +285,17 @@ input {
 
   /* LAYOUT */
   .layout {
-  grid-template-columns: 220px minmax(720px, 860px) 320px;
+  grid-template-columns: minmax(680px, 860px) minmax(280px, 320px);
   justify-content: center;
-  gap: 34px;
-}
+  gap: 36px;
+  align-items: start;
+  width: min(1380px, 96%);
+  }
 
   /* CENTRO */
   .center {
     max-width: 860px;
+    margin: 0 auto;
   }
 
   .center h1 {
@@ -301,6 +329,7 @@ input {
   .right {
     font-size: 1rem;
     padding: 20px;
+    margin-top: 0;
   }
 
   .right h2 {

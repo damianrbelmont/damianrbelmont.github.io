@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -53,18 +53,17 @@
   </section>
 
   <div class="layout">
-    <aside class="left">
-      <h3>Lore</h3>
+    <main class="center">
+      <section class="lore-search-block">
+        <h3>Lore</h3>
+        <input type="text" id="search" placeholder="Buscar..." autocomplete="off">
+        <ul id="searchResults"></ul>
+        <div id="tree" class="tree-hidden"></div>
+      </section>
 
-      <!-- 🔍 Buscador -->
-      <input type="text" id="search" placeholder="Buscar..." autocomplete="off">
-      <ul id="searchResults"></ul>
-
-      <div id="tree" style="margin-top: 16px;"></div>
-    </aside>
-
-    <main class="center" id="content">
-      <!-- Aquí se renderiza el contenido dinámico -->
+      <section id="content">
+        <!-- Aquí se renderiza el contenido dinámico -->
+      </section>
     </main>
 
     <aside class="right" id="sidebar">

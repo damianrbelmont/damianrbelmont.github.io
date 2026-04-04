@@ -358,6 +358,21 @@ function formatType(type) {
   return types[type] || type;
 }
 
+function slugifySectionId(value, fallbackIndex) {
+  const base = (value || `section-${fallbackIndex + 1}`)
+    .toString()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return base || `section-${fallbackIndex + 1}`;
+}
+
+function isDesktopOrTablet() {
+  return window.matchMedia("(min-width: 768px)").matches;
+}
+
 function getAllIdsFromIndex(indexData) {
   if (!indexData || typeof indexData !== "object") return [];
 
@@ -630,6 +645,36 @@ function renderContent(data) {
       ? [{ id: "descripcion", title: "Descripcion", text: data.description, order: 0 }]
       : []);
 
+  const enableIndexAndCollapse = isDesktopOrTablet();
+  const usedIds = new Set();
+  const preparedSections = sectionsToRender.map((section, index) => {
+    const baseSlug = slugifySectionId(section.id || section.title, index);
+    let uniqueSlug = baseSlug;
+    let suffix = 2;
+    while (usedIds.has(uniqueSlug)) {
+      uniqueSlug = `${baseSlug}-${suffix}`;
+      suffix += 1;
+    }
+    usedIds.add(uniqueSlug);
+    return {
+      ...section,
+      uiId: `wiki-${uniqueSlug}`
+    };
+  });
+
+  const tocHtml = (enableIndexAndCollapse && preparedSections.length > 0)
+    ? `
+      <nav class="wiki-toc" id="wikiToc" aria-label="Indice de secciones">
+        <p class="wiki-toc-title">Indice</p>
+        <ul class="wiki-toc-list">
+          ${preparedSections.map((section) => `
+            <li><a href="#${section.uiId}">${escapeHtml(section.title)}</a></li>
+          `).join("")}
+        </ul>
+      </nav>
+    `
+    : "";
+
   content.innerHTML = `
     <div class="breadcrumb">
       <a href="javascript:void(0)" onclick="goHome()">Inicio</a>
@@ -641,6 +686,7 @@ function renderContent(data) {
 
     <div class="content-body">
       <div class="wiki-summary" id="summaryBlock"></div>
+      ${tocHtml}
       <div class="wiki-sections" id="sectionsBlock"></div>
     </div>
   `;
@@ -649,9 +695,41 @@ function renderContent(data) {
   renderRichText(summaryBlock, data.summary || "");
 
   const sectionsBlock = document.getElementById("sectionsBlock");
-  sectionsToRender.forEach((section, index) => {
+  preparedSections.forEach((section, index) => {
     const sectionElement = document.createElement("section");
     sectionElement.className = "wiki-section";
+    sectionElement.id = section.uiId;
+
+    if (enableIndexAndCollapse) {
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "wiki-section-toggle";
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.innerHTML = `
+        <span class="wiki-section-title">${escapeHtml(section.title || `Seccion ${index + 1}`)}</span>
+        <span class="wiki-section-arrow" aria-hidden="true">▴</span>
+      `;
+      sectionElement.appendChild(toggle);
+
+      const textElement = document.createElement("div");
+      textElement.className = "wiki-section-body wiki-section-text";
+      sectionElement.appendChild(textElement);
+
+      toggle.addEventListener("click", () => {
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        const nextExpanded = !expanded;
+        toggle.setAttribute("aria-expanded", String(nextExpanded));
+        sectionElement.classList.toggle("is-collapsed", !nextExpanded);
+        const arrow = toggle.querySelector(".wiki-section-arrow");
+        if (arrow) {
+          arrow.textContent = nextExpanded ? "▴" : "▾";
+        }
+      });
+
+      sectionsBlock.appendChild(sectionElement);
+      renderRichText(textElement, section.text || "");
+      return;
+    }
 
     const titleElement = document.createElement("h2");
     titleElement.className = "wiki-section-title";

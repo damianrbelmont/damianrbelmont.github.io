@@ -55,7 +55,7 @@ ul {
   width: min(1400px, 94%);
   margin: 0 auto;
 
-  padding-top: calc(var(--header-height) + 2rem);
+  padding-top: 0.7rem;
   padding-bottom: 4rem;
 }
 
@@ -349,6 +349,10 @@ input {
     margin-bottom: 8px;
   }
 
+  .wiki-toc {
+    max-width: calc(100% - min(360px, 34%) - 30px);
+  }
+
   /* HEADER */
   .menu-toggle {
     display: none;
@@ -478,7 +482,13 @@ input {
 }
 
 .wiki-sections {
-  margin-top: 1.4rem;
+  margin-top: 1.2rem;
+  clear: none;
+}
+
+.wiki-sections,
+.wiki-section {
+  clear: none;
 }
 
 .wiki-section {
@@ -534,6 +544,10 @@ input {
 }
 
 @media screen and (min-width: 768px) {
+  .wiki-sections {
+    display: contents;
+  }
+
   .right {
     width: min(340px, 38%);
     margin: 0 0 22px 26px;
@@ -548,6 +562,8 @@ input {
     border: 1px solid rgba(184, 155, 94, 0.12);
     border-radius: 4px;
     background: rgba(10, 19, 31, 0.35);
+    width: fit-content;
+    max-width: calc(100% - min(340px, 38%) - 26px);
   }
 }
 
@@ -579,7 +595,7 @@ input {
   max-width: 800px;
   margin: 0 auto;
   margin-top: calc(var(--header-height) + 2rem);
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.25rem;
   overflow: hidden;
   border-radius: 5px;
 }

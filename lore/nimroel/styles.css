@@ -156,6 +156,7 @@ ul {
 
 .sidebar-infobox-image img {
   width: 100%;
+  max-width: 100%;
   height: auto;
   object-fit: cover;
   display: block;
@@ -194,6 +195,11 @@ ul {
 .sidebar-relations-title {
   text-align: center;
   margin-bottom: 8px;
+}
+
+/* Fallback: centra el título del bloque de relaciones aunque no lleve clase */
+.sidebar-block:has(.sidebar-rel-group) > p:first-child {
+  text-align: center;
 }
 
 /* =========================================

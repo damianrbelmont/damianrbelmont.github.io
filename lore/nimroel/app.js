@@ -22,6 +22,40 @@ const db = getFirestore(app);
 const INDEX_DOC_REF = doc(db, "meta", "index");
 const entityCache = new Map();
 let indexCache = null;
+const categoryItemsCache = new Map();
+
+const CATEGORY_CONFIG = {
+  characters: {
+    label: "Personajes",
+    indexKeys: ["characters", "personajes"],
+    typeKeys: ["character"]
+  },
+  locations: {
+    label: "Localizaciones",
+    indexKeys: ["locations", "lugares", "localizaciones"],
+    typeKeys: ["location"]
+  },
+  organizations: {
+    label: "Organizaciones",
+    indexKeys: ["organizations", "organizaciones"],
+    typeKeys: ["organization"]
+  },
+  events: {
+    label: "Eventos",
+    indexKeys: ["events", "eventos"],
+    typeKeys: ["event"]
+  },
+  artifacts: {
+    label: "Objetos",
+    indexKeys: ["artifacts", "objects", "objetos"],
+    typeKeys: ["artifact"]
+  },
+  creatures: {
+    label: "Criaturas",
+    indexKeys: ["creatures", "criaturas"],
+    typeKeys: ["creature"]
+  }
+};
 
 function normalizeRichText(value) {
   return (value || "")
@@ -366,6 +400,173 @@ function formatType(type) {
   return types[type] || type;
 }
 
+function normalizeEntityType(type) {
+  const normalized = (type || "").toString().trim().toLowerCase();
+  const aliasMap = {
+    characters: "character",
+    personaje: "character",
+    personajes: "character",
+    locations: "location",
+    lugar: "location",
+    lugares: "location",
+    localizacion: "location",
+    localizaciones: "location",
+    organizations: "organization",
+    organizacion: "organization",
+    organizaciones: "organization",
+    events: "event",
+    evento: "event",
+    eventos: "event",
+    artifacts: "artifact",
+    objeto: "artifact",
+    objetos: "artifact",
+    creatures: "creature",
+    criatura: "creature",
+    criaturas: "creature"
+  };
+  return aliasMap[normalized] || normalized;
+}
+
+function closeCategoryModal() {
+  const overlay = document.getElementById("categoryModalOverlay");
+  if (!overlay) return;
+  overlay.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+function ensureCategoryModal() {
+  let overlay = document.getElementById("categoryModalOverlay");
+  if (overlay) return overlay;
+
+  overlay = document.createElement("div");
+  overlay.id = "categoryModalOverlay";
+  overlay.className = "category-modal-overlay";
+  overlay.innerHTML = `
+    <div class="category-modal-panel" role="dialog" aria-modal="true" aria-labelledby="categoryModalTitle">
+      <button type="button" class="category-modal-close" id="categoryModalClose" aria-label="Cerrar">&times;</button>
+      <h3 class="category-modal-title" id="categoryModalTitle"></h3>
+      <div class="category-modal-body" id="categoryModalBody"></div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) {
+      closeCategoryModal();
+    }
+  });
+
+  overlay.querySelector("#categoryModalClose")?.addEventListener("click", closeCategoryModal);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && overlay.classList.contains("active")) {
+      closeCategoryModal();
+    }
+  });
+
+  return overlay;
+}
+
+async function getCategoryIds(categoryKey) {
+  const config = CATEGORY_CONFIG[categoryKey];
+  if (!config) return [];
+
+  const indexData = await loadIndex();
+  let ids = [];
+
+  config.indexKeys.forEach((key) => {
+    const value = indexData?.[key];
+    if (Array.isArray(value)) {
+      ids.push(...value);
+    }
+  });
+
+  ids = uniqueStrings(ids);
+  if (ids.length > 0) return ids;
+
+  // Fallback if the category is not explicitly indexed.
+  const allIds = getAllIdsFromIndex(indexData);
+  const entities = await Promise.all(allIds.map((id) => getEntityById(id)));
+  const allowedTypes = new Set(config.typeKeys);
+
+  return uniqueStrings(
+    entities
+      .filter((entity) => entity && allowedTypes.has(normalizeEntityType(entity.type)))
+      .map((entity) => entity.id)
+  );
+}
+
+async function getCategoryItems(categoryKey) {
+  if (categoryItemsCache.has(categoryKey)) {
+    return categoryItemsCache.get(categoryKey);
+  }
+
+  const ids = await getCategoryIds(categoryKey);
+  const items = await Promise.all(
+    ids.map(async (id) => {
+      const name = await getEntityName(id);
+      return { id, name: name || formatName(id) };
+    })
+  );
+
+  const sorted = items
+    .filter((item) => item.id && item.name)
+    .sort((a, b) => a.name.localeCompare(b.name, "es", { sensitivity: "base" }));
+
+  categoryItemsCache.set(categoryKey, sorted);
+  return sorted;
+}
+
+async function openCategoryList(categoryKey) {
+  const config = CATEGORY_CONFIG[categoryKey];
+  if (!config) return;
+
+  const overlay = ensureCategoryModal();
+  const titleEl = overlay.querySelector("#categoryModalTitle");
+  const bodyEl = overlay.querySelector("#categoryModalBody");
+  if (!titleEl || !bodyEl) return;
+
+  titleEl.textContent = config.label;
+  bodyEl.innerHTML = `<p class="category-modal-status">Cargando ${config.label.toLowerCase()}...</p>`;
+  overlay.classList.add("active");
+  document.body.style.overflow = "hidden";
+
+  try {
+    const items = await getCategoryItems(categoryKey);
+    if (items.length === 0) {
+      bodyEl.innerHTML = `<p class="category-modal-status">Aun no hay entradas publicadas en esta categoria.</p>`;
+      return;
+    }
+
+    bodyEl.innerHTML = `
+      <ul class="category-modal-list">
+        ${items.map((item) => `
+          <li>
+            <a href="?id=${encodeURIComponent(item.id)}" class="category-modal-link" data-entity-id="${escapeHtml(item.id)}">
+              ${escapeHtml(item.name)}
+            </a>
+          </li>
+        `).join("")}
+      </ul>
+    `;
+
+    bodyEl.querySelectorAll(".category-modal-link").forEach((link) => {
+      link.addEventListener("click", async (event) => {
+        event.preventDefault();
+        const id = link.getAttribute("data-entity-id");
+        if (!id) return;
+        closeCategoryModal();
+        window.history.pushState({}, "", `?id=${encodeURIComponent(id)}`);
+        await loadEntity(id);
+      });
+    });
+  } catch (error) {
+    console.error("Category modal error:", error);
+    bodyEl.innerHTML = `<p class="category-modal-status">No se pudo cargar esta categoria.</p>`;
+  }
+}
+
 function slugifySectionId(value, fallbackIndex) {
   const base = (value || `section-${fallbackIndex + 1}`)
     .toString()
@@ -440,39 +641,39 @@ function renderHome() {
   sidebar.innerHTML = "";
 
   content.innerHTML = `
-    <h1>Nimroel</h1>
+    <h1>Cronista del Santuario</h1>
 
     <p class="home-intro">
-      Nimroel no es un mundo. Es una historia que se recuerda.
+      Nimroel no es un mundo. Es una historia que se recuerda. Yo soy el actual Cronista Mayor del Santuario, encargado de cuidar, administrar y legar a todo Nimroel el conocimiento de su historia que se ha ido adquiriendo desde el inicio de las Eras.
     </p>
 
     <div class="home-grid">
-      <a href="javascript:void(0)" onclick="filterSection('characters')" class="home-card">
+      <a href="javascript:void(0)" onclick="openCategoryList('characters')" class="home-card">
         <img src="assets/images/home/personajes.webp">
         <span>Personajes</span>
       </a>
 
-      <a href="javascript:void(0)" onclick="filterSection('locations')" class="home-card">
+      <a href="javascript:void(0)" onclick="openCategoryList('locations')" class="home-card">
         <img src="assets/images/home/lugares.webp">
         <span>Lugares</span>
       </a>
 
-      <a href="javascript:void(0)" onclick="filterSection('organizations')" class="home-card">
+      <a href="javascript:void(0)" onclick="openCategoryList('organizations')" class="home-card">
         <img src="assets/images/home/organizaciones.webp">
         <span>Organizaciones</span>
       </a>
 
-      <a href="javascript:void(0)" class="home-card">
+      <a href="javascript:void(0)" onclick="openCategoryList('events')" class="home-card">
         <img src="assets/images/home/eventos.webp">
         <span>Eventos</span>
       </a>
 
-      <a href="javascript:void(0)" class="home-card">
+      <a href="javascript:void(0)" onclick="openCategoryList('artifacts')" class="home-card">
         <img src="assets/images/home/objetos.webp">
         <span>Objetos</span>
       </a>
 
-      <a href="javascript:void(0)" onclick="filterSection('creatures')" class="home-card">
+      <a href="javascript:void(0)" onclick="openCategoryList('creatures')" class="home-card">
         <picture>
           <source srcset="assets/images/home/criaturas.avif" type="image/avif">
           <source srcset="assets/images/home/criaturas.webp" type="image/webp">
@@ -888,6 +1089,7 @@ window.addEventListener("popstate", () => {
 
 window.goHome = goHome;
 window.filterSection = filterSection;
+window.openCategoryList = openCategoryList;
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {

@@ -573,3 +573,37 @@ ul {
     white-space: nowrap;
     border: 0;
 }
+
+/* Waterstones icon estilo coherente con SVGs */
+.waterstones-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.waterstones-icon {
+    font-size: 18px;
+    font-weight: bold;
+    color: currentColor; /* hereda el color amarillo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    line-height: 1;
+}
+
+/* Tooltip simple al pasar el ratón */
+.waterstones-link::after {
+    content: "Waterstones";
+    position: absolute;
+    bottom: -25px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.waterstones-link:hover::after {
+    opacity: 1;
+}

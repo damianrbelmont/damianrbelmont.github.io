@@ -629,7 +629,7 @@ async function renderSidebar(data) {
 
     ${relationGroupsHtml ? `
       <div class="sidebar-block">
-        <p><strong>Relaciones</strong></p>
+        <p class="sidebar-relations-title"><strong>Relaciones</strong></p>
         ${relationGroupsHtml}
       </div>
     ` : ""}

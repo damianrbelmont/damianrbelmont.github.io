@@ -149,8 +149,15 @@ ul {
   overflow: hidden;
 }
 
+.sidebar-infobox-image picture {
+  display: block;
+  width: 100%;
+}
+
 .sidebar-infobox-image img {
   width: 100%;
+  height: auto;
+  object-fit: cover;
   display: block;
   margin: 0;
   border-radius: 0;
@@ -182,6 +189,11 @@ ul {
 
 .sidebar-rel-label {
   margin-bottom: 4px;
+}
+
+.sidebar-relations-title {
+  text-align: center;
+  margin-bottom: 8px;
 }
 
 /* =========================================

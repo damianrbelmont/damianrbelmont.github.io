@@ -23,6 +23,14 @@ const INDEX_DOC_REF = doc(db, "meta", "index");
 const entityCache = new Map();
 let indexCache = null;
 
+function normalizeRichText(value) {
+  return (value || "")
+    .toString()
+    .replace(/\r\n?/g, "\n")
+    .replace(/\\\\n/g, "\n")
+    .replace(/\\n/g, "\n");
+}
+
 function getFirstStringValueFromPaths(source, paths) {
   for (const path of paths) {
     const parts = path.split(".");
@@ -98,7 +106,7 @@ function getJoinedSectionText(source) {
   if (!Array.isArray(sections)) return "";
 
   const texts = sections
-    .map((section) => (section?.text || "").toString().trim())
+    .map((section) => normalizeRichText(section?.text).trim())
     .filter(Boolean);
   return texts.join("\n\n");
 }
@@ -146,21 +154,21 @@ function normalizeEntityData(raw) {
       : [];
 
   // Prefer the new Firebase schema first.
-  data.summary = getFirstStringValueFromPaths(raw, [
+  data.summary = normalizeRichText(getFirstStringValueFromPaths(raw, [
     "content.summary",
     "content.intro",
     "overview",
     "summary",
     "synopsis",
     "bio"
-  ]) || data.summary || "";
+  ]) || data.summary || "");
 
-  data.description = getFirstStringValueFromPaths(raw, [
+  data.description = normalizeRichText(getFirstStringValueFromPaths(raw, [
     "content.description",
     "content.body",
     "description",
     "details"
-  ]) || joinedSections || data.description || "";
+  ]) || joinedSections || data.description || "");
 
   if (!data.summary && data.description) {
     data.summary = data.description.split("\n")[0].slice(0, 220);
@@ -277,7 +285,7 @@ function normalizeEntityData(raw) {
     .map((section, index) => {
       const id = (section?.id || `section_${index + 1}`).toString();
       const title = (section?.title || section?.tittle || formatName(id)).toString().trim();
-      const text = (section?.text || section?.description || "").toString().trim();
+      const text = normalizeRichText(section?.text || section?.description).trim();
       return {
         id,
         title: title || `Seccion ${index + 1}`,
@@ -495,7 +503,7 @@ async function parseLinks(text) {
 
 async function renderRichText(targetElement, text) {
   if (!targetElement) return;
-  const parsed = await parseLinks((text || "").toString());
+  const parsed = await parseLinks(normalizeRichText(text));
   const paragraphs = parsed
     .split(/\n{2,}/)
     .map((paragraph) => paragraph.trim())

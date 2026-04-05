@@ -563,7 +563,11 @@ input {
 
 @media screen and (min-width: 768px) {
   .wiki-sections {
-    display: contents;
+    display: block;
+  }
+
+  .wiki-section-toggle {
+    width: auto;
   }
 
   .right {

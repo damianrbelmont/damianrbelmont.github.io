@@ -184,6 +184,10 @@ ul {
   color: var(--accent);
 }
 
+.sidebar-list a:hover {
+  color: #fff;
+}
+
 .sidebar-rel-group + .sidebar-rel-group {
   margin-top: 10px;
 }

@@ -543,7 +543,7 @@ async function openCategoryList(categoryKey) {
       <ul class="category-modal-list">
         ${items.map((item) => `
           <li>
-            <a href="?id=${encodeURIComponent(item.id)}" class="category-modal-link" data-entity-id="${escapeHtml(item.id)}">
+            <a href="?id=${encodeURIComponent(item.id)}" class="category-modal-link" data-entity-id="${encodeURIComponent(item.id)}">
               ${escapeHtml(item.name)}
             </a>
           </li>
@@ -553,9 +553,10 @@ async function openCategoryList(categoryKey) {
 
     bodyEl.querySelectorAll(".category-modal-link").forEach((link) => {
       link.addEventListener("click", async (event) => {
-        event.preventDefault();
-        const id = link.getAttribute("data-entity-id");
+        const encodedId = link.getAttribute("data-entity-id");
+        const id = encodedId ? decodeURIComponent(encodedId) : "";
         if (!id) return;
+        event.preventDefault();
         closeCategoryModal();
         window.history.pushState({}, "", `?id=${encodeURIComponent(id)}`);
         await loadEntity(id);
@@ -1108,4 +1109,3 @@ document.addEventListener("DOMContentLoaded", async () => {
   await initSearch();
   await initTree();
 });
-

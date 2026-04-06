@@ -472,7 +472,7 @@ $jsonLd
           <li><a href="../../index.html">Inicio</a></li>
           <li><a href="../../damian/index.html">Damian</a></li>
           <li><a href="../../novelas/index.html">Novelas</a></li>
-          <li><a href="../index.html" class="active-link">Lore</a></li>
+          <li><a href="../index.html" class="active-link">WIKI</a></li>
           <li><a href="../../novelas/proximamente/index.html">Proximamente</a></li>
         </ul>
       </nav>
@@ -485,7 +485,7 @@ $jsonLd
       <li><a href="../../index.html" class="nav-link">INICIO</a></li>
       <li><a href="../../damian/index.html" class="nav-link">DAMIAN</a></li>
       <li><a href="../../novelas/index.html" class="nav-link">NOVELAS</a></li>
-      <li><a href="../index.html" class="nav-link">LORE</a></li>
+      <li><a href="../index.html" class="nav-link">WIKI</a></li>
       <li><a href="../../novelas/proximamente/index.html" class="nav-link">PROXIMAMENTE</a></li>
     </ul>
   </nav>
@@ -610,7 +610,7 @@ $mainSectionsHtml
       <a href="../../index.html">INICIO</a>
       <a href="../../damian/index.html">DAMIAN</a>
       <a href="../../novelas/index.html">NOVELAS</a>
-      <a href="../index.html">LORE</a>
+      <a href="../index.html">WIKI</a>
       <a href="../../novelas/proximamente/index.html">PROXIMAMENTE</a>
     </div>
     <div class="social-icons">

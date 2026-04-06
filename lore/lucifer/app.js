@@ -5,35 +5,25 @@ let indexCache = null;
 const categoryItemsCache = new Map();
 
 const CATEGORY_CONFIG = {
-  characters: {
-    label: "Personajes",
-    indexKeys: ["characters", "personajes"],
+  celestial: {
+    label: "Cielo",
+    indexKeys: ["celestial", "cielo"],
     typeKeys: ["character"]
   },
-  locations: {
-    label: "Localizaciones",
-    indexKeys: ["locations", "lugares", "localizaciones"],
-    typeKeys: ["location"]
-  },
-  organizations: {
-    label: "Organizaciones",
-    indexKeys: ["organizations", "organizaciones"],
+  infernal: {
+    label: "Infierno",
+    indexKeys: ["infernal", "infierno"],
     typeKeys: ["organization"]
+  },
+  cosmogonia: {
+    label: "Cosmogonia",
+    indexKeys: ["cosmogonia"],
+    typeKeys: ["location", "artifact", "creature"]
   },
   events: {
     label: "Eventos",
     indexKeys: ["events", "eventos"],
     typeKeys: ["event"]
-  },
-  artifacts: {
-    label: "Objetos",
-    indexKeys: ["artifacts", "objects", "objetos"],
-    typeKeys: ["artifact"]
-  },
-  creatures: {
-    label: "Criaturas",
-    indexKeys: ["creatures", "criaturas"],
-    typeKeys: ["creature"]
   }
 };
 
@@ -633,42 +623,32 @@ function renderHome() {
   sidebar.innerHTML = "";
 
   content.innerHTML = `
-    <h1>Archivo de Lucifer</h1>
+    <h1>Cronicas de Lucifer</h1>
 
     <p class="home-intro">
-      Este archivo reune personajes, lugares, eventos y relaciones del universo narrativo de Lucifer.
+      Este archivo reune toda la informacion sobre el universo narrativo de Lucifer.
       Es una base viva de consulta en proceso de ampliacion.
     </p>
 
     <div class="home-grid">
-      <a href="javascript:void(0)" onclick="openCategoryList('characters')" class="home-card">
-        <img src="../../assets/images/libros/lucifer/Lucifer.webp" alt="Personajes">
-        <span>Personajes</span>
+      <a href="javascript:void(0)" onclick="openCategoryList('celestial')" class="home-card">
+        <img src="../assets/images/Cielo.webp" alt="Cielo">
+        <span>Cielo</span>
       </a>
 
-      <a href="javascript:void(0)" onclick="openCategoryList('locations')" class="home-card">
-        <img src="../../assets/images/libros/lucifer/HeroPC_Lucifer.webp" alt="Lugares">
-        <span>Lugares</span>
-      </a>
-
-      <a href="javascript:void(0)" onclick="openCategoryList('organizations')" class="home-card">
-        <img src="../../assets/images/proximamente/proximamente.png" alt="Organizaciones">
-        <span>Organizaciones</span>
+      <a href="javascript:void(0)" onclick="openCategoryList('infernal')" class="home-card">
+        <img src="../assets/images/Infierno.webp" alt="Infierno">
+        <span>Infierno</span>
       </a>
 
       <a href="javascript:void(0)" onclick="openCategoryList('events')" class="home-card">
-        <img src="../../assets/images/libros/lucifer/Hero_MOVIL_Lucifer.webp" alt="Eventos">
+        <img src="../assets/images/Eventos.webp" alt="Eventos">
         <span>Eventos</span>
       </a>
 
-      <a href="javascript:void(0)" onclick="openCategoryList('artifacts')" class="home-card">
-        <img src="../../assets/images/DRB.png" alt="Objetos">
-        <span>Objetos</span>
-      </a>
-
-      <a href="javascript:void(0)" onclick="openCategoryList('creatures')" class="home-card">
-        <img src="../../assets/images/proximamente/proximamente.png" alt="Criaturas">
-        <span>Criaturas</span>
+      <a href="javascript:void(0)" onclick="openCategoryList('cosmogonia')" class="home-card">
+        <img src="../assets/images/Cosmogonia.webp" alt="Cosmogonia">
+        <span>Cosmogonia</span>
       </a>
     </div>
   `;
@@ -1097,3 +1077,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   await initSearch();
   await initTree();
 });
+

@@ -1,10 +1,8 @@
-﻿{
-  "characters": ["lucifer_helel", "miguel_arcangel"],
-  "locations": ["souto_1960"],
-  "organizations": ["santa_compana"],
+{
+  "celestial": ["lucifer_helel", "miguel_arcangel"],
+  "infernal": ["santa_compana"],
+  "cosmogonia": ["souto_1960"],
   "events": ["noche_del_sellado"],
-  "artifacts": [],
-  "creatures": [],
   "entries": {
     "lucifer_helel": "characters/lucifer_helel.json",
     "miguel_arcangel": "characters/miguel_arcangel.json",

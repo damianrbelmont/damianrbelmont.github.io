@@ -553,6 +553,18 @@ $mainSectionsHtml
   <script src="../../scripts/script.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      var contentBody = document.querySelector(".content-body");
+      var sidebar = document.getElementById("sidebar");
+      var sectionsBlock = document.getElementById("sectionsBlock");
+      if (contentBody && sidebar && sectionsBlock) {
+        var isDesktopOrTablet = window.matchMedia("(min-width: 768px)").matches;
+        if (isDesktopOrTablet) {
+          contentBody.prepend(sidebar);
+        } else {
+          contentBody.insertBefore(sidebar, sectionsBlock);
+        }
+      }
+
       document.querySelectorAll(".wiki-section-toggle").forEach(function (toggle) {
         toggle.addEventListener("click", function () {
           var section = toggle.closest(".wiki-section");

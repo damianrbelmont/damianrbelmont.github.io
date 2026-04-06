@@ -851,14 +851,18 @@ async function renderSidebar(data) {
     .join("");
 
   const image = data.image || "";
-  const avif = image.endsWith(".webp") ? image.replace(".webp", ".avif") : image;
+  const imageAvif = getFirstStringValueFromPaths(data, [
+    "imageAvif",
+    "media.avif",
+    "assets.avif"
+  ]);
 
   sidebar.innerHTML = `
     ${image ? `
       <div class="sidebar-infobox-image">
         <picture>
-          <source srcset="${avif}" type="image/avif">
-          <source srcset="${image}" type="image/webp">
+          ${imageAvif ? `<source srcset="${imageAvif}" type="image/avif">` : ""}
+          ${image.endsWith(".webp") ? `<source srcset="${image}" type="image/webp">` : ""}
           <img src="${image}" class="clickable" alt="${escapeHtml(data.name || data.id)}">
         </picture>
       </div>

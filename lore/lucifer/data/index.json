@@ -1,15 +1,17 @@
 {
-  "entries": [{
-  "id": "valak",
-  "slug": "valak",
-  "title": "Valak",
-  "type": "character",
-  "section": "infierno",
-  "subsection": "demonio",
-  "excerpt": "",
-  "image": "assets/images/characters/valak.avif",
-  "path": "infierno/valak.json",
-  "status": "draft",
-  "visibility": "private"
-}]
+  "entries": [
+    {
+      "id": "valak",
+      "slug": "valak",
+      "title": "Valak",
+      "type": "character",
+      "section": "infierno",
+      "subsection": "demonio",
+      "excerpt": "",
+      "image": "assets/images/characters/valak.webp",
+      "path": "infierno/valak.json",
+      "status": "published",
+      "visibility": "public"
+    }
+  ]
 }

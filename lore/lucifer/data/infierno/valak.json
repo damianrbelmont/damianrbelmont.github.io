@@ -8,7 +8,7 @@
   "title": "Valak",
   "subtitle": "",
   "description": "Demonio mayor a las órdenes de Azazel",
-  "image": "assets/images/characters/valak.avif",
+  "image": "assets/images/characters/valak.webp",
   "alias": [
     "Señor de los Susurros"
   ],
@@ -57,8 +57,8 @@
     "role": ""
   },
   "publication": {
-    "status": "draft",
-    "visibility": "private",
+    "status": "published",
+    "visibility": "public",
     "updatedAt": "",
     "version": 1
   }

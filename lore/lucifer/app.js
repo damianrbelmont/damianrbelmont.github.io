@@ -7,22 +7,22 @@ const categoryItemsCache = new Map();
 const CATEGORY_CONFIG = {
   cielo: {
     label: "Cielo",
-    indexKeys: ["cielo", "celestial"],
+    sectionKeys: ["cielo", "celestial"],
     typeKeys: ["character"]
   },
   infierno: {
     label: "Infierno",
-    indexKeys: ["infierno", "infernal"],
+    sectionKeys: ["infierno", "infernal"],
     typeKeys: ["organization"]
   },
-  cosmogonia: {
-    label: "Cosmogonia",
-    indexKeys: ["cosmogonia"],
+  cosmologia: {
+    label: "Cosmologia",
+    sectionKeys: ["cosmologia", "cosmogonia"],
     typeKeys: ["location", "artifact", "creature"]
   },
   eventos: {
     label: "Eventos",
-    indexKeys: ["eventos", "events"],
+    sectionKeys: ["eventos", "events"],
     typeKeys: ["event"]
   }
 };
@@ -156,6 +156,14 @@ function normalizeEntityData(raw) {
     : Array.isArray(raw?.sections)
       ? raw.sections
       : [];
+
+  data.title = getFirstStringValueFromPaths(raw, [
+    "title",
+    "name"
+  ]) || data.title || data.name || "";
+
+  // Transitional compatibility while detail JSONs migrate fully to `title`.
+  data.name = data.name || data.title || "";
 
   // Prefer the richer content schema when available.
   data.summary = normalizeRichText(getFirstStringValueFromPaths(raw, [
@@ -345,10 +353,90 @@ function renderRelationList(items) {
   `;
 }
 
+function normalizeSectionKey(value) {
+  const normalized = (value || "").toString().trim().toLowerCase();
+  const sectionAlias = {
+    cielo: "cielo",
+    celestial: "cielo",
+    infierno: "infierno",
+    infernal: "infierno",
+    cosmologia: "cosmologia",
+    cosmogonia: "cosmologia",
+    eventos: "eventos",
+    events: "eventos"
+  };
+  return sectionAlias[normalized] || normalized;
+}
+
+function normalizePublicationStatus(value) {
+  const normalized = (value || "published").toString().trim().toLowerCase();
+  return normalized === "draft" ? "draft" : "published";
+}
+
+function normalizePublicationVisibility(value) {
+  const normalized = (value || "public").toString().trim().toLowerCase();
+  return normalized === "private" ? "private" : "public";
+}
+
+function normalizeIndexEntry(rawEntry) {
+  if (!rawEntry || typeof rawEntry !== "object") return null;
+
+  const id = (rawEntry.id || "").toString().trim();
+  if (!id) return null;
+
+  const path = (rawEntry.path || "").toString().trim().replace(/^\/+/, "");
+  const sectionFromPath = path.includes("/") ? path.split("/")[0] : "";
+  const section = normalizeSectionKey(rawEntry.section || sectionFromPath);
+
+  return {
+    id,
+    slug: (rawEntry.slug || "").toString().trim(),
+    title: (rawEntry.title || "").toString().trim(),
+    type: normalizeEntityType(rawEntry.type),
+    section,
+    subsection: (rawEntry.subsection || "").toString().trim(),
+    excerpt: (rawEntry.excerpt || "").toString().trim(),
+    image: (rawEntry.image || "").toString().trim(),
+    path,
+    status: normalizePublicationStatus(rawEntry.status),
+    visibility: normalizePublicationVisibility(rawEntry.visibility)
+  };
+}
+
+function getIndexEntries(indexData) {
+  const rawEntries = indexData?.entries;
+
+  if (Array.isArray(rawEntries)) {
+    return rawEntries
+      .map((entry) => normalizeIndexEntry(entry))
+      .filter(Boolean);
+  }
+
+  // Legacy compatibility: map id -> path
+  if (rawEntries && typeof rawEntries === "object") {
+    return Object.entries(rawEntries)
+      .map(([id, path]) => normalizeIndexEntry({ id, path }))
+      .filter(Boolean);
+  }
+
+  return [];
+}
+
+function getIndexEntryById(indexData, id) {
+  const cleanId = (id || "").toString().trim();
+  if (!cleanId) return null;
+  return getIndexEntries(indexData).find((entry) => entry.id === cleanId) || null;
+}
+
+function isPublicPublishedEntry(entry) {
+  if (!entry) return false;
+  return entry.status === "published" && entry.visibility === "public";
+}
+
 function getEntityPathById(indexData, id) {
-  const candidate = indexData?.entries?.[id];
-  if (!candidate || typeof candidate !== "string") return "";
-  const clean = candidate.trim().replace(/^\/+/, "");
+  const entry = getIndexEntryById(indexData, id);
+  if (!entry || !entry.path) return "";
+  const clean = entry.path.trim().replace(/^\/+/, "");
   return clean.startsWith("data/") ? clean : `data/${clean}`;
 }
 
@@ -446,28 +534,26 @@ async function getCategoryIds(categoryKey) {
   if (!config) return [];
 
   const indexData = await loadIndex();
-  let ids = [];
+  const entries = getIndexEntries(indexData).filter(isPublicPublishedEntry);
+  const sectionKeys = new Set((config.sectionKeys || []).map((key) => normalizeSectionKey(key)));
 
-  config.indexKeys.forEach((key) => {
-    const value = indexData?.[key];
-    if (Array.isArray(value)) {
-      ids.push(...value);
-    }
-  });
+  let ids = uniqueStrings(
+    entries
+      .filter((entry) => sectionKeys.has(normalizeSectionKey(entry.section)))
+      .map((entry) => entry.id)
+  );
 
-  ids = uniqueStrings(ids);
   if (ids.length > 0) return ids;
 
-  // Fallback if the category is not explicitly indexed.
-  const allIds = getAllIdsFromIndex(indexData);
-  const entities = await Promise.all(allIds.map((id) => getEntityById(id)));
+  // Fallback by type if section metadata is incomplete.
   const allowedTypes = new Set(config.typeKeys);
-
-  return uniqueStrings(
-    entities
-      .filter((entity) => entity && allowedTypes.has(normalizeEntityType(entity.type)))
-      .map((entity) => entity.id)
+  ids = uniqueStrings(
+    entries
+      .filter((entry) => allowedTypes.has(normalizeEntityType(entry.type)))
+      .map((entry) => entry.id)
   );
+
+  return ids;
 }
 
 async function getCategoryItems(categoryKey) {
@@ -476,8 +562,15 @@ async function getCategoryItems(categoryKey) {
   }
 
   const ids = await getCategoryIds(categoryKey);
+  const indexData = await loadIndex();
+  const entryMap = new Map(getIndexEntries(indexData).map((entry) => [entry.id, entry]));
+
   const items = await Promise.all(
     ids.map(async (id) => {
+      const indexEntry = entryMap.get(id);
+      if (indexEntry?.title) {
+        return { id, name: indexEntry.title };
+      }
       const name = await getEntityName(id);
       return { id, name: name || formatName(id) };
     })
@@ -557,17 +650,11 @@ function isDesktopOrTablet() {
 }
 
 function getAllIdsFromIndex(indexData) {
-  if (!indexData || typeof indexData !== "object") return [];
-
-  const idSet = new Set();
-  Object.values(indexData).forEach((value) => {
-    if (!Array.isArray(value)) return;
-    value.forEach((id) => {
-      const clean = (id || "").toString().trim();
-      if (clean) idSet.add(clean);
-    });
-  });
-  return [...idSet];
+  return uniqueStrings(
+    getIndexEntries(indexData)
+      .filter(isPublicPublishedEntry)
+      .map((entry) => entry.id)
+  );
 }
 
 async function loadIndex() {
@@ -610,8 +697,12 @@ async function getEntityById(id) {
 }
 
 async function getEntityName(id) {
+  const indexData = await loadIndex();
+  const indexEntry = getIndexEntryById(indexData, id);
+  if (indexEntry?.title) return indexEntry.title;
+
   const entity = await getEntityById(id);
-  return entity?.name || formatName(id);
+  return entity?.title || entity?.name || formatName(id);
 }
 
 function renderHome() {
@@ -646,9 +737,9 @@ function renderHome() {
         <span>Eventos</span>
       </a>
 
-      <a href="javascript:void(0)" onclick="openCategoryList('cosmogonia')" class="home-card">
+      <a href="javascript:void(0)" onclick="openCategoryList('cosmologia')" class="home-card">
         <img src="assets/images/Cosmogonia.webp" alt="Cosmogonia">
-        <span>Cosmogonia</span>
+        <span>Cosmologia</span>
       </a>
     </div>
   `;

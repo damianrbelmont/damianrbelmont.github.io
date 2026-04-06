@@ -5,10 +5,8 @@
   "type": "location",
   "section": "",
   "subsection": "",
-  "name": "",
   "title": "",
   "subtitle": "",
-  "summary": "",
   "description": "",
   "image": "",
   "alias": [],
@@ -26,10 +24,10 @@
   "excerpt": "",
   "relations": {
     "characters": [],
-    "entities": [],
     "locations": [],
     "events": [],
     "concepts": [],
+    "organizations": [],
     "related": []
   },
   "content": {

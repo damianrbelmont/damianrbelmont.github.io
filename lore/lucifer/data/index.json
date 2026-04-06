@@ -64,6 +64,19 @@
       "path": "eventos/noche_del_sellado.json",
       "status": "published",
       "visibility": "public"
-    }
+    },
+    {
+  "id": "valak",
+  "slug": "valak",
+  "title": "Valak",
+  "type": "character",
+  "section": "infierno",
+  "subsection": "gran_demonio",
+  "excerpt": "Valak es uno de los grandes demonios del Infierno...",
+  "image": "",
+  "path": "infierno/valak.json",
+  "status": "published",
+  "visibility": "public"
+}
   ]
 }

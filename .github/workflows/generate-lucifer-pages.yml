@@ -1,0 +1,41 @@
+name: Generate Lucifer Pages
+
+on:
+  push:
+    paths:
+      - "lore/lucifer/data/**"
+      - "lore/lucifer/data/index.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    if: ${{ github.event_name != 'push' || (github.actor != 'github-actions[bot]' && !contains(github.event.head_commit.message, 'Auto-generate Lucifer HTML pages')) }}
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Lucifer generator
+        shell: pwsh
+        run: |
+          powershell -ExecutionPolicy Bypass -File "lore/lucifer/scripts/generate-entry-pages.ps1"
+
+      - name: Commit and push generated files
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions@github.com"
+
+          git add -A lore/lucifer
+
+          if (git diff --cached --quiet) {
+            Write-Host "No generated changes to commit."
+            exit 0
+          }
+
+          git commit -m "Auto-generate Lucifer HTML pages [skip ci]"
+          git push

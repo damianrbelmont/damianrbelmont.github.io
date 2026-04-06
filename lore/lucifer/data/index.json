@@ -1,17 +1,17 @@
 {
   "entries": [
     {
-      "id": "valak",
-      "slug": "valak",
-      "title": "Valak",
-      "type": "character",
-      "section": "infierno",
-      "subsection": "demonio",
-      "excerpt": "",
-      "image": "assets/images/characters/valak.webp",
-      "path": "infierno/valak.json",
-      "status": "published",
-      "visibility": "public"
-    }
+  "id": "valak",
+  "slug": "valak",
+  "title": "Valak",
+  "type": "character",
+  "section": "infierno",
+  "subsection": "demonio_mayor",
+  "excerpt": "Valak es un demonio al servicio de Azazel, especializado en rastrear y espiar presencias espirituales. Su investigación en la Tierra lo llevó a descubrir un secreto que le costó la vida.",
+  "image": "assets/images/characters/valak.webp",
+  "path": "infierno/valak.json",
+  "status": "published",
+  "visibility": "public"
+}
   ]
 }

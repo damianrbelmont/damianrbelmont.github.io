@@ -1,0 +1,65 @@
+{
+  "id": "valak",
+  "slug": "valak",
+  "universe": "lucifer",
+  "type": "character",
+  "section": "infierno",
+  "subsection": "demonio",
+  "title": "Valak",
+  "subtitle": "",
+  "description": "Demonio mayor a las órdenes de Azazel",
+  "image": "assets/images/characters/valak.avif",
+  "alias": [
+    "Señor de los Susurros"
+  ],
+  "tags": [],
+  "paths": {
+    "json": "",
+    "url": "",
+    "html": ""
+  },
+  "seo": {
+    "title": "",
+    "description": "",
+    "image": ""
+  },
+  "excerpt": "",
+  "relations": {
+    "characters": [],
+    "locations": [],
+    "events": [],
+    "concepts": [],
+    "organizations": [],
+    "related": []
+  },
+  "content": {
+    "summary": "Valka es el mayor de los ayudantes de Azazel",
+    "sections": [],
+    "origen": "Se crea de la corrupción de un ángel caído"
+  },
+  "infobox": {
+    "naturaleza": "",
+    "reino": "",
+    "dominio": "",
+    "afinidad": "",
+    "lealtad": "Azazel",
+    "estado": ""
+  },
+  "hierarchy": {
+    "realm": "",
+    "rank": "",
+    "faction": "",
+    "order": 0
+  },
+  "lore": {
+    "origin": "",
+    "nature": "",
+    "role": ""
+  },
+  "publication": {
+    "status": "draft",
+    "visibility": "private",
+    "updatedAt": "",
+    "version": 1
+  }
+}

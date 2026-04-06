@@ -1,0 +1,68 @@
+{
+  "id": "",
+  "slug": "",
+  "universe": "lucifer",
+  "type": "location",
+  "section": "",
+  "subsection": "",
+  "name": "",
+  "title": "",
+  "subtitle": "",
+  "summary": "",
+  "description": "",
+  "image": "",
+  "alias": [],
+  "tags": [],
+  "paths": {
+    "json": "",
+    "url": "",
+    "html": ""
+  },
+  "seo": {
+    "title": "",
+    "description": "",
+    "image": ""
+  },
+  "excerpt": "",
+  "relations": {
+    "characters": [],
+    "entities": [],
+    "locations": [],
+    "events": [],
+    "concepts": [],
+    "related": []
+  },
+  "content": {
+    "summary": "",
+    "sections": []
+  },
+  "infobox": {
+    "tipo": "",
+    "reino": "",
+    "region": "",
+    "estado": "",
+    "acceso": ""
+  },
+  "hierarchy": {
+    "realm": "",
+    "level": "",
+    "control": "",
+    "order": 0
+  },
+  "lore": {
+    "origin": "",
+    "nature": "",
+    "role": ""
+  },
+  "environment": {
+    "climate": "",
+    "visual": "",
+    "hazards": []
+  },
+  "publication": {
+    "status": "draft",
+    "visibility": "private",
+    "updatedAt": "",
+    "version": 1
+  }
+}

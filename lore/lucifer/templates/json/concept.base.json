@@ -1,0 +1,74 @@
+{
+  "id": "",
+  "slug": "",
+  "universe": "lucifer",
+  "type": "concept",
+  "section": "",
+  "subsection": "",
+  "name": "",
+  "title": "",
+  "subtitle": "",
+  "summary": "",
+  "description": "",
+  "image": "",
+  "alias": [],
+  "tags": [],
+  "paths": {
+    "json": "",
+    "url": "",
+    "html": ""
+  },
+  "seo": {
+    "title": "",
+    "description": "",
+    "image": ""
+  },
+  "excerpt": "",
+  "relations": {
+    "characters": [],
+    "entities": [],
+    "locations": [],
+    "events": [],
+    "concepts": [],
+    "related": []
+  },
+  "principles": [],
+  "mechanics": {
+    "creation": "",
+    "evolution": "",
+    "degradation": "",
+    "restoration": ""
+  },
+  "cosmicRole": {
+    "function": "",
+    "importance": "",
+    "scope": ""
+  },
+  "content": {
+    "summary": "",
+    "sections": []
+  },
+  "infobox": {
+    "tipo": "",
+    "naturaleza": "",
+    "alcance": "",
+    "estado": ""
+  },
+  "hierarchy": {
+    "level": "",
+    "domain": "",
+    "order": 0
+  },
+  "lore": {
+    "origin": "",
+    "nature": "",
+    "role": ""
+  },
+  "interpretations": [],
+  "publication": {
+    "status": "draft",
+    "visibility": "private",
+    "updatedAt": "",
+    "version": 1
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "id": "",
+  "slug": "",
+  "universe": "lucifer",
+  "type": "event",
+  "section": "",
+  "subsection": "",
+  "name": "",
+  "title": "",
+  "subtitle": "",
+  "summary": "",
+  "description": "",
+  "image": "",
+  "alias": [],
+  "tags": [],
+  "paths": {
+    "json": "",
+    "url": "",
+    "html": ""
+  },
+  "seo": {
+    "title": "",
+    "description": "",
+    "image": ""
+  },
+  "excerpt": "",
+  "relations": {
+    "characters": [],
+    "entities": [],
+    "locations": [],
+    "events": [],
+    "concepts": [],
+    "related": []
+  },
+  "timeline": {
+    "start": "",
+    "end": "",
+    "duration": "",
+    "era": ""
+  },
+  "participants": {
+    "factions": [],
+    "leaders": [],
+    "keyEntities": []
+  },
+  "outcome": {
+    "result": "",
+    "consequences": []
+  },
+  "content": {
+    "summary": "",
+    "sections": []
+  },
+  "infobox": {
+    "tipo": "",
+    "ubicacion": "",
+    "estado": "",
+    "escala": ""
+  },
+  "importance": {
+    "level": "",
+    "impact": []
+  },
+  "publication": {
+    "status": "draft",
+    "visibility": "private",
+    "updatedAt": "",
+    "version": 1
+  }
+}

@@ -559,3 +559,26 @@ ul {
         gap: 3rem;
     }
 }
+
+
+/* Oculta visualmente pero mantiene accesible para SEO y lectores de pantalla */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.waterstones-icon {
+    font-weight: bold;
+    font-size: 20px; /* antes 18px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

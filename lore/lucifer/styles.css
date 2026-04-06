@@ -1,0 +1,930 @@
+/* =========================================
+   VARIABLES Y PALETA DE COLOR
+   ========================================= */
+:root {
+  --bg-color: #050b14;
+  --bg-alt: #0a131f;
+  --text-main: #e6e6e6;
+  --text-muted: #8a93a0;
+  --accent: #b89b5e;
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --header-height: 75px;
+}
+
+/* =========================================
+   RESET Y BASE
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: var(--accent);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #fff;
+}
+
+ul {
+  list-style: none;
+}
+
+/* =========================================
+   🔥 LORE — BASE (MÓVIL + TABLET VERTICAL)
+   ========================================= */
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  width: min(1400px, 94%);
+  margin: 0 auto;
+
+  padding-top: 0.7rem;
+  padding-bottom: 4rem;
+}
+
+/* =========================================
+   CONTENIDO CENTRAL (EDITORIAL)
+   ========================================= */
+
+.center {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.lore-search-block {
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 18px;
+}
+
+.lore-search-block h3 {
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.tree-hidden {
+  display: none;
+}
+
+.center h1 {
+  font-family: var(--font-serif);
+  color: var(--accent);
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  margin-bottom: 1.2rem;
+
+  border-bottom: 1px solid rgba(184, 155, 94, 0.2);
+  padding-bottom: 8px;
+}
+
+.center p {
+  color: #d8cdb8;
+  font-size: 1.06rem;
+  line-height: 1.9;
+  margin-bottom: 1rem;
+}
+
+/* 🔥 IMÁGENES */
+.center img {
+  display: block;
+  max-width: 85%;
+  margin: 20px auto;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* =========================================
+   SIDEBAR DERECHA
+   ========================================= */
+
+.right {
+  border: 1px solid rgba(184, 155, 94, 0.1);
+  padding: 16px;
+  border-radius: 4px;
+  margin: 16px 0 20px;
+  width: 100%;
+  float: none;
+  clear: both;
+}
+
+.right h2 {
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.right p {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.sidebar-infobox-image {
+  margin-bottom: 14px;
+  border: 1px solid rgba(184, 155, 94, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.sidebar-infobox-image picture {
+  display: block;
+  width: 100%;
+}
+
+.sidebar-infobox-image img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.sidebar-block + .sidebar-block {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(184, 155, 94, 0.12);
+}
+
+.sidebar-list {
+  margin-top: 6px;
+}
+
+.sidebar-list li {
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+
+.sidebar-list a {
+  color: var(--accent);
+}
+
+.sidebar-list a:hover {
+  color: #fff;
+}
+
+.sidebar-rel-group + .sidebar-rel-group {
+  margin-top: 10px;
+}
+
+.sidebar-rel-label {
+  margin-bottom: 4px;
+}
+
+.sidebar-relations-title {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* Fallback: centra el título del bloque de relaciones aunque no lleve clase */
+.sidebar-block:has(.sidebar-rel-group) > p:first-child {
+  text-align: center;
+}
+
+/* =========================================
+   SIDEBAR IZQUIERDA
+   ========================================= */
+
+.left h3 {
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.left ul li {
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+/* =========================================
+   BUSCADOR
+   ========================================= */
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+
+  background: var(--bg-alt);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white;
+}
+
+#searchResults li {
+  margin-bottom: 4px;
+}
+
+#searchResults a {
+  display: block;
+  padding: 4px 2px;
+}
+
+/* =========================================
+   HEADER (COMPARTIDO)
+   ========================================= */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: rgba(5, 11, 20, 0.95);
+  border-bottom: 1px solid rgba(184, 155, 94, 0.1);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.header-container {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.author-name {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.header-logo {
+  height: 32px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.desktop-nav {
+  display: none;
+}
+
+/* =========================================
+   🔥 MEDIA QUERY — PC + TABLET HORIZONTAL
+   ========================================= */
+
+@media screen and (min-width: 1024px) {
+
+  /* LAYOUT */
+  .layout {
+    grid-template-columns: 1fr;
+    justify-content: center;
+    gap: 24px;
+    align-items: start;
+    width: min(1320px, 94%);
+  }
+
+  /* CENTRO */
+  .center {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .center h1 {
+    font-size: 2.35rem;
+    margin-bottom: 2rem;
+  }
+
+  .center p {
+    font-size: 1.23rem;
+    line-height: 2;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  /* SIDEBAR IZQUIERDA */
+  .left {
+    font-size: 0.95rem;
+  }
+
+  .left h3 {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  .left ul li {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  /* SIDEBAR DERECHA */
+  .right {
+    font-size: 1rem;
+    padding: 20px;
+    width: min(360px, 34%);
+    margin: 0 0 24px 30px;
+    float: right;
+    clear: none;
+  }
+
+  .right h2 {
+    font-size: 1.45rem;
+    margin-bottom: 15px;
+  }
+
+  .right p {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .wiki-toc {
+    max-width: calc(100% - min(360px, 34%) - 30px);
+  }
+
+  /* HEADER */
+  .menu-toggle {
+    display: none;
+  }
+
+  .desktop-nav {
+    display: block;
+  }
+
+  .desktop-menu {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .desktop-menu a {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .desktop-menu a:hover {
+    color: white;
+    text-shadow: 0 0 8px rgba(255,255,255,0.4);
+  }
+}
+
+.lore-hero {
+  width: 100%;
+  height: 280px;
+
+  background-image: url("../../assets/images/lore/hero-nimroel.jpg");
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+
+.lore-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 11, 20, 0.6);
+}
+
+.lore-hero-overlay {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+.lore-hero h1 {
+  font-family: var(--font-serif);
+  color: var(--accent);
+  font-size: 2.2rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.lore-hero p {
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+/* =========================================
+   IMAGEN FLOTANTE (ESTILO WIKI)
+   ========================================= */
+
+.content-body {
+  position: relative;
+}
+
+/* Imagen a la derecha */
+.image-float {
+  float: right;
+  width: 280px;
+  margin: 0 0 20px 25px;
+}
+
+/* Imagen interna */
+.image-float img {
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+/* Limpieza del float */
+.content-body::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.wiki-summary p {
+  margin-bottom: 1.1rem;
+}
+
+.wiki-toc {
+  display: none;
+}
+
+.wiki-toc-title {
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.wiki-toc-list li {
+  margin-bottom: 6px;
+}
+
+.wiki-toc-list a {
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.wiki-toc-list a:hover {
+  color: var(--accent);
+}
+
+.wiki-sections {
+  margin-top: 1.2rem;
+  clear: none;
+}
+
+.wiki-sections,
+.wiki-section {
+  clear: none;
+}
+
+.wiki-section {
+  margin-top: 1.8rem;
+  scroll-margin-top: 110px;
+}
+
+.wiki-section-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(184, 155, 94, 0.2);
+  padding: 0 0 6px 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.wiki-section-arrow {
+  color: var(--accent);
+  font-size: 1.55rem;
+  line-height: 1;
+  margin-left: 2px;
+}
+
+.wiki-section-title {
+  font-family: var(--font-serif);
+  color: var(--accent);
+  font-size: 1.35rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.8rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.wiki-section-toggle .wiki-section-title {
+  margin-bottom: 0;
+}
+
+.wiki-section-text p {
+  margin-bottom: 1rem;
+}
+
+.wiki-section-body {
+  margin-top: 0.8rem;
+}
+
+.wiki-section.is-collapsed .wiki-section-body {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .wiki-sections {
+    display: block;
+  }
+
+  .wiki-section-toggle {
+    width: auto;
+  }
+
+  .right {
+    width: min(340px, 38%);
+    margin: 0 0 22px 26px;
+    float: right;
+    clear: none;
+  }
+
+  .wiki-toc {
+    display: block;
+    margin-top: 1.2rem;
+    padding: 12px 14px;
+    border: 1px solid rgba(184, 155, 94, 0.12);
+    border-radius: 4px;
+    background: rgba(10, 19, 31, 0.35);
+    width: fit-content;
+    max-width: calc(100% - min(340px, 38%) - 26px);
+  }
+}
+
+/* =========================================
+   FIX MÓVIL — IMAGEN NO FLOTANTE
+   ========================================= */
+
+@media screen and (max-width: 1024px) {
+
+  .image-float {
+    float: none;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .image-float img {
+    max-width: 100%;
+  }
+
+}
+
+ /* =========================================
+   HERO NIMROEL (VERSIÓN FINAL PRO)
+   ========================================= */
+
+.hero {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: calc(var(--header-height) + 2rem);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+/* Imagen */
+.hero-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/6;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay oscuro elegante */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(5, 11, 20, 0.75),
+    rgba(5, 11, 20, 0.4),
+    rgba(5, 11, 20, 0.85)
+  );
+}
+
+/* TEXTO ENCIMA */
+.hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  z-index: 2;
+  padding: 0 20px;
+}
+
+/* Título */
+.hero-content h1 {
+  font-family: var(--font-serif);
+  color: var(--accent);
+  font-size: 2rem;
+  letter-spacing: 4px;
+  margin-bottom: 24px;
+}
+
+/* Subtítulo */
+.hero-content p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+
+/* DESKTOP */
+@media screen and (min-width: 1024px) {
+
+  .hero {
+    max-width: 60%;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+}
+
+
+/* =========================================
+   LIGHTBOX IMÁGENES
+   ========================================= */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 11, 20, 0.95);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+
+  z-index: 9999;
+}
+
+.lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox img {
+  max-width: 85%;
+  max-height: 85%;
+  border-radius: 6px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  cursor: zoom-out;
+
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 0.25s ease;
+}
+
+.lightbox.active img {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.clickable:hover {
+  transform: scale(1.02);
+}
+
+
+/* =========================================
+   HOME LORE (GRID PRO)
+   ========================================= */
+
+.home-intro {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* GRID LIMPIO */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 28px;
+  margin-top: 30px;
+}
+
+/* TARJETA */
+.home-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.home-card picture {
+  width: 100%;
+  display: block;
+}
+
+/* IMAGEN UNIFORME */
+.home-card img {
+  width: 100%;
+  height: 180px;              /* 🔥 clave: todas iguales */
+  object-fit: cover;          /* 🔥 recorte elegante */
+  border-radius: 12px;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* TEXTO */
+.home-card span {
+  display: block;
+  margin-top: 12px;
+  color: var(--accent);
+  font-family: var(--font-serif);
+  letter-spacing: 1px;
+}
+
+/* HOVER PRO */
+.home-card:hover img {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+/* =========================================
+   CATEGORY MODAL (HOME)
+   ========================================= */
+
+.category-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 11, 20, 0.88);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 12000;
+}
+
+.category-modal-overlay.active {
+  display: flex;
+}
+
+.category-modal-panel {
+  width: min(560px, 96vw);
+  max-height: min(78vh, 820px);
+  background: #091320;
+  border: 1px solid rgba(184, 155, 94, 0.24);
+  border-radius: 8px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+}
+
+.category-modal-close {
+  align-self: flex-end;
+  margin: 8px 10px 0 0;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.category-modal-title {
+  margin: 0;
+  padding: 0 22px 12px;
+  font-family: var(--font-serif);
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(184, 155, 94, 0.2);
+}
+
+.category-modal-body {
+  padding: 8px 22px 22px;
+  overflow: auto;
+}
+
+.category-modal-status {
+  color: var(--text-muted);
+  margin: 6px 0;
+}
+
+.category-modal-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.category-modal-link {
+  display: block;
+  padding: 10px 2px;
+  border-bottom: 1px solid rgba(184, 155, 94, 0.12);
+  color: var(--accent);
+}
+
+.category-modal-link:hover {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+}
+
+body.is-home-view .center {
+  max-width: min(1320px, 96%);
+}
+
+body.is-home-view .home-intro {
+  max-width: 100%;
+  text-align: center;
+  hyphens: none;
+  -webkit-hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+  text-wrap: pretty;
+}
+
+@media screen and (min-width: 768px) {
+  body.is-home-view #content > h1 {
+    font-size: 2.6rem;
+  }
+
+  body.is-home-view .home-intro {
+    max-width: min(1060px, 96%);
+    font-size: 1.12rem;
+  }
+
+  body.is-home-view .home-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.breadcrumb {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+
+.breadcrumb a {
+  color: var(--accent);
+}
+
+.breadcrumb a:hover {
+  color: #fff;
+}
+
+.breadcrumb-current {
+  color: var(--text-muted);
+}

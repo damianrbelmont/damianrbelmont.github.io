@@ -1,0 +1,12 @@
+﻿{
+  "id": "lucifer_helel",
+  "type": "character",
+  "name": "Lucifer (Helel ben Sahar)",
+  "summary": "Primer Arcangel y figura central del conflicto en Souto.",
+  "description": "En la noche de [[noche_del_sellado]], Lucifer desciende a [[souto_1960]] para cumplir una orden imposible de comprender desde la mirada humana.\n\nSu presencia altera el equilibrio espiritual y redefine su relacion con [[miguel_arcangel]] y con la [[santa_compana]].",
+  "image": "../../assets/images/libros/lucifer/Lucifer.webp",
+  "race": "Arcangel",
+  "birthplace": "souto_1960",
+  "affiliation": ["santa_compana"],
+  "related": ["miguel_arcangel", "noche_del_sellado", "souto_1960"]
+}

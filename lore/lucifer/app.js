@@ -5,14 +5,14 @@ let indexCache = null;
 const categoryItemsCache = new Map();
 
 const CATEGORY_CONFIG = {
-  celestial: {
+  cielo: {
     label: "Cielo",
-    indexKeys: ["celestial", "cielo"],
+    indexKeys: ["cielo", "celestial"],
     typeKeys: ["character"]
   },
-  infernal: {
+  infierno: {
     label: "Infierno",
-    indexKeys: ["infernal", "infierno"],
+    indexKeys: ["infierno", "infernal"],
     typeKeys: ["organization"]
   },
   cosmogonia: {
@@ -20,9 +20,9 @@ const CATEGORY_CONFIG = {
     indexKeys: ["cosmogonia"],
     typeKeys: ["location", "artifact", "creature"]
   },
-  events: {
+  eventos: {
     label: "Eventos",
-    indexKeys: ["events", "eventos"],
+    indexKeys: ["eventos", "events"],
     typeKeys: ["event"]
   }
 };
@@ -631,23 +631,23 @@ function renderHome() {
     </p>
 
     <div class="home-grid">
-      <a href="javascript:void(0)" onclick="openCategoryList('celestial')" class="home-card">
-        <img src="../assets/images/Cielo.webp" alt="Cielo">
+      <a href="javascript:void(0)" onclick="openCategoryList('cielo')" class="home-card">
+        <img src="assets/images/Cielo.webp" alt="Cielo">
         <span>Cielo</span>
       </a>
 
-      <a href="javascript:void(0)" onclick="openCategoryList('infernal')" class="home-card">
-        <img src="../assets/images/Infierno.webp" alt="Infierno">
+      <a href="javascript:void(0)" onclick="openCategoryList('infierno')" class="home-card">
+        <img src="assets/images/Infierno.webp" alt="Infierno">
         <span>Infierno</span>
       </a>
 
-      <a href="javascript:void(0)" onclick="openCategoryList('events')" class="home-card">
-        <img src="../assets/images/Eventos.webp" alt="Eventos">
+      <a href="javascript:void(0)" onclick="openCategoryList('eventos')" class="home-card">
+        <img src="assets/images/Eventos.webp" alt="Eventos">
         <span>Eventos</span>
       </a>
 
       <a href="javascript:void(0)" onclick="openCategoryList('cosmogonia')" class="home-card">
-        <img src="../assets/images/Cosmogonia.webp" alt="Cosmogonia">
+        <img src="assets/images/Cosmogonia.webp" alt="Cosmogonia">
         <span>Cosmogonia</span>
       </a>
     </div>

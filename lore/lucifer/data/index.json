@@ -1,13 +1,13 @@
 {
-  "celestial": ["lucifer_helel", "miguel_arcangel"],
-  "infernal": ["santa_compana"],
+  "cielo": ["lucifer_helel", "miguel_arcangel"],
+  "infierno": ["santa_compana"],
   "cosmogonia": ["souto_1960"],
-  "events": ["noche_del_sellado"],
+  "eventos": ["noche_del_sellado"],
   "entries": {
-    "lucifer_helel": "characters/lucifer_helel.json",
-    "miguel_arcangel": "characters/miguel_arcangel.json",
-    "souto_1960": "locations/souto_1960.json",
-    "santa_compana": "organizations/santa_compana.json",
-    "noche_del_sellado": "events/noche_del_sellado.json"
+    "lucifer_helel": "Cielo/lucifer_helel.json",
+    "miguel_arcangel": "Cielo/miguel_arcangel.json",
+    "souto_1960": "Cosmogonia/souto_1960.json",
+    "santa_compana": "Infierno/santa_compana.json",
+    "noche_del_sellado": "Eventos/noche_del_sellado.json"
   }
 }

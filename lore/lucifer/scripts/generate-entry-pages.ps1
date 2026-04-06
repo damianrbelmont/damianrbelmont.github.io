@@ -336,19 +336,18 @@ foreach ($entry in $entries) {
             $suffix += 1
         }
         $usedSectionIds[$uniqueId] = $true
+        $uiId = "wiki-$uniqueId"
 
-        $tocItems += "<li><a href=""#$uniqueId"">$(Escape-Html $sectionItem.title)</a></li>"
+        $tocItems += "<li><a href=""#$uiId"">$(Escape-Html $sectionItem.title)</a></li>"
         $sectionBody = Convert-TextToHtml $sectionItem.text
         $sectionHtmlParts += @"
-        <section class="wiki-section" id="$uniqueId">
+        <section class="wiki-section" id="$uiId">
           <button class="wiki-section-toggle" type="button" aria-expanded="true">
-            <span class="wiki-section-arrow">&#9652;</span>
             <h2 class="wiki-section-title">$(Escape-Html $sectionItem.title)</h2>
+            <span class="wiki-section-arrow" aria-hidden="true">&#9652;</span>
           </button>
-          <div class="wiki-section-body">
-            <div class="wiki-section-text">
+          <div class="wiki-section-body wiki-section-text">
 $sectionBody
-            </div>
           </div>
         </section>
 "@
@@ -359,7 +358,7 @@ $sectionBody
     if ($tocItems.Count -gt 0) {
         $tocBody = $tocItems -join "`n"
         $tocHtml = @"
-      <nav class="wiki-toc" aria-label="Indice de secciones">
+      <nav class="wiki-toc" id="wikiToc" aria-label="Indice de secciones">
         <p class="wiki-toc-title">Indice</p>
         <ul class="wiki-toc-list">
 $tocBody
@@ -410,6 +409,12 @@ $tocBody
 
     $mainSectionsHtml = $sectionHtmlParts -join "`n"
     $seoContext = "Esta entrada pertenece a la wiki del universo de Lucifer, basada en la novela Lucifer de Damian R Belmont."
+    $imageAvif = ""
+    if ($detail.PSObject.Properties["imageAvif"]) {
+        $imageAvif = Normalize-Text $detail.imageAvif
+    } elseif ($detail.PSObject.Properties["media"] -and $null -ne $detail.media -and $detail.media.PSObject.Properties["avif"]) {
+        $imageAvif = Normalize-Text $detail.media.avif
+    }
 
     $jsonLdObject = [ordered]@{
         "@context"         = "https://schema.org"
@@ -454,7 +459,7 @@ $tocBody
 $jsonLd
   </script>
 </head>
-<body class="static-entry-page">
+<body>
   <header class="site-header">
     <div class="header-container">
       <div class="author-name">
@@ -487,49 +492,62 @@ $jsonLd
 
   <section class="hero">
     <picture>
-      <source srcset="$(Escape-Html $image)" media="(min-width: 1024px)">
-      <img src="$(Escape-Html $image)" class="hero-img" alt="$(Escape-Html $title)">
+      <source srcset="assets/images/Hero_Lucifer.webp" media="(min-width: 1024px)">
+      <img src="assets/images/Hero_Lucifer.webp" class="hero-img" alt="Lore de Lucifer">
     </picture>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1>$(Escape-Html $title)</h1>
+      <h1>Lucifer - Helel Ben Sahar</h1>
     </div>
   </section>
 
   <div class="layout">
     <main class="center">
+      <section class="lore-search-block">
+        <h3>Lore</h3>
+        <input type="text" id="search" placeholder="Buscar..." autocomplete="off">
+        <ul id="searchResults"></ul>
+        <div id="tree" class="tree-hidden"></div>
+      </section>
+
       <section id="content">
-        <nav class="breadcrumb" aria-label="breadcrumb">
-          <a href="index.html">Wiki Lucifer</a> / <span class="breadcrumb-current">$(Escape-Html $title)</span>
-        </nav>
-        <article class="wiki-entry" itemscope itemtype="https://schema.org/Article">
-          <header class="wiki-entry-header">
-            <h1 itemprop="headline">$(Escape-Html $title)</h1>
-            <p class="wiki-entry-excerpt">$(Escape-Html $excerpt)</p>
-            <p class="wiki-entry-context">$(Escape-Html $seoContext)</p>
-          </header>
-          <section class="wiki-summary" itemprop="description">
+        <div class="breadcrumb">
+          <a href="index.html">Inicio</a>
+          <span> / </span>
+          <span class="breadcrumb-current">$(Escape-Html $title)</span>
+        </div>
+
+        <h1 itemprop="headline">$(Escape-Html $title)</h1>
+
+        <div class="content-body" itemscope itemtype="https://schema.org/Article">
+          <aside class="right" id="sidebar">
+            $(if ($image) { @"
+            <div class="sidebar-infobox-image">
+              <picture>
+                $(if ($imageAvif) { "<source srcset=""$(Escape-Html $imageAvif)"" type=""image/avif"">" } else { "" })
+                $(if ($image.ToLowerInvariant().EndsWith(".webp")) { "<source srcset=""$(Escape-Html $image)"" type=""image/webp"">" } else { "" })
+                <img src="$(Escape-Html $image)" class="clickable" alt="$(Escape-Html $title)">
+              </picture>
+            </div>
+"@ } else { "" })
+            <h2>$(Escape-Html $title)</h2>
+            <div class="sidebar-block">
+$sidebarBody
+            </div>
+          </aside>
+
+          <div class="wiki-summary" id="summaryBlock" itemprop="description">
 $summaryHtml
-          </section>
+          </div>
+
 $tocHtml
-          <div class="wiki-sections">
+
+          <div class="wiki-sections" id="sectionsBlock">
 $mainSectionsHtml
           </div>
-        </article>
+        </div>
       </section>
     </main>
-
-    <aside class="right" id="sidebar">
-      <div class="sidebar-infobox-image">
-        <picture>
-          <img src="$(Escape-Html $image)" class="clickable" alt="$(Escape-Html $title)">
-        </picture>
-      </div>
-      <h2>$(Escape-Html $title)</h2>
-      <div class="sidebar-block">
-$sidebarBody
-      </div>
-    </aside>
   </div>
 
   <script src="../../scripts/script.js"></script>

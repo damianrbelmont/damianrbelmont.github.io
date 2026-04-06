@@ -37,7 +37,7 @@
 }
   </script>
 </head>
-<body class="static-entry-page">
+<body>
   <header class="site-header">
     <div class="header-container">
       <div class="author-name">
@@ -70,68 +70,77 @@
 
   <section class="hero">
     <picture>
-      <source srcset="assets/images/characters/valak.webp" media="(min-width: 1024px)">
-      <img src="assets/images/characters/valak.webp" class="hero-img" alt="Valak">
+      <source srcset="assets/images/Hero_Lucifer.webp" media="(min-width: 1024px)">
+      <img src="assets/images/Hero_Lucifer.webp" class="hero-img" alt="Lore de Lucifer">
     </picture>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1>Valak</h1>
+      <h1>Lucifer - Helel Ben Sahar</h1>
     </div>
   </section>
 
   <div class="layout">
     <main class="center">
-      <section id="content">
-        <nav class="breadcrumb" aria-label="breadcrumb">
-          <a href="index.html">Wiki Lucifer</a> / <span class="breadcrumb-current">Valak</span>
-        </nav>
-        <article class="wiki-entry" itemscope itemtype="https://schema.org/Article">
-          <header class="wiki-entry-header">
-            <h1 itemprop="headline">Valak</h1>
-            <p class="wiki-entry-excerpt">Valka es el mayor de los ayudantes de Azazel</p>
-            <p class="wiki-entry-context">Esta entrada pertenece a la wiki del universo de Lucifer, basada en la novela Lucifer de Damian R Belmont.</p>
-          </header>
-          <section class="wiki-summary" itemprop="description">
-<p>Valka es el mayor de los ayudantes de Azazel</p>
-          </section>
-      <nav class="wiki-toc" aria-label="Indice de secciones">
-        <p class="wiki-toc-title">Indice</p>
-        <ul class="wiki-toc-list">
-<li><a href="#descripcion">Descripcion</a></li>
-        </ul>
-      </nav>
-          <div class="wiki-sections">
-        <section class="wiki-section" id="descripcion">
-          <button class="wiki-section-toggle" type="button" aria-expanded="true">
-            <span class="wiki-section-arrow">&#9652;</span>
-            <h2 class="wiki-section-title">Descripcion</h2>
-          </button>
-          <div class="wiki-section-body">
-            <div class="wiki-section-text">
-<p>Demonio mayor a las &#243;rdenes de Azazel</p>
-            </div>
-          </div>
-        </section>
-          </div>
-        </article>
+      <section class="lore-search-block">
+        <h3>Lore</h3>
+        <input type="text" id="search" placeholder="Buscar..." autocomplete="off">
+        <ul id="searchResults"></ul>
+        <div id="tree" class="tree-hidden"></div>
       </section>
-    </main>
 
-    <aside class="right" id="sidebar">
-      <div class="sidebar-infobox-image">
-        <picture>
-          <img src="assets/images/characters/valak.webp" class="clickable" alt="Valak">
-        </picture>
-      </div>
-      <h2>Valak</h2>
-      <div class="sidebar-block">
+      <section id="content">
+        <div class="breadcrumb">
+          <a href="index.html">Inicio</a>
+          <span> / </span>
+          <span class="breadcrumb-current">Valak</span>
+        </div>
+
+        <h1 itemprop="headline">Valak</h1>
+
+        <div class="content-body" itemscope itemtype="https://schema.org/Article">
+          <aside class="right" id="sidebar">
+                        <div class="sidebar-infobox-image">
+              <picture>
+                
+                <source srcset="assets/images/characters/valak.webp" type="image/webp">
+                <img src="assets/images/characters/valak.webp" class="clickable" alt="Valak">
+              </picture>
+            </div>
+            <h2>Valak</h2>
+            <div class="sidebar-block">
 <p><strong>Tipo:</strong> Personaje</p>
 <p><strong>Categoria:</strong> infierno</p>
 <p><strong>Subcategoria:</strong> demonio</p>
 <p><strong>Alias:</strong> Se&#241;or de los Susurros</p>
 <p><strong>Lealtad:</strong> Azazel</p>
-      </div>
-    </aside>
+            </div>
+          </aside>
+
+          <div class="wiki-summary" id="summaryBlock" itemprop="description">
+<p>Valka es el mayor de los ayudantes de Azazel</p>
+          </div>
+
+      <nav class="wiki-toc" id="wikiToc" aria-label="Indice de secciones">
+        <p class="wiki-toc-title">Indice</p>
+        <ul class="wiki-toc-list">
+<li><a href="#wiki-descripcion">Descripcion</a></li>
+        </ul>
+      </nav>
+
+          <div class="wiki-sections" id="sectionsBlock">
+        <section class="wiki-section" id="wiki-descripcion">
+          <button class="wiki-section-toggle" type="button" aria-expanded="true">
+            <h2 class="wiki-section-title">Descripcion</h2>
+            <span class="wiki-section-arrow" aria-hidden="true">&#9652;</span>
+          </button>
+          <div class="wiki-section-body wiki-section-text">
+<p>Demonio mayor a las &#243;rdenes de Azazel</p>
+          </div>
+        </section>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
 
   <script src="../../scripts/script.js"></script>

@@ -345,7 +345,7 @@ function renderRelationList(items) {
     <ul class="sidebar-list">
       ${items.map((item) => `
         <li>${item.linkable
-          ? `<a href="?id=${encodeURIComponent(item.id)}">${escapeHtml(item.label)}</a>`
+          ? `<a href="${getEntityHrefById(item.id)}">${escapeHtml(item.label)}</a>`
           : `<span>${escapeHtml(item.label)}</span>`
         }</li>
       `).join("")}
@@ -426,6 +426,23 @@ function getIndexEntryById(indexData, id) {
   const cleanId = (id || "").toString().trim();
   if (!cleanId) return null;
   return getIndexEntries(indexData).find((entry) => entry.id === cleanId) || null;
+}
+
+function getEntryHref(entry) {
+  if (entry && entry.slug) {
+    return `${encodeURIComponent(entry.slug)}.html`;
+  }
+  if (entry && entry.id) {
+    return `?id=${encodeURIComponent(entry.id)}`;
+  }
+  return "index.html";
+}
+
+function getEntityHrefById(id) {
+  const cleanId = (id || "").toString().trim();
+  if (!cleanId) return "index.html";
+  const entry = indexCache ? getIndexEntryById(indexCache, cleanId) : null;
+  return getEntryHref(entry || { id: cleanId });
 }
 
 function isPublicPublishedEntry(entry) {
@@ -609,25 +626,13 @@ async function openCategoryList(categoryKey) {
       <ul class="category-modal-list">
         ${items.map((item) => `
           <li>
-            <a href="?id=${encodeURIComponent(item.id)}" class="category-modal-link" data-entity-id="${encodeURIComponent(item.id)}">
+            <a href="${getEntityHrefById(item.id)}" class="category-modal-link">
               ${escapeHtml(item.name)}
             </a>
           </li>
         `).join("")}
       </ul>
     `;
-
-    bodyEl.querySelectorAll(".category-modal-link").forEach((link) => {
-      link.addEventListener("click", async (event) => {
-        const encodedId = link.getAttribute("data-entity-id");
-        const id = encodedId ? decodeURIComponent(encodedId) : "";
-        if (!id) return;
-        event.preventDefault();
-        closeCategoryModal();
-        window.history.pushState({}, "", `?id=${encodeURIComponent(id)}`);
-        await loadEntity(id);
-      });
-    });
   } catch (error) {
     console.error("Category modal error:", error);
     bodyEl.innerHTML = `<p class="category-modal-status">No se pudo cargar esta categoria.</p>`;
@@ -756,7 +761,7 @@ async function parseLinks(text) {
     const name = await getEntityName(id);
     result = result.replaceAll(
       `[[${id}]]`,
-      `<a href="?id=${id}">${name}</a>`
+      `<a href="${getEntityHrefById(id)}">${escapeHtml(name)}</a>`
     );
   }
   return result;
@@ -874,7 +879,7 @@ async function renderSidebar(data) {
       <p><strong>Tipo:</strong> ${formatType(data.type)}</p>
       ${data.birthplace ? `
         <p><strong>Origen:</strong>
-          <a href="?id=${encodeURIComponent(data.birthplace)}">${escapeHtml(formatName(data.birthplace))}</a>
+          <a href="${getEntityHrefById(data.birthplace)}">${escapeHtml(formatName(data.birthplace))}</a>
         </p>
       ` : ""}
     </div>
@@ -908,7 +913,7 @@ async function renderSidebar(data) {
         <p><strong>Mencionado en:</strong></p>
         <ul>
           ${backlinks.map(id => `
-            <li><a href="?id=${id}">${formatName(id)}</a></li>
+            <li><a href="${getEntityHrefById(id)}">${formatName(id)}</a></li>
           `).join("")}
         </ul>
       `;
@@ -1111,16 +1116,7 @@ async function initSearch() {
 
     for (const item of filtered) {
       const li = document.createElement("li");
-      li.innerHTML = `<a href="?id=${item.id}" class="search-link">${item.name}</a>`;
-
-      const link = li.querySelector(".search-link");
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
-        window.history.pushState({}, "", `?id=${item.id}`);
-        loadEntity(item.id);
-        input.value = "";
-        resultsContainer.innerHTML = "";
-      });
+      li.innerHTML = `<a href="${getEntityHrefById(item.id)}" class="search-link">${item.name}</a>`;
 
       resultsContainer.appendChild(li);
     }

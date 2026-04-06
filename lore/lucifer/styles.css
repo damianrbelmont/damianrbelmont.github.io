@@ -478,6 +478,24 @@ input {
   margin-bottom: 1.1rem;
 }
 
+.wiki-entry-header {
+  margin-bottom: 1rem;
+}
+
+.wiki-entry-excerpt {
+  color: var(--text-muted);
+  font-size: 1.03rem;
+  line-height: 1.65;
+}
+
+.wiki-entry-context {
+  color: #c2b08b;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  border-left: 2px solid rgba(184, 155, 94, 0.35);
+  padding-left: 10px;
+}
+
 .wiki-toc {
   display: none;
 }

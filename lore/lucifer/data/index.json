@@ -12,6 +12,19 @@
   "path": "infierno/valak.json",
   "status": "published",
   "visibility": "public"
+},
+{
+  "id": "azazel",
+  "slug": "azazel",
+  "title": "Azazel",
+  "type": "character",
+  "section": "Infierno",
+  "subsection": "Gran Demonio",
+  "excerpt": "Azazel es uno de los Seis Grandes del Infierno y Señor de los Secretos Prohibidos. Su obsesión por descubrir la verdad sobre Lucifer lo llevó a desafiar al propio Rey del Infierno.",
+  "image": "assets/images/characters/azazel.webp",
+  "path": "Infierno/azazel.json",
+  "status": "published",
+  "visibility": "public"
 }
   ]
 }

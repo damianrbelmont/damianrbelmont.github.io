@@ -686,21 +686,30 @@ function renderHome() {
   `;
 }
 
+function resolveWikiEntityId(label) {
+  const cleanLabel = (label || "").toString().trim();
+  if (!cleanLabel) return "";
+  if (isLikelyEntityId(cleanLabel)) return cleanLabel.toLowerCase();
+
+  return cleanLabel
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
 async function parseLinks(text) {
   if (typeof text !== "string" || !text) return "";
 
-  const matches = [...text.matchAll(/\[\[(.*?)\]\]/g)];
-  const uniqueIds = [...new Set(matches.map(match => match[1]))];
+  return text.replace(/\[\[([^[\]]+)\]\]/g, (match, label) => {
+    const visibleLabel = (label || "").toString().trim();
+    if (!visibleLabel) return match;
 
-  let result = text;
-  for (const id of uniqueIds) {
-    const name = await getEntityName(id);
-    result = result.replaceAll(
-      `[[${id}]]`,
-      `<a href="?id=${id}">${name}</a>`
-    );
-  }
-  return result;
+    const entityId = resolveWikiEntityId(visibleLabel);
+    const href = `?id=${encodeURIComponent(entityId || visibleLabel)}`;
+    return `<a href="${href}">${escapeHtml(visibleLabel)}</a>`;
+  });
 }
 
 async function renderRichText(targetElement, text) {

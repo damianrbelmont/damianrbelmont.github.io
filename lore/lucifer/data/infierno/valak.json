@@ -1,92 +1,102 @@
-{
-  "id": "valak",
-  "slug": "valak",
-  "universe": "lucifer",
-  "type": "character",
-  "section": "Infierno",
-  "subsection": "Demonio Mayor",
-  "title": "Valak",
-  "subtitle": "",
-  "description": "Demonio rastreador al servicio de [[Azazel]], especializado en espionaje espiritual y seguimiento de entidades.",
-  "image": "assets/images/characters/valak.webp",
-  "alias": [
-    "Señor de los Susurros"
-  ],
-  "tags": [],
-  "paths": {
-    "json": "",
-    "url": "",
-    "html": ""
-  },
-  "seo": {
-    "title": "Valak | Demonio del Infierno en Lucifer de Damian R Belmont",
-    "description": "[[Valak]] es un demonio rastreador al servicio de [[Azazel]] en el universo de [[Lucifer]] de Damian R Belmont. Descubre su papel, habilidades y destino final.",
-    "image": ""
-  },
-  "excerpt": "[[Valak]] es un demonio al servicio de [[Azazel]], especializado en rastrear y espiar presencias espirituales. Su investigación en la [[Tierra]] lo llevó a descubrir un secreto que le costó la vida.",
-  "relations": {
-    "characters": [
-      "lucifer",
-      "azazel",
-      "jose_vila"
-    ],
-    "locations": [
-      "souto",
-      "seminario_ourense",
-      "salamanca",
-      "lobios"
-    ],
-    "events": [],
-    "concepts": [],
-    "organizations": [],
-    "related": []
-  },
-  "content": {
-    "summary": "[[Valak]] es una entidad demoníaca al servicio de [[Azazel]], enviada a la [[Tierra]] para investigar la relación entre [[Lucifer]] y el humano [[José Vila]]. Dotado de una percepción única de las energías espirituales, actúa como espía y rastreador, moviéndose entre sombras en busca de verdades ocultas. Su descubrimiento de la verdadera naturaleza de [[Lucifer]] selló su destino.",
-    "sections": [
-      {
-        "id": "apariencia_y_naturaleza",
-        "title": "Apariencia y naturaleza",
-        "text": "[[Valak]] se manifiesta con la apariencia de un niño humano pálido y enfermizo, con profundas ojeras y ojos completamente negros, carentes de iris o esclerótica. Su presencia resulta inquietante y antinatural, como si su forma fuese solo una máscara imperfecta de algo mucho más oscuro.\n\nSobre su hombro izquierdo reposa un pequeño dragón bicéfalo, una criatura demoníaca que reacciona a las vibraciones espirituales y actúa como extensión de sus sentidos.\n\n[[Valak]] no percibe el mundo como los humanos, sino como una superposición de rastros energéticos, interpretando la realidad a través de lo que describe como \"olores espirituales\". Más que observar, caza. No mira a los rostros, sino a las gargantas, como un depredador que anticipa el final de sus presas.",
-        "order": 0
-      },
-      {
-        "id": "mision_en_la_tierra",
-        "title": "Misión en la Tierra",
-        "text": "Bajo órdenes de [[Azazel]], [[Valak]] fue enviado a la [[Tierra]] para investigar las constantes ausencias de [[Lucifer]] y descubrir la naturaleza de su vínculo con el joven [[José Vila]].\n\nEn octubre de 1972, llegó a la aldea de [[Souto]], donde irrumpió en la rectoral para interrogar al sacerdote [[Don Eladio]]. Mediante el uso de sus garras etéreas, desgarró la memoria del hombre hasta descubrir que José había sido enviado al [[Seminario de Ourense]]. Tras obtener la información, detuvo su corazón, acabando con su vida.\n\nPosteriormente, siguió el rastro de José hasta el [[Seminario de Ourense|Seminario Menor]] y más tarde hasta [[Salamanca]], observando desde las sombras cómo [[Lucifer]] intervenía en la vida del joven, protegiéndolo y moldeando su destino.\n\nTras la muerte del ángel [[Ramiel]] y del arcángel [[Camael]], [[Valak]] analizó los residuos energéticos del enfrentamiento y comprendió que [[Lucifer]] había destruido a un Príncipe del [[Cielo]]. A partir de ese momento, concluyó que José no era un humano ordinario, sino un posible recipiente o pieza clave dentro de un plan mayor.",
-        "order": 1
-      },
-      {
-        "id": "descubrimiento_y_muerte",
-        "title": "Descubrimiento y muerte",
-        "text": "En 1983, mientras vigilaba a José durante una misa en [[Lobios]], [[Valak]] intentó interactuar con el residuo de un milagro reciente. Al hacerlo, entró en contacto con Luz Celestial, lo que le provocó un dolor insoportable y una revelación inmediata.\n\nComprendió entonces que [[Lucifer]] no había caído completamente, que seguía siendo puro en esencia, y que sus acciones en la [[Tierra]] constituían una traición directa al [[Infierno]].\n\nPresa del pánico, [[Valak]] intentó huir para informar a [[Azazel]], pero fue interceptado por [[Lucifer]] en el vacío entre mundos. Allí, [[Lucifer]] lo atrapó con una manifestación de sombras y lo destruyó por haber descubierto su secreto.\n\nComo advertencia, [[Lucifer]] llevó posteriormente la cabeza decapitada de [[Valak]] ante [[Azazel]] y los Grandes Demonios, dejando claro el destino de cualquiera que osara interferir en sus planes.",
-        "order": 2
-      }
-    ]
-  },
-  "infobox": {
-    "naturaleza": "",
-    "reino": "",
-    "dominio": "",
-    "afinidad": "",
-    "lealtad": "",
-    "estado": ""
-  },
-  "hierarchy": {
-    "realm": "",
-    "rank": "",
-    "faction": "",
-    "order": 0
-  },
-  "lore": {
-    "origin": "",
-    "nature": "",
-    "role": ""
-  },
-  "publication": {
-    "status": "published",
-    "visibility": "public",
-    "updatedAt": "",
-    "version": 1
-  }
+﻿{
+    "id":  "valak",
+    "slug":  "valak",
+    "universe":  "lucifer",
+    "type":  "character",
+    "section":  "Infierno",
+    "subsection":  "Demonio Mayor",
+    "title":  "Valak",
+    "subtitle":  "",
+    "description":  "Demonio rastreador al servicio de Azazel, especializado en espionaje espiritual y seguimiento de entidades.",
+    "image":  "assets/images/characters/valak.webp",
+    "alias":  [
+                  "Señor de los Susurros"
+              ],
+    "tags":  [
+
+             ],
+    "paths":  {
+                  "json":  "",
+                  "url":  "",
+                  "html":  ""
+              },
+    "seo":  {
+                "title":  "Valak | Demonio del Infierno en Lucifer de Damian R Belmont",
+                "description":  "Valak es un demonio rastreador al servicio de Azazel en el universo de Lucifer de Damian R Belmont. Descubre su papel, habilidades y destino final.",
+                "image":  ""
+            },
+    "excerpt":  "Valak es un demonio al servicio de Azazel, especializado en rastrear y espiar presencias espirituales. Su investigación en la Tierra lo llevó a descubrir un secreto que le costó la vida.",
+    "relations":  {
+                      "characters":  [
+                                         "lucifer",
+                                         "azazel",
+                                         "jose_vila"
+                                     ],
+                      "locations":  [
+                                        "souto",
+                                        "seminario_ourense",
+                                        "salamanca",
+                                        "lobios"
+                                    ],
+                      "events":  [
+
+                                 ],
+                      "concepts":  [
+
+                                   ],
+                      "organizations":  [
+
+                                        ],
+                      "related":  [
+
+                                  ]
+                  },
+    "content":  {
+                    "summary":  "Valak es una entidad demoníaca al servicio de Azazel, enviada a la Tierra para investigar la relación entre Lucifer y el humano José Vila. Dotado de una percepción única de las energías espirituales, actúa como espía y rastreador, moviéndose entre sombras en busca de verdades ocultas. Su descubrimiento de la verdadera naturaleza de Lucifer selló su destino.",
+                    "sections":  [
+                                     {
+                                         "id":  "apariencia_y_naturaleza",
+                                         "title":  "Apariencia y naturaleza",
+                                         "text":  "Valak se manifiesta con la apariencia de un niño humano pálido y enfermizo, con profundas ojeras y ojos completamente negros, carentes de iris o esclerótica. Su presencia resulta inquietante y antinatural, como si su forma fuese solo una máscara imperfecta de algo mucho más oscuro.\n\nSobre su hombro izquierdo reposa un pequeño dragón bicéfalo, una criatura demoníaca que reacciona a las vibraciones espirituales y actúa como extensión de sus sentidos.\n\nValak no percibe el mundo como los humanos, sino como una superposición de rastros energéticos, interpretando la realidad a través de lo que describe como \"olores espirituales\". Más que observar, caza. No mira a los rostros, sino a las gargantas, como un depredador que anticipa el final de sus presas.",
+                                         "order":  0
+                                     },
+                                     {
+                                         "id":  "mision_en_la_tierra",
+                                         "title":  "Misión en la Tierra",
+                                         "text":  "Bajo órdenes de Azazel, Valak fue enviado a la Tierra para investigar las constantes ausencias de Lucifer y descubrir la naturaleza de su vínculo con el joven José Vila.\n\nEn octubre de 1972, llegó a la aldea de Souto, donde irrumpió en la rectoral para interrogar al sacerdote Don Eladio. Mediante el uso de sus garras etéreas, desgarró la memoria del hombre hasta descubrir que José había sido enviado al Seminario de Ourense. Tras obtener la información, detuvo su corazón, acabando con su vida.\n\nPosteriormente, siguió el rastro de José hasta el Seminario Menor y más tarde hasta Salamanca, observando desde las sombras cómo Lucifer intervenía en la vida del joven, protegiéndolo y moldeando su destino.\n\nTras la muerte del ángel Ramiel y del arcángel Camael, Valak analizó los residuos energéticos del enfrentamiento y comprendió que Lucifer había destruido a un Príncipe del Cielo. A partir de ese momento, concluyó que José no era un humano ordinario, sino un posible recipiente o pieza clave dentro de un plan mayor.",
+                                         "order":  1
+                                     },
+                                     {
+                                         "id":  "descubrimiento_y_muerte",
+                                         "title":  "Descubrimiento y muerte",
+                                         "text":  "En 1983, mientras vigilaba a José durante una misa en Lobios, Valak intentó interactuar con el residuo de un milagro reciente. Al hacerlo, entró en contacto con Luz Celestial, lo que le provocó un dolor insoportable y una revelación inmediata.\n\nComprendió entonces que Lucifer no había caído completamente, que seguía siendo puro en esencia, y que sus acciones en la Tierra constituían una traición directa al Infierno.\n\nPresa del pánico, Valak intentó huir para informar a Azazel, pero fue interceptado por Lucifer en el vacío entre mundos. Allí, Lucifer lo atrapó con una manifestación de sombras y lo destruyó por haber descubierto su secreto.\n\nComo advertencia, Lucifer llevó posteriormente la cabeza decapitada de Valak ante Azazel y los Grandes Demonios, dejando claro el destino de cualquiera que osara interferir en sus planes.",
+                                         "order":  2
+                                     }
+                                 ]
+                },
+    "infobox":  {
+                    "naturaleza":  "",
+                    "reino":  "",
+                    "dominio":  "",
+                    "afinidad":  "",
+                    "lealtad":  "",
+                    "estado":  ""
+                },
+    "hierarchy":  {
+                      "realm":  "",
+                      "rank":  "",
+                      "faction":  "",
+                      "order":  0
+                  },
+    "lore":  {
+                 "origin":  "",
+                 "nature":  "",
+                 "role":  ""
+             },
+    "publication":  {
+                        "status":  "published",
+                        "visibility":  "public",
+                        "updatedAt":  "",
+                        "version":  1
+                    }
 }

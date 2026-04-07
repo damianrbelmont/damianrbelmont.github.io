@@ -562,10 +562,13 @@ async function getCategoryIds(categoryKey) {
 
   if (ids.length > 0) return ids;
 
-  // Fallback by type if section metadata is incomplete.
+  // Fallback by type only for entries without section metadata.
+  const entriesWithoutSection = entries.filter((entry) => !normalizeSectionKey(entry.section));
+  if (entriesWithoutSection.length === 0) return [];
+
   const allowedTypes = new Set(config.typeKeys);
   ids = uniqueStrings(
-    entries
+    entriesWithoutSection
       .filter((entry) => allowedTypes.has(normalizeEntityType(entry.type)))
       .map((entry) => entry.id)
   );

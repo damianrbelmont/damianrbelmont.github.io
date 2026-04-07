@@ -305,3 +305,19 @@ ul { list-style: none; }
 .modal-overlay.active {
     display: flex;
 }
+
+/* Solo afecta a las portadas de Nimroel */
+    .book-item.future-project .book-placeholder {
+        aspect-ratio: 2 / 3; /* 👈 proporción tipo portada libro */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .book-cover.nimroel-cover {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }

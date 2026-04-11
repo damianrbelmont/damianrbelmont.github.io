@@ -1,4 +1,4 @@
-﻿{
+{
   "id": "valak",
   "slug": "valak",
   "universe": "lucifer",
@@ -7,7 +7,7 @@
   "subsection": "Demonio Mayor",
   "title": "Valak",
   "subtitle": "",
-  "description": "Demonio rastreador del [[Infierno]] al servicio de [[Azazel]], especializado en espionaje espiritual y seguimiento de entidades.",
+  "description": "Demonio rastreador del Infierno al servicio de [[Azazel]], especializado en espionaje espiritual y seguimiento de entidades.",
   "image": "assets/images/characters/valak.webp",
   "alias": [
     "Señor de los Susurros"
@@ -42,7 +42,7 @@
     "related": []
   },
   "content": {
-    "summary": "Valak es una entidad demoníaca del [[Infierno]] al servicio de [[Azazel]], enviada a la Tierra para investigar la relación entre [[Lucifer]] y el humano [[José Vila]]. Dotado de una percepción única de las energías espirituales, actúa como espía y rastreador, moviéndose entre sombras en busca de verdades ocultas. Su descubrimiento de la verdadera naturaleza de [[Lucifer]] selló su destino.",
+    "summary": "Valak es una entidad demoníaca del Infierno al servicio de [[Azazel]], enviada a la Tierra para investigar la relación entre Lucifer y el humano José Vila. Dotado de una percepción única de las energías espirituales, actúa como espía y rastreador, moviéndose entre sombras en busca de verdades ocultas. Su descubrimiento de la verdadera naturaleza de Lucifer selló su destino.",
     "sections": [
       {
         "id": "apariencia_y_naturaleza",
@@ -53,13 +53,13 @@
       {
         "id": "mision_en_la_tierra",
         "title": "Misión en la Tierra",
-        "text": "Bajo órdenes de [[Azazel]], Valak fue enviado a la Tierra para investigar las constantes ausencias de [[Lucifer]] y descubrir la naturaleza de su vínculo con el joven [[José Vila]].\n\nEn octubre de 1972, llegó a la aldea de [[Souto]], donde irrumpió en la rectoral para interrogar al sacerdote Don Eladio. Mediante el uso de sus garras etéreas, desgarró la memoria del hombre hasta descubrir que José había sido enviado al [[Seminario de Ourense]]. Tras obtener la información, detuvo su corazón, acabando con su vida.\n\nPosteriormente, siguió el rastro de José hasta el Seminario Menor y más tarde hasta [[Salamanca]], observando desde las sombras cómo [[Lucifer]] intervenía en la vida del joven, protegiéndolo y moldeando su destino.\n\nTras la muerte del ángel [[Ramiel]] y del arcángel [[Camael]], Valak analizó los residuos energéticos del enfrentamiento y comprendió que [[Lucifer]] había destruido a un Príncipe del Cielo. A partir de ese momento, concluyó que [[José Vila]] no era un humano ordinario, sino un posible recipiente o pieza clave dentro de un plan mayor.",
+        "text": "Bajo órdenes de [[Azazel]], Valak fue enviado a la Tierra para investigar las constantes ausencias de Lucifer y descubrir la naturaleza de su vínculo con el joven José Vila.\n\nEn octubre de 1972, llegó a la aldea de Souto, donde irrumpió en la rectoral para interrogar al sacerdote Don Eladio. Mediante el uso de sus garras etéreas, desgarró la memoria del hombre hasta descubrir que José había sido enviado al Seminario de Ourense. Tras obtener la información, detuvo su corazón, acabando con su vida.\n\nPosteriormente, siguió el rastro de José hasta el Seminario Menor y más tarde hasta Salamanca, observando desde las sombras cómo Lucifer intervenía en la vida del joven, protegiéndolo y moldeando su destino.\n\nTras la muerte del ángel Ramiel y del arcángel Camael, Valak analizó los residuos energéticos del enfrentamiento y comprendió que Lucifer había destruido a un Príncipe del Cielo. A partir de ese momento, concluyó que José Vila no era un humano ordinario, sino un posible recipiente o pieza clave dentro de un plan mayor.",
         "order": 1
       },
       {
         "id": "descubrimiento_y_muerte",
         "title": "Descubrimiento y muerte",
-        "text": "En 1983, mientras vigilaba a [[José Vila]] durante una misa en [[Lobios]], Valak intentó interactuar con el residuo de un milagro reciente. Al hacerlo, entró en contacto con [[Luz Celestial]], lo que le provocó un dolor insoportable y una revelación inmediata.\n\nComprendió entonces que [[Lucifer]] no había caído completamente, que seguía siendo puro en esencia, y que sus acciones en la Tierra constituían una traición directa al [[Infierno]].\n\nPresa del pánico, Valak intentó huir para informar a [[Azazel]], pero fue interceptado por [[Lucifer]] en el vacío entre mundos. Allí, [[Lucifer]] lo atrapó con una manifestación de sombras y lo destruyó por haber descubierto su secreto.\n\nComo advertencia, [[Lucifer]] llevó posteriormente la cabeza decapitada de Valak ante [[Azazel]] y los Grandes Demonios, dejando claro el destino de cualquiera que osara interferir en sus planes.",
+        "text": "En 1983, mientras vigilaba a José Vila durante una misa en Lobios, Valak intentó interactuar con el residuo de un milagro reciente. Al hacerlo, entró en contacto con Luz Celestial, lo que le provocó un dolor insoportable y una revelación inmediata.\n\nComprendió entonces que Lucifer no había caído completamente, que seguía siendo puro en esencia, y que sus acciones en la Tierra constituían una traición directa al Infierno.\n\nPresa del pánico, Valak intentó huir para informar a [[Azazel]], pero fue interceptado por Lucifer en el vacío entre mundos. Allí, Lucifer lo atrapó con una manifestación de sombras y lo destruyó por haber descubierto su secreto.\n\nComo advertencia, Lucifer llevó posteriormente la cabeza decapitada de Valak ante [[Azazel]] y los Grandes Demonios, dejando claro el destino de cualquiera que osara interferir en sus planes.",
         "order": 2
       }
     ]

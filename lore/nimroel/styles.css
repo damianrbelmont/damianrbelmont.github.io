@@ -557,6 +557,24 @@ input {
   margin-bottom: 1rem;
 }
 
+.wiki-summary a,
+.wiki-section-text a,
+.wiki-entry-context a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+  text-decoration-color: rgba(184, 155, 94, 0.8);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.wiki-summary a:hover,
+.wiki-section-text a:hover,
+.wiki-entry-context a:hover {
+  color: #fff;
+  text-decoration-color: #fff;
+}
+
 .wiki-section-body {
   margin-top: 0.8rem;
 }

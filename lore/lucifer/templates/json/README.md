@@ -54,6 +54,8 @@ Reglas comunes:
 - `excerpt` se usa para tarjetas/listados.
 - `content.summary` se usa dentro de la entrada.
 - `paths` y `seo` se mantienen para fases posteriores.
+- Cada item de `content.sections` puede incluir opcionalmente `groupTitle` para agrupar varias secciones bajo un mismo encabezado visible en la wiki.
+- `groupTitle` es opcional y puede repetirse en varias secciones consecutivas para crear bloques narrativos (ejemplo: "Valak en la novela").
 
 ## Relaciones canonicas
 

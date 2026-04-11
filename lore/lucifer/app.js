@@ -298,10 +298,12 @@ function normalizeEntityData(raw) {
       const id = (section?.id || `section_${index + 1}`).toString();
       const title = (section?.title || section?.tittle || formatName(id)).toString().trim();
       const text = normalizeRichText(section?.text || section?.description).trim();
+      const groupTitle = (section?.groupTitle || section?.group || section?.sectionGroupTitle || "").toString().trim();
       return {
         id,
         title: title || `Seccion ${index + 1}`,
         text,
+        groupTitle,
         order: Number.isFinite(Number(section?.order)) ? Number(section.order) : index
       };
     })
@@ -958,6 +960,7 @@ function renderContent(data) {
     usedIds.add(uniqueSlug);
     return {
       ...section,
+      groupTitle: (section.groupTitle || "").toString().trim(),
       uiId: `wiki-${uniqueSlug}`
     };
   });
@@ -1006,7 +1009,17 @@ function renderContent(data) {
   const summaryBlock = document.getElementById("summaryBlock");
   renderRichText(summaryBlock, data.summary || "");
 
+  let lastRenderedGroupTitle = "";
   preparedSections.forEach((section, index) => {
+    const groupTitle = (section.groupTitle || "").toString().trim();
+    if (groupTitle && groupTitle !== lastRenderedGroupTitle) {
+      const groupHeading = document.createElement("h2");
+      groupHeading.className = "wiki-section-group-title";
+      groupHeading.textContent = groupTitle;
+      sectionsBlock.appendChild(groupHeading);
+      lastRenderedGroupTitle = groupTitle;
+    }
+
     const sectionElement = document.createElement("section");
     sectionElement.className = "wiki-section";
     sectionElement.id = section.uiId;

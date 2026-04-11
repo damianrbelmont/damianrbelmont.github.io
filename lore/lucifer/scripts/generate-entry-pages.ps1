@@ -303,19 +303,29 @@ foreach ($entry in $entries) {
             if ([string]::IsNullOrWhiteSpace($sectionTitle)) {
                 $sectionTitle = "Seccion"
             }
+            $sectionGroupTitle = ""
+            if ($rawSection.PSObject.Properties["groupTitle"]) {
+                $sectionGroupTitle = Normalize-Text $rawSection.groupTitle
+            } elseif ($rawSection.PSObject.Properties["group"]) {
+                $sectionGroupTitle = Normalize-Text $rawSection.group
+            } elseif ($rawSection.PSObject.Properties["sectionGroupTitle"]) {
+                $sectionGroupTitle = Normalize-Text $rawSection.sectionGroupTitle
+            }
             $sections += [pscustomobject]@{
-                id    = Normalize-Text $rawSection.id
-                title = $sectionTitle
-                text  = $sectionText
+                id         = Normalize-Text $rawSection.id
+                title      = $sectionTitle
+                text       = $sectionText
+                groupTitle = $sectionGroupTitle
             }
         }
     }
 
     if ($sections.Count -eq 0 -and -not [string]::IsNullOrWhiteSpace($description)) {
         $sections += [pscustomobject]@{
-            id    = "descripcion"
-            title = "Descripcion"
-            text  = $description
+            id         = "descripcion"
+            title      = "Descripcion"
+            text       = $description
+            groupTitle = ""
         }
     }
 
@@ -323,6 +333,7 @@ foreach ($entry in $entries) {
     $tocItems = @()
     $sectionHtmlParts = @()
     $sectionIndex = 1
+    $lastRenderedGroupTitle = ""
 
     foreach ($sectionItem in $sections) {
         $candidateId = Get-Slug $sectionItem.id
@@ -341,10 +352,19 @@ foreach ($entry in $entries) {
         }
         $usedSectionIds[$uniqueId] = $true
         $uiId = "wiki-$uniqueId"
+        $groupTitle = Normalize-Text $sectionItem.groupTitle
 
         $tocItems += "<li><a href=""#$uiId"">$(Escape-Html $sectionItem.title)</a></li>"
         $sectionBody = Convert-TextToHtml $sectionItem.text
+        $groupHeadingHtml = ""
+        if (-not [string]::IsNullOrWhiteSpace($groupTitle) -and $groupTitle -ne $lastRenderedGroupTitle) {
+            $groupHeadingHtml = @"
+        <h2 class="wiki-section-group-title">$(Escape-Html $groupTitle)</h2>
+"@
+            $lastRenderedGroupTitle = $groupTitle
+        }
         $sectionHtmlParts += @"
+$groupHeadingHtml
         <section class="wiki-section" id="$uiId">
           <button class="wiki-section-toggle" type="button" aria-expanded="true">
             <h2 class="wiki-section-title">$(Escape-Html $sectionItem.title)</h2>

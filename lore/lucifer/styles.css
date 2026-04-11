@@ -531,6 +531,21 @@ input {
   clear: none;
 }
 
+.wiki-section-group-title {
+  margin-top: 2.4rem;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  letter-spacing: 1px;
+  color: #d7c191;
+  border-top: 1px solid rgba(184, 155, 94, 0.25);
+  padding-top: 0.9rem;
+}
+
+.wiki-section-group-title + .wiki-section {
+  margin-top: 1rem;
+}
+
 .wiki-section {
   margin-top: 1.8rem;
   scroll-margin-top: 110px;

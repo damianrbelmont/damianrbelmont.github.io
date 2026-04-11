@@ -770,7 +770,7 @@ async function parseLinks(text) {
   if (typeof text !== "string" || !text) return "";
 
   return text.replace(/\[\[([^[\]]+)\]\]/g, (match, label) => {
-    const visibleLabel = (label || "").toString().trim();
+    const visibleLabel = (label || "").toString();
     if (!visibleLabel) return match;
 
     const entityId = resolveWikiEntityId(visibleLabel);
@@ -784,7 +784,6 @@ async function renderRichText(targetElement, text) {
   const parsed = await parseLinks(normalizeRichText(text));
   const paragraphs = parsed
     .split(/\n{2,}/)
-    .map((paragraph) => paragraph.trim())
     .filter(Boolean);
 
   if (paragraphs.length === 0) {

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kazan Rise | Nimroel Lore</title>
+  <meta name="description" content="Legendario mago humano y antiguo maestro del Santuario, reconocido como uno de los usuarios de magia m&#225;s poderosos de Nimroel.">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/damian.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-container">
+      <div class="author-name">Damian R.<br>Belmont</div>
+      <img src="../../assets/images/DRB.png" alt="Firma DRB" class="header-logo">
+      <nav class="desktop-nav">
+        <ul class="desktop-menu">
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/damian/">Damian</a></li>
+          <li><a href="/novelas/">Novelas</a></li>
+          <li><a href="/novelas/proximamente/">PrÃ³ximamente</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <picture>
+      <source srcset="assets/images/hero/hero.avif" type="image/avif">
+      <source srcset="assets/images/hero/hero.webp" type="image/webp">
+      <img src="assets/images/hero/hero.webp" class="hero-img" alt="Nimroel">
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="hero-content"><h1>Las CrÃ³nicas de Nimroel</h1></div>
+  </section>
+
+  <div class="layout">
+    <main class="center">
+      <section id="content">
+        <div class="breadcrumb">
+          <a href="index.html">Inicio</a>
+          <span> / </span>
+          <span class="breadcrumb-current">Kazan Rise</span>
+        </div>
+        <h1>Kazan Rise</h1>
+        <div class="content-body">
+          <aside class="right" id="sidebar">
+                        <div class="sidebar-infobox-image">
+              <picture>
+                <source srcset="assets/images/characters/kazan.avif" type="image/avif">
+                <source srcset="assets/images/characters/kazan.webp" type="image/webp">
+                <img src="assets/images/characters/kazan.webp" class="clickable" alt="Kazan Rise">
+              </picture>
+            </div>
+            <h2>Kazan Rise</h2>
+            <div class="sidebar-block">
+<p><strong>Tipo:</strong> character</p>
+<p><strong>Raza:</strong> Humano</p>
+<p><strong>Origen:</strong> <a href="index.html?id=treskal">treskal</a></p>
+            </div>
+          </aside>
+
+          <div class="wiki-summary" id="summaryBlock">
+<p>Legendario mago humano y antiguo maestro del Santuario, reconocido como uno de los usuarios de magia m&#225;s poderosos de Nimroel.</p>
+          </div>
+      <nav class="wiki-toc" id="wikiToc" aria-label="Indice de secciones">
+        <p class="wiki-toc-title">Indice</p>
+        <ul class="wiki-toc-list">
+<li><a href="#wiki-descripcion">Descripcion</a></li>
+        </ul>
+      </nav>
+          <div class="wiki-sections" id="sectionsBlock">
+        <section class="wiki-section" id="wiki-descripcion">
+          <button class="wiki-section-toggle" type="button" aria-expanded="true">
+            <h2 class="wiki-section-title">Descripcion</h2>
+            <span class="wiki-section-arrow" aria-hidden="true">&#9652;</span>
+          </button>
+          <div class="wiki-section-body wiki-section-text">
+<p>Kazan Rise fue un poderoso mago humano del santuario y uno de los mayores arcanistas de la historia. Alcanz&#243; la leyenda tras enfrentarse al dragon_milenario en suthiros, donde perdi&#243; su brazo izquierdo.</p>
+<p>Mantuvo una relaci&#243;n secreta con clarisse, una elfa de elowen perteneciente a la orden_nebdek, con quien tuvo a fatheema. Tras la muerte de Clarisse en el parto, confi&#243; a su hija a la Orden y desapareci&#243;.</p>
+<p>Vivi&#243; oculto en piedrafria, prepar&#225;ndose para una profec&#237;a relacionada con railyn_beresh. A&#241;os despu&#233;s, localiz&#243; a su hija en thorwick y la entren&#243;.</p>
+<p>Finalmente, sacrific&#243; su vida en ravem usando el hechizo &quot;Destructor Absoluto&quot; para eliminar a draven_morth y evitar el despertar del Drag&#243;n Corrompido.</p>
+          </div>
+        </section>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="lightbox" class="lightbox">
+    <img id="lightbox-img" alt="Ampliacion">
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".wiki-section-toggle").forEach(function (toggle) {
+        toggle.addEventListener("click", function () {
+          var section = toggle.closest(".wiki-section");
+          var expanded = toggle.getAttribute("aria-expanded") === "true";
+          var nextExpanded = !expanded;
+          toggle.setAttribute("aria-expanded", String(nextExpanded));
+          section.classList.toggle("is-collapsed", !nextExpanded);
+          var arrow = toggle.querySelector(".wiki-section-arrow");
+          if (arrow) {
+            arrow.innerHTML = nextExpanded ? "&#9652;" : "&#9662;";
+          }
+        });
+      });
+
+      document.addEventListener("click", function (event) {
+        var lightbox = document.getElementById("lightbox");
+        var lightboxImg = document.getElementById("lightbox-img");
+        if (event.target.classList.contains("clickable")) {
+          lightboxImg.src = event.target.src;
+          lightbox.classList.add("active");
+        }
+        if (event.target.id === "lightbox" || event.target.id === "lightbox-img") {
+          lightbox.classList.remove("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,25 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import {
-  doc,
-  getDoc,
-  getFirestore
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
 console.log("app.js cargado");
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAALd99tyT-ILov22m1G58iforA3f-E628",
-  authDomain: "nimroel-wiki.firebaseapp.com",
-  projectId: "nimroel-wiki",
-  storageBucket: "nimroel-wiki.firebasestorage.app",
-  messagingSenderId: "499128220480",
-  appId: "1:499128220480:web:e1da6cf1a6f306cd0458a5"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-const INDEX_DOC_REF = doc(db, "meta", "index");
+const INDEX_FILE_PATH = "data/public-index.json";
 const entityCache = new Map();
 let indexCache = null;
 const categoryItemsCache = new Map();
@@ -404,16 +385,12 @@ function renderRelationList(items) {
     <ul class="sidebar-list">
       ${items.map((item) => `
         <li>${item.linkable
-          ? `<a href="?id=${encodeURIComponent(item.id)}">${escapeHtml(item.label)}</a>`
+          ? `<a href="${getEntityHrefById(item.id)}">${escapeHtml(item.label)}</a>`
           : `<span>${escapeHtml(item.label)}</span>`
         }</li>
       `).join("")}
     </ul>
   `;
-}
-
-function getEntityRef(id) {
-  return doc(db, "items", unwrapWikiReference(id));
 }
 
 function getIdFromURL() {
@@ -464,6 +441,80 @@ function normalizeEntityType(type) {
   return aliasMap[normalized] || normalized;
 }
 
+function normalizePublicationStatus(value) {
+  const normalized = (value || "published").toString().trim().toLowerCase();
+  return normalized === "draft" ? "draft" : "published";
+}
+
+function normalizePublicationVisibility(value) {
+  const normalized = (value || "public").toString().trim().toLowerCase();
+  return normalized === "private" ? "private" : "public";
+}
+
+function normalizeIndexEntry(rawEntry) {
+  if (!rawEntry || typeof rawEntry !== "object") return null;
+
+  const id = unwrapWikiReference((rawEntry.id || "").toString().trim());
+  if (!id) return null;
+
+  return {
+    id,
+    slug: (rawEntry.slug || "").toString().trim(),
+    title: stripWikiMarkup((rawEntry.title || rawEntry.name || "").toString().trim()),
+    type: normalizeEntityType(rawEntry.type),
+    section: (rawEntry.section || "").toString().trim(),
+    subsection: (rawEntry.subsection || "").toString().trim(),
+    excerpt: stripWikiMarkup((rawEntry.excerpt || "").toString().trim()),
+    image: (rawEntry.image || "").toString().trim(),
+    path: (rawEntry.path || "").toString().trim().replace(/^\/+/, ""),
+    status: normalizePublicationStatus(rawEntry.status),
+    visibility: normalizePublicationVisibility(rawEntry.visibility)
+  };
+}
+
+function getIndexEntries(indexData) {
+  const rawEntries = indexData?.entries;
+  if (!Array.isArray(rawEntries)) return [];
+  return rawEntries
+    .map((entry) => normalizeIndexEntry(entry))
+    .filter(Boolean);
+}
+
+function getIndexEntryById(indexData, id) {
+  const cleanId = unwrapWikiReference((id || "").toString().trim());
+  if (!cleanId) return null;
+  const entries = getIndexEntries(indexData);
+  return entries.find((entry) => entry.id === cleanId)
+    || entries.find((entry) => entry.id.toLowerCase() === cleanId.toLowerCase())
+    || null;
+}
+
+function getEntryHref(entry) {
+  if (entry?.slug) return `${encodeURIComponent(entry.slug)}.html`;
+  if (entry?.id) return `?id=${encodeURIComponent(entry.id)}`;
+  return "index.html";
+}
+
+function getEntityHrefById(id) {
+  const cleanId = unwrapWikiReference((id || "").toString().trim());
+  if (!cleanId) return "index.html";
+  const entry = indexCache ? getIndexEntryById(indexCache, cleanId) : null;
+  return getEntryHref(entry || { id: cleanId });
+}
+
+function isPublicPublishedEntry(entry) {
+  if (!entry) return false;
+  return entry.status === "published" && entry.visibility === "public";
+}
+
+function getEntityPathById(indexData, id) {
+  const entry = getIndexEntryById(indexData, id);
+  if (!isPublicPublishedEntry(entry)) return "";
+  if (!entry?.path) return "";
+  const clean = entry.path.trim().replace(/^\/+/, "");
+  return clean.startsWith("data/") ? clean : `data/${clean}`;
+}
+
 function closeCategoryModal() {
   const overlay = document.getElementById("categoryModalOverlay");
   if (!overlay) return;
@@ -510,27 +561,11 @@ async function getCategoryIds(categoryKey) {
   if (!config) return [];
 
   const indexData = await loadIndex();
-  let ids = [];
-
-  config.indexKeys.forEach((key) => {
-    const value = indexData?.[key];
-    if (Array.isArray(value)) {
-      ids.push(...value);
-    }
-  });
-
-  ids = uniqueStrings(ids);
-  if (ids.length > 0) return ids;
-
-  // Fallback if the category is not explicitly indexed.
-  const allIds = getAllIdsFromIndex(indexData);
-  const entities = await Promise.all(allIds.map((id) => getEntityById(id)));
   const allowedTypes = new Set(config.typeKeys);
-
   return uniqueStrings(
-    entities
-      .filter((entity) => entity && allowedTypes.has(normalizeEntityType(entity.type)))
-      .map((entity) => entity.id)
+    getIndexEntries(indexData)
+      .filter((entry) => isPublicPublishedEntry(entry) && allowedTypes.has(normalizeEntityType(entry.type)))
+      .map((entry) => entry.id)
   );
 }
 
@@ -580,25 +615,13 @@ async function openCategoryList(categoryKey) {
       <ul class="category-modal-list">
         ${items.map((item) => `
           <li>
-            <a href="?id=${encodeURIComponent(item.id)}" class="category-modal-link" data-entity-id="${encodeURIComponent(item.id)}">
+            <a href="${getEntityHrefById(item.id)}" class="category-modal-link">
               ${escapeHtml(item.name)}
             </a>
           </li>
         `).join("")}
       </ul>
     `;
-
-    bodyEl.querySelectorAll(".category-modal-link").forEach((link) => {
-      link.addEventListener("click", async (event) => {
-        const encodedId = link.getAttribute("data-entity-id");
-        const id = encodedId ? decodeURIComponent(encodedId) : "";
-        if (!id) return;
-        event.preventDefault();
-        closeCategoryModal();
-        window.history.pushState({}, "", `?id=${encodeURIComponent(id)}`);
-        await loadEntity(id);
-      });
-    });
   } catch (error) {
     console.error("Category modal error:", error);
     bodyEl.innerHTML = `<p class="category-modal-status">No se pudo cargar esta categoria.</p>`;
@@ -621,28 +644,22 @@ function isDesktopOrTablet() {
 }
 
 function getAllIdsFromIndex(indexData) {
-  if (!indexData || typeof indexData !== "object") return [];
-
-  const idSet = new Set();
-  Object.values(indexData).forEach((value) => {
-    if (!Array.isArray(value)) return;
-    value.forEach((id) => {
-      const clean = unwrapWikiReference((id || "").toString().trim());
-      if (clean) idSet.add(clean);
-    });
-  });
-  return [...idSet];
+  return uniqueStrings(
+    getIndexEntries(indexData)
+      .filter((entry) => isPublicPublishedEntry(entry))
+      .map((entry) => entry.id)
+  );
 }
 
 async function loadIndex() {
   if (indexCache) return indexCache;
 
-  const snap = await getDoc(INDEX_DOC_REF);
-  if (!snap.exists()) {
-    throw new Error("No existe meta/index en Firestore.");
+  const response = await fetch(INDEX_FILE_PATH, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error("No se pudo cargar data/public-index.json.");
   }
 
-  indexCache = snap.data() || {};
+  indexCache = (await response.json()) || {};
   return indexCache;
 }
 
@@ -654,18 +671,30 @@ async function getEntityById(id) {
     return entityCache.get(cleanId);
   }
 
-  const snap = await getDoc(getEntityRef(cleanId));
-  if (!snap.exists()) {
+  const indexData = await loadIndex();
+  const entityPath = getEntityPathById(indexData, cleanId);
+  if (!entityPath) {
     entityCache.set(cleanId, null);
     return null;
   }
 
-  const entity = normalizeEntityData({ id: cleanId, ...snap.data() });
+  const response = await fetch(entityPath, { cache: "no-store" });
+  if (!response.ok) {
+    entityCache.set(cleanId, null);
+    return null;
+  }
+
+  const payload = await response.json();
+  const entity = normalizeEntityData({ id: cleanId, ...payload });
   entityCache.set(cleanId, entity);
   return entity;
 }
 
 async function getEntityName(id) {
+  const indexData = await loadIndex();
+  const indexEntry = getIndexEntryById(indexData, id);
+  if (indexEntry?.title) return stripWikiMarkup(indexEntry.title);
+
   const entity = await getEntityById(id);
   return stripWikiMarkup(entity?.name || formatName(id));
 }
@@ -754,7 +783,7 @@ async function parseLinks(text) {
     if (!fallbackLabel) return "";
 
     const entityId = resolveWikiEntityId(targetRef || fallbackLabel);
-    const href = `?id=${encodeURIComponent(entityId || targetRef || fallbackLabel)}`;
+    const href = getEntityHrefById(entityId || targetRef || fallbackLabel);
 
     let linkLabel = fallbackLabel;
     if (!hasCustomLabel && entityId) {
@@ -828,6 +857,9 @@ async function renderSidebar(data) {
 
   const aliases = uniqueStrings(data.aliases || []);
   const affiliations = await resolveRelationLabels(data.affiliation || []);
+  const birthplaceLabel = data.birthplace
+    ? stripWikiMarkup(await getEntityName(data.birthplace))
+    : "";
 
   const relationOrder = ["characters", "locations", "events", "organizations", "others"];
   const relationLabels = {
@@ -890,7 +922,7 @@ async function renderSidebar(data) {
       <p><strong>Tipo:</strong> ${formatType(data.type)}</p>
       ${data.birthplace ? `
         <p><strong>Origen:</strong>
-          <a href="?id=${encodeURIComponent(data.birthplace)}">${escapeHtml(formatName(data.birthplace))}</a>
+          <a href="${getEntityHrefById(data.birthplace)}">${escapeHtml(birthplaceLabel || formatName(data.birthplace))}</a>
         </p>
       ` : ""}
     </div>
@@ -918,13 +950,14 @@ async function renderSidebar(data) {
     <div id="backlinks"></div>
   `;
 
-  getBacklinks(data.id).then((backlinks) => {
+  getBacklinks(data.id).then(async (backlinks) => {
     if (backlinks.length > 0) {
+      const backlinkItems = await resolveRelationLabels(backlinks);
       document.getElementById("backlinks").innerHTML = `
         <p><strong>Mencionado en:</strong></p>
         <ul>
-          ${backlinks.map(id => `
-            <li><a href="?id=${id}">${formatName(id)}</a></li>
+          ${backlinkItems.map((item) => `
+            <li><a href="${getEntityHrefById(item.id)}">${escapeHtml(item.label || formatName(item.id))}</a></li>
           `).join("")}
         </ul>
       `;
@@ -1127,16 +1160,7 @@ async function initSearch() {
 
     for (const item of filtered) {
       const li = document.createElement("li");
-      li.innerHTML = `<a href="?id=${item.id}" class="search-link">${item.name}</a>`;
-
-      const link = li.querySelector(".search-link");
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
-        window.history.pushState({}, "", `?id=${item.id}`);
-        loadEntity(item.id);
-        input.value = "";
-        resultsContainer.innerHTML = "";
-      });
+      li.innerHTML = `<a href="${getEntityHrefById(item.id)}" class="search-link">${item.name}</a>`;
 
       resultsContainer.appendChild(li);
     }

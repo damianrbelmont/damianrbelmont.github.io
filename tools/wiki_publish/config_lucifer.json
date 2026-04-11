@@ -1,0 +1,12 @@
+{
+  "wiki": "lucifer",
+  "firestore_collection": "lucifer_items",
+  "firestore_index_document": "meta_lucifer/index",
+  "local_root": "lore/lucifer",
+  "data_dir": "data",
+  "index_mode": "entries",
+  "generator_script": "lore/lucifer/scripts/generate-entry-pages.ps1",
+  "protected_html": [
+    "index.html"
+  ]
+}

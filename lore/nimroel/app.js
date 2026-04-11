@@ -739,18 +739,48 @@ function resolveWikiEntityId(label) {
 async function parseLinks(text) {
   if (typeof text !== "string" || !text) return "";
 
-  return text.replace(/\[\[([^[\]]+)\]\]/g, (_match, token) => {
-    const cleanToken = (token || "").toString().trim();
+  const matches = [...text.matchAll(/\[\[([^[\]]+)\]\]/g)];
+  if (matches.length === 0) return text;
+
+  const labelCache = new Map();
+  const replacements = await Promise.all(matches.map(async (match) => {
+    const token = match?.[1] || "";
+    const cleanToken = token.toString().trim();
     if (!cleanToken) return "";
 
+    const hasCustomLabel = cleanToken.includes("|");
     const targetRef = getWikiTargetToken(cleanToken);
-    const visibleLabel = stripWikiMarkup(getWikiDisplayLabel(cleanToken));
-    if (!visibleLabel) return "";
+    const fallbackLabel = stripWikiMarkup(getWikiDisplayLabel(cleanToken));
+    if (!fallbackLabel) return "";
 
-    const entityId = resolveWikiEntityId(targetRef || visibleLabel);
-    const href = `?id=${encodeURIComponent(entityId || targetRef || visibleLabel)}`;
-    return `<a href="${escapeHtml(href)}">${escapeHtml(visibleLabel)}</a>`;
+    const entityId = resolveWikiEntityId(targetRef || fallbackLabel);
+    const href = `?id=${encodeURIComponent(entityId || targetRef || fallbackLabel)}`;
+
+    let linkLabel = fallbackLabel;
+    if (!hasCustomLabel && entityId) {
+      if (!labelCache.has(entityId)) {
+        labelCache.set(entityId, getEntityName(entityId).catch(() => ""));
+      }
+      const resolvedName = await labelCache.get(entityId);
+      if (resolvedName) {
+        linkLabel = stripWikiMarkup(resolvedName);
+      }
+    }
+
+    return `<a href="${escapeHtml(href)}">${escapeHtml(linkLabel)}</a>`;
+  }));
+
+  let output = "";
+  let lastIndex = 0;
+  matches.forEach((match, index) => {
+    const start = match.index ?? 0;
+    output += text.slice(lastIndex, start);
+    output += replacements[index];
+    lastIndex = start + match[0].length;
   });
+  output += text.slice(lastIndex);
+
+  return output;
 }
 
 async function renderRichText(targetElement, text) {

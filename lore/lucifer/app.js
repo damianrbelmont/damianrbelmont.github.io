@@ -35,6 +35,37 @@ function normalizeRichText(value) {
     .replace(/\\n/g, "\n");
 }
 
+function getWikiTargetToken(token) {
+  const cleanToken = (token || "").toString().trim();
+  if (!cleanToken) return "";
+  const separatorIndex = cleanToken.indexOf("|");
+  if (separatorIndex === -1) return cleanToken;
+  return cleanToken.slice(0, separatorIndex).trim();
+}
+
+function getWikiDisplayLabel(token) {
+  const cleanToken = (token || "").toString().trim();
+  if (!cleanToken) return "";
+  const separatorIndex = cleanToken.indexOf("|");
+  if (separatorIndex === -1) return cleanToken;
+  const label = cleanToken.slice(separatorIndex + 1).trim();
+  return label || cleanToken.slice(0, separatorIndex).trim();
+}
+
+function stripWikiMarkup(value) {
+  return (value || "")
+    .toString()
+    .replace(/\[\[([^[\]]+)\]\]/g, (_match, token) => getWikiDisplayLabel(token))
+    .trim();
+}
+
+function unwrapWikiReference(value) {
+  const cleanValue = (value || "").toString().trim();
+  const wrappedMatch = cleanValue.match(/^\[\[([^[\]]+)\]\]$/);
+  if (!wrappedMatch) return cleanValue;
+  return getWikiTargetToken(wrappedMatch[1]);
+}
+
 function getFirstStringValueFromPaths(source, paths) {
   for (const path of paths) {
     const parts = path.split(".");
@@ -86,7 +117,7 @@ function toArray(value) {
 function uniqueStrings(values) {
   const set = new Set();
   values.forEach((value) => {
-    const clean = (value || "").toString().trim();
+    const clean = stripWikiMarkup(value);
     if (clean) set.add(clean);
   });
   return [...set];
@@ -95,11 +126,11 @@ function uniqueStrings(values) {
 function extractTextValues(value) {
   return toArray(value).flatMap((item) => {
     if (typeof item === "string" || typeof item === "number") {
-      return [item.toString()];
+      return [unwrapWikiReference(item)];
     }
     if (item && typeof item === "object") {
       const candidate = item.id || item.slug || item.ref || item.name || item.title || item.label;
-      if (candidate) return [candidate.toString()];
+      if (candidate) return [unwrapWikiReference(candidate)];
     }
     return [];
   });
@@ -161,9 +192,10 @@ function normalizeEntityData(raw) {
     "title",
     "name"
   ]) || data.title || data.name || "";
+  data.title = stripWikiMarkup(data.title);
 
   // Transitional compatibility while detail JSONs migrate fully to `title`.
-  data.name = data.name || data.title || "";
+  data.name = stripWikiMarkup(data.name || data.title || "");
 
   // Prefer the richer content schema when available.
   data.summary = normalizeRichText(getFirstStringValueFromPaths(raw, [
@@ -295,10 +327,10 @@ function normalizeEntityData(raw) {
 
   data.sections = rawSections
     .map((section, index) => {
-      const id = (section?.id || `section_${index + 1}`).toString();
-      const title = (section?.title || section?.tittle || formatName(id)).toString().trim();
+      const id = unwrapWikiReference((section?.id || `section_${index + 1}`).toString());
+      const title = stripWikiMarkup((section?.title || section?.tittle || formatName(id)).toString().trim());
       const text = normalizeRichText(section?.text || section?.description).trim();
-      const groupTitle = (section?.groupTitle || section?.group || section?.sectionGroupTitle || "").toString().trim();
+      const groupTitle = stripWikiMarkup((section?.groupTitle || section?.group || section?.sectionGroupTitle || "").toString().trim());
       return {
         id,
         title: title || `Seccion ${index + 1}`,
@@ -383,7 +415,7 @@ function normalizePublicationVisibility(value) {
 function normalizeIndexEntry(rawEntry) {
   if (!rawEntry || typeof rawEntry !== "object") return null;
 
-  const id = (rawEntry.id || "").toString().trim();
+  const id = unwrapWikiReference((rawEntry.id || "").toString().trim());
   if (!id) return null;
 
   const path = (rawEntry.path || "").toString().trim().replace(/^\/+/, "");
@@ -393,11 +425,11 @@ function normalizeIndexEntry(rawEntry) {
   return {
     id,
     slug: (rawEntry.slug || "").toString().trim(),
-    title: (rawEntry.title || "").toString().trim(),
+    title: stripWikiMarkup((rawEntry.title || "").toString().trim()),
     type: normalizeEntityType(rawEntry.type),
     section,
-    subsection: (rawEntry.subsection || "").toString().trim(),
-    excerpt: (rawEntry.excerpt || "").toString().trim(),
+    subsection: stripWikiMarkup((rawEntry.subsection || "").toString().trim()),
+    excerpt: stripWikiMarkup((rawEntry.excerpt || "").toString().trim()),
     image: (rawEntry.image || "").toString().trim(),
     path,
     status: normalizePublicationStatus(rawEntry.status),
@@ -425,9 +457,12 @@ function getIndexEntries(indexData) {
 }
 
 function getIndexEntryById(indexData, id) {
-  const cleanId = (id || "").toString().trim();
+  const cleanId = unwrapWikiReference((id || "").toString().trim());
   if (!cleanId) return null;
-  return getIndexEntries(indexData).find((entry) => entry.id === cleanId) || null;
+  const entries = getIndexEntries(indexData);
+  return entries.find((entry) => entry.id === cleanId)
+    || entries.find((entry) => entry.id.toLowerCase() === cleanId.toLowerCase())
+    || null;
 }
 
 function getEntryHref(entry) {
@@ -441,7 +476,7 @@ function getEntryHref(entry) {
 }
 
 function getEntityHrefById(id) {
-  const cleanId = (id || "").toString().trim();
+  const cleanId = unwrapWikiReference((id || "").toString().trim());
   if (!cleanId) return "index.html";
   const entry = indexCache ? getIndexEntryById(indexCache, cleanId) : null;
   return getEntryHref(entry || { id: cleanId });
@@ -680,7 +715,7 @@ async function loadIndex() {
 }
 
 async function getEntityById(id) {
-  const cleanId = (id || "").toString().trim();
+  const cleanId = unwrapWikiReference((id || "").toString().trim());
   if (!cleanId) return null;
 
   if (entityCache.has(cleanId)) {
@@ -709,10 +744,10 @@ async function getEntityById(id) {
 async function getEntityName(id) {
   const indexData = await loadIndex();
   const indexEntry = getIndexEntryById(indexData, id);
-  if (indexEntry?.title) return indexEntry.title;
+  if (indexEntry?.title) return stripWikiMarkup(indexEntry.title);
 
   const entity = await getEntityById(id);
-  return entity?.title || entity?.name || formatName(id);
+  return stripWikiMarkup(entity?.title || entity?.name || formatName(id));
 }
 
 function renderHome() {
@@ -771,13 +806,17 @@ function resolveWikiEntityId(label) {
 async function parseLinks(text) {
   if (typeof text !== "string" || !text) return "";
 
-  return text.replace(/\[\[([^[\]]+)\]\]/g, (match, label) => {
-    const visibleLabel = (label || "").toString();
-    if (!visibleLabel) return match;
+  return text.replace(/\[\[([^[\]]+)\]\]/g, (_match, token) => {
+    const cleanToken = (token || "").toString().trim();
+    if (!cleanToken) return "";
 
-    const entityId = resolveWikiEntityId(visibleLabel);
-    const href = getEntityHrefById(entityId || visibleLabel);
-    return `<a href="${href}">${escapeHtml(visibleLabel)}</a>`;
+    const targetRef = getWikiTargetToken(cleanToken);
+    const visibleLabel = stripWikiMarkup(getWikiDisplayLabel(cleanToken));
+    if (!visibleLabel) return "";
+
+    const entityId = resolveWikiEntityId(targetRef || visibleLabel);
+    const href = getEntityHrefById(entityId || targetRef || visibleLabel);
+    return `<a href="${escapeHtml(href)}">${escapeHtml(visibleLabel)}</a>`;
   });
 }
 
@@ -886,7 +925,7 @@ async function renderSidebar(data) {
       </div>
     ` : ""}
 
-    <h2>${data.name}</h2>
+    <h2>${escapeHtml(stripWikiMarkup(data.name))}</h2>
 
     <div class="sidebar-block">
       <p><strong>Tipo:</strong> ${formatType(data.type)}</p>
@@ -982,10 +1021,10 @@ function renderContent(data) {
     <div class="breadcrumb">
       <a href="javascript:void(0)" onclick="goHome()">Inicio</a>
       <span> / </span>
-      <span class="breadcrumb-current">${data.name || formatName(data.id)}</span>
+      <span class="breadcrumb-current">${escapeHtml(stripWikiMarkup(data.name || formatName(data.id)))}</span>
     </div>
 
-    <h1>${data.name || formatName(data.id)}</h1>
+    <h1>${escapeHtml(stripWikiMarkup(data.name || formatName(data.id)))}</h1>
 
     <div class="content-body">
       <div class="wiki-summary" id="summaryBlock"></div>

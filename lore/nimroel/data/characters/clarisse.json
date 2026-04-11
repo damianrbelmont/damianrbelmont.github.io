@@ -3,7 +3,7 @@
   "type": "character",
   "name": "Clarisse",
   "summary": "Elfa de la Orden de Nebdek.",
-  "description": "Clarisse pertenecía a la orden_nebdek y vivió en [[elowen]].",
+  "description": "Clarisse pertenecía a la orden_nebdek y vivió en elowen.",
   "image": "assets/images/characters/clarisse.webp",
   "race": "Elfa",
   "birthplace": "elowen",

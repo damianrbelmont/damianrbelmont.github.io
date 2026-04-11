@@ -20,6 +20,15 @@ function Normalize-Text {
     return $Value.ToString().Replace("`r`n", "`n").Replace("`r", "`n").Trim()
 }
 
+function Normalize-DisplayText {
+    param([AllowNull()][object]$Value)
+    $text = Normalize-Text $Value
+    if ([string]::IsNullOrWhiteSpace($text)) { return "" }
+    $text = $text -replace "\[\[([^\[\]\|]+)\|([^\[\]]+)\]\]", '$2'
+    $text = $text -replace "\[\[([^\[\]]+)\]\]", '$1'
+    return $text.Trim()
+}
+
 function Escape-Html {
     param([AllowNull()][object]$Value)
     return [System.Net.WebUtility]::HtmlEncode((Normalize-Text $Value))
@@ -47,7 +56,7 @@ function Get-Slug {
 
 function To-MetaDescription {
     param([AllowNull()][object]$Value, [int]$MaxLength = 160)
-    $text = Normalize-Text $Value
+    $text = Normalize-DisplayText $Value
     if ([string]::IsNullOrWhiteSpace($text)) { return "" }
     if ($text.Length -le $MaxLength) { return $text }
     return ($text.Substring(0, $MaxLength - 3).TrimEnd() + "...")
@@ -113,21 +122,42 @@ if ($entries.Count -eq 0) {
 }
 
 $entryLookup = @{}
+$entryLookupByLowerId = @{}
 foreach ($entry in $entries) {
     $id = Normalize-Text $entry.id
     if (-not [string]::IsNullOrWhiteSpace($id)) {
         $entryLookup[$id] = $entry
+        $entryLookupByLowerId[$id.ToLowerInvariant()] = $entry
     }
+}
+
+function Get-EntryByReference {
+    param([AllowNull()][object]$Reference)
+    $cleanReference = Normalize-DisplayText $Reference
+    if ([string]::IsNullOrWhiteSpace($cleanReference)) { return $null }
+    if ($entryLookup.ContainsKey($cleanReference)) {
+        return $entryLookup[$cleanReference]
+    }
+    $lowerReference = $cleanReference.ToLowerInvariant()
+    if ($entryLookupByLowerId.ContainsKey($lowerReference)) {
+        return $entryLookupByLowerId[$lowerReference]
+    }
+    return $null
 }
 
 function Get-EntryHrefById {
     param([AllowNull()][object]$Id)
-    $cleanId = Normalize-Text $Id
+    $cleanId = Normalize-DisplayText $Id
     if ([string]::IsNullOrWhiteSpace($cleanId)) { return "index.html" }
-    if ($entryLookup.ContainsKey($cleanId)) {
-        $slug = Normalize-Text $entryLookup[$cleanId].slug
+    $entry = Get-EntryByReference $cleanId
+    if ($null -ne $entry) {
+        $slug = Normalize-Text $entry.slug
         if (-not [string]::IsNullOrWhiteSpace($slug)) {
             return "$([System.Uri]::EscapeDataString($slug)).html"
+        }
+        $entryId = Normalize-Text $entry.id
+        if (-not [string]::IsNullOrWhiteSpace($entryId)) {
+            return "index.html?id=$([System.Uri]::EscapeDataString($entryId))"
         }
     }
     return "index.html?id=$([System.Uri]::EscapeDataString($cleanId))"
@@ -160,13 +190,26 @@ function Convert-InlineWikiLinks {
             [void]$builder.Append([System.Net.WebUtility]::HtmlEncode($prefix))
         }
 
-        $targetId = Normalize-Text $match.Groups[1].Value
+        $rawToken = Normalize-Text $match.Groups[1].Value
+        $targetId = $rawToken
+        $targetLabel = $rawToken
+        if ($rawToken -match "^(.*?)\|(.*)$") {
+            $targetId = Normalize-Text $Matches[1]
+            $targetLabel = Normalize-DisplayText $Matches[2]
+        } else {
+            $targetId = Normalize-Text $rawToken
+            $targetLabel = Normalize-DisplayText $rawToken
+        }
+
         if ([string]::IsNullOrWhiteSpace($targetId)) {
             [void]$builder.Append([System.Net.WebUtility]::HtmlEncode($match.Value))
         } else {
-            $targetLabel = $targetId
-            if ($entryLookup.ContainsKey($targetId)) {
-                $entryTitle = Normalize-Text $entryLookup[$targetId].title
+            if ([string]::IsNullOrWhiteSpace($targetLabel)) {
+                $targetLabel = Normalize-DisplayText $targetId
+            }
+            $targetEntry = Get-EntryByReference $targetId
+            if ($null -ne $targetEntry) {
+                $entryTitle = Normalize-DisplayText $targetEntry.title
                 if (-not [string]::IsNullOrWhiteSpace($entryTitle)) {
                     $targetLabel = $entryTitle
                 }
@@ -226,9 +269,9 @@ foreach ($entry in $entries) {
 
     $detail = Get-Content -Raw -Encoding UTF8 -LiteralPath $jsonPath | ConvertFrom-Json
 
-    $title = Normalize-Text $detail.title
+    $title = Normalize-DisplayText $detail.title
     if ([string]::IsNullOrWhiteSpace($title)) {
-        $title = Normalize-Text $entry.title
+        $title = Normalize-DisplayText $entry.title
     }
     if ([string]::IsNullOrWhiteSpace($title)) {
         $title = $id
@@ -240,14 +283,14 @@ foreach ($entry in $entries) {
     }
     $typeLabel = Normalize-TypeLabel $type
 
-    $section = Normalize-Text $detail.section
+    $section = Normalize-DisplayText $detail.section
     if ([string]::IsNullOrWhiteSpace($section)) {
-        $section = Normalize-Text $entry.section
+        $section = Normalize-DisplayText $entry.section
     }
 
-    $subsection = Normalize-Text $detail.subsection
+    $subsection = Normalize-DisplayText $detail.subsection
     if ([string]::IsNullOrWhiteSpace($subsection)) {
-        $subsection = Normalize-Text $entry.subsection
+        $subsection = Normalize-DisplayText $entry.subsection
     }
 
     $summary = Normalize-Text $detail.content.summary
@@ -261,7 +304,7 @@ foreach ($entry in $entries) {
         $excerpt = $description
     }
 
-    $seoTitle = Normalize-Text $detail.seo.title
+    $seoTitle = Normalize-DisplayText $detail.seo.title
     if ([string]::IsNullOrWhiteSpace($seoTitle)) {
         $seoTitle = "$title | Wiki Lucifer de Damian R Belmont"
     }
@@ -299,17 +342,17 @@ foreach ($entry in $entries) {
             if ($null -eq $rawSection) { continue }
             $sectionText = Normalize-Text $rawSection.text
             if ([string]::IsNullOrWhiteSpace($sectionText)) { continue }
-            $sectionTitle = Normalize-Text $rawSection.title
+            $sectionTitle = Normalize-DisplayText $rawSection.title
             if ([string]::IsNullOrWhiteSpace($sectionTitle)) {
                 $sectionTitle = "Seccion"
             }
             $sectionGroupTitle = ""
             if ($rawSection.PSObject.Properties["groupTitle"]) {
-                $sectionGroupTitle = Normalize-Text $rawSection.groupTitle
+                $sectionGroupTitle = Normalize-DisplayText $rawSection.groupTitle
             } elseif ($rawSection.PSObject.Properties["group"]) {
-                $sectionGroupTitle = Normalize-Text $rawSection.group
+                $sectionGroupTitle = Normalize-DisplayText $rawSection.group
             } elseif ($rawSection.PSObject.Properties["sectionGroupTitle"]) {
-                $sectionGroupTitle = Normalize-Text $rawSection.sectionGroupTitle
+                $sectionGroupTitle = Normalize-DisplayText $rawSection.sectionGroupTitle
             }
             $sections += [pscustomobject]@{
                 id         = Normalize-Text $rawSection.id
@@ -352,7 +395,7 @@ foreach ($entry in $entries) {
         }
         $usedSectionIds[$uniqueId] = $true
         $uiId = "wiki-$uniqueId"
-        $groupTitle = Normalize-Text $sectionItem.groupTitle
+        $groupTitle = Normalize-DisplayText $sectionItem.groupTitle
 
         $tocItems += "<li><a href=""#$uiId"">$(Escape-Html $sectionItem.title)</a></li>"
         $sectionBody = Convert-TextToHtml $sectionItem.text
@@ -403,20 +446,20 @@ $tocBody
     }
 
     $aliases = @($detail.alias)
-    $cleanAliases = @($aliases | ForEach-Object { Normalize-Text $_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    $cleanAliases = @($aliases | ForEach-Object { Normalize-DisplayText $_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
     if ($cleanAliases.Count -gt 0) {
         $infoRows += "<p><strong>Alias:</strong> $(Escape-Html ($cleanAliases -join ', '))</p>"
     }
 
     $tags = @($detail.tags)
-    $cleanTags = @($tags | ForEach-Object { Normalize-Text $_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    $cleanTags = @($tags | ForEach-Object { Normalize-DisplayText $_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
     if ($cleanTags.Count -gt 0) {
         $infoRows += "<p><strong>Etiquetas:</strong> $(Escape-Html ($cleanTags -join ', '))</p>"
     }
 
     if ($null -ne $detail.infobox) {
         foreach ($prop in $detail.infobox.PSObject.Properties) {
-            $value = Normalize-Text $prop.Value
+            $value = Normalize-DisplayText $prop.Value
             if ([string]::IsNullOrWhiteSpace($value)) { continue }
             $label = $prop.Name -creplace "([a-z])([A-Z])", '$1 $2'
             $label = $label.Substring(0, 1).ToUpperInvariant() + $label.Substring(1)

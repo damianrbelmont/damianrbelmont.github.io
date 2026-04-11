@@ -136,7 +136,11 @@ function Get-EntryHrefById {
 function Convert-InlineWikiLinks {
     param([AllowNull()][object]$Value)
 
-    $text = Normalize-Text $Value
+    $text = if ($null -eq $Value) {
+        ""
+    } else {
+        $Value.ToString().Replace("`r`n", "`n").Replace("`r", "`n")
+    }
     if ([string]::IsNullOrWhiteSpace($text)) { return "" }
 
     $matches = [System.Text.RegularExpressions.Regex]::Matches($text, "\[\[(.*?)\]\]")
@@ -153,12 +157,12 @@ function Convert-InlineWikiLinks {
 
         if ($startIndex -gt $currentIndex) {
             $prefix = $text.Substring($currentIndex, $startIndex - $currentIndex)
-            [void]$builder.Append((Escape-Html $prefix))
+            [void]$builder.Append([System.Net.WebUtility]::HtmlEncode($prefix))
         }
 
         $targetId = Normalize-Text $match.Groups[1].Value
         if ([string]::IsNullOrWhiteSpace($targetId)) {
-            [void]$builder.Append((Escape-Html $match.Value))
+            [void]$builder.Append([System.Net.WebUtility]::HtmlEncode($match.Value))
         } else {
             $targetLabel = $targetId
             if ($entryLookup.ContainsKey($targetId)) {
@@ -176,7 +180,7 @@ function Convert-InlineWikiLinks {
 
     if ($currentIndex -lt $text.Length) {
         $suffix = $text.Substring($currentIndex)
-        [void]$builder.Append((Escape-Html $suffix))
+        [void]$builder.Append([System.Net.WebUtility]::HtmlEncode($suffix))
     }
 
     return $builder.ToString()

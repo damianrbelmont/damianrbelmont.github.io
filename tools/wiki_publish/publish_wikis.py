@@ -134,15 +134,23 @@ def get_collection_docs(db: Any, collection_name: str) -> dict[str, dict[str, An
 def remove_if_empty_directory(path: Path, stop_at: Path) -> None:
     current = path
     while current != stop_at and current.exists():
-        if any(current.iterdir()):
+        try:
+            if any(current.iterdir()):
+                return
+            current.rmdir()
+        except FileNotFoundError:
             return
-        current.rmdir()
         current = current.parent
 
 
 def clean_orphan_json_files(data_root: Path, keep_files: set[Path]) -> None:
-    for json_file in data_root.rglob("*.json"):
+    # Materialize first: deleting directories while rglob is scanning can
+    # raise WinError 3 on Windows for folders removed mid-iteration.
+    json_files = list(data_root.rglob("*.json"))
+    for json_file in json_files:
         if json_file not in keep_files:
+            if not json_file.exists():
+                continue
             json_file.unlink()
             remove_if_empty_directory(json_file.parent, data_root)
 

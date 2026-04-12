@@ -14,22 +14,28 @@ if not exist "%PUBLISH_PS1%" (
 )
 
 set "SERVICE_ACCOUNT_PATH=%FIREBASE_SERVICE_ACCOUNT%"
-if "%SERVICE_ACCOUNT_PATH%"=="" (
+if "!SERVICE_ACCOUNT_PATH!"=="" (
     if exist "%SERVICE_ACCOUNT_HINT_FILE%" (
         set /p SERVICE_ACCOUNT_PATH=<"%SERVICE_ACCOUNT_HINT_FILE%"
     )
 )
 
-if "%SERVICE_ACCOUNT_PATH%"=="" (
+if "!SERVICE_ACCOUNT_PATH!"=="" (
     if exist "%SCRIPT_DIR%firebase-service-account.json" (
         set "SERVICE_ACCOUNT_PATH=%SCRIPT_DIR%firebase-service-account.json"
     )
 )
 
-if "%SERVICE_ACCOUNT_PATH%"=="" (
+if "!SERVICE_ACCOUNT_PATH!"=="" (
     set "SERVICE_ACCOUNT_PATH=C:\Users\andro\secrets\firebase-service-account.json"
 )
-set "SERVICE_ACCOUNT_PATH=%SERVICE_ACCOUNT_PATH:"=%"
+
+set "PYTHON_EXE="
+if not "%WIKI_PUBLISH_PYTHON%"=="" if exist "%WIKI_PUBLISH_PYTHON%" set "PYTHON_EXE=%WIKI_PUBLISH_PYTHON%"
+if "!PYTHON_EXE!"=="" if exist "%LocalAppData%\Programs\Python\Python313\python.exe" set "PYTHON_EXE=%LocalAppData%\Programs\Python\Python313\python.exe"
+if "!PYTHON_EXE!"=="" if exist "%LocalAppData%\Programs\Python\Python312\python.exe" set "PYTHON_EXE=%LocalAppData%\Programs\Python\Python312\python.exe"
+if "!PYTHON_EXE!"=="" if exist "%LocalAppData%\Programs\Python\Python311\python.exe" set "PYTHON_EXE=%LocalAppData%\Programs\Python\Python311\python.exe"
+if "!PYTHON_EXE!"=="" if exist "%LocalAppData%\Programs\Python\Python310\python.exe" set "PYTHON_EXE=%LocalAppData%\Programs\Python\Python310\python.exe"
 
 echo.
 echo ==========================================
@@ -37,15 +43,22 @@ echo Publicando cambios desde Firebase...
 echo ==========================================
 echo.
 
-if exist "%SERVICE_ACCOUNT_PATH%" (
-    echo Usando Service Account: %SERVICE_ACCOUNT_PATH%
-    > "%SERVICE_ACCOUNT_HINT_FILE%" echo %SERVICE_ACCOUNT_PATH%
-    "%POWERSHELL_EXE%" -NoProfile -ExecutionPolicy Bypass -File "%PUBLISH_PS1%" -ServiceAccount "%SERVICE_ACCOUNT_PATH%"
+if exist "!SERVICE_ACCOUNT_PATH!" (
+    echo Usando Service Account: !SERVICE_ACCOUNT_PATH!
+    if not "!PYTHON_EXE!"=="" (
+        echo Usando Python: !PYTHON_EXE!
+        set "WIKI_PUBLISH_PYTHON=!PYTHON_EXE!"
+    )
+    > "%SERVICE_ACCOUNT_HINT_FILE%" echo !SERVICE_ACCOUNT_PATH!
+    if "!PYTHON_EXE!"=="" (
+        "%POWERSHELL_EXE%" -NoProfile -ExecutionPolicy Bypass -File "%PUBLISH_PS1%" -ServiceAccount "!SERVICE_ACCOUNT_PATH!"
+    ) else (
+        "%POWERSHELL_EXE%" -NoProfile -ExecutionPolicy Bypass -File "%PUBLISH_PS1%" -ServiceAccount "!SERVICE_ACCOUNT_PATH!" -PythonExe "!PYTHON_EXE!"
+    )
 ) else (
     echo No se encontro Service Account automaticamente.
     echo.
     set /p SERVICE_ACCOUNT_PATH=Introduce la ruta completa del service account JSON. Enter para cancelar: 
-    set "SERVICE_ACCOUNT_PATH=!SERVICE_ACCOUNT_PATH:"=!"
     if "!SERVICE_ACCOUNT_PATH!"=="" (
         echo.
         echo [ERROR] Publicacion cancelada: falta service account.
@@ -61,7 +74,15 @@ if exist "%SERVICE_ACCOUNT_PATH%" (
     > "%SERVICE_ACCOUNT_HINT_FILE%" echo !SERVICE_ACCOUNT_PATH!
     echo.
     echo Usando Service Account: !SERVICE_ACCOUNT_PATH!
-    "%POWERSHELL_EXE%" -NoProfile -ExecutionPolicy Bypass -File "%PUBLISH_PS1%" -ServiceAccount "!SERVICE_ACCOUNT_PATH!"
+    if not "!PYTHON_EXE!"=="" (
+        echo Usando Python: !PYTHON_EXE!
+        set "WIKI_PUBLISH_PYTHON=!PYTHON_EXE!"
+    )
+    if "!PYTHON_EXE!"=="" (
+        "%POWERSHELL_EXE%" -NoProfile -ExecutionPolicy Bypass -File "%PUBLISH_PS1%" -ServiceAccount "!SERVICE_ACCOUNT_PATH!"
+    ) else (
+        "%POWERSHELL_EXE%" -NoProfile -ExecutionPolicy Bypass -File "%PUBLISH_PS1%" -ServiceAccount "!SERVICE_ACCOUNT_PATH!" -PythonExe "!PYTHON_EXE!"
+    )
 )
 
 set "EXIT_CODE=%ERRORLEVEL%"

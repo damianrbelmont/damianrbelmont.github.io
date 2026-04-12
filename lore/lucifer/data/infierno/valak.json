@@ -2,14 +2,30 @@
   "type": "character",
   "slug": "valak",
   "id": "valak",
+  "seo": {
+    "description": "Valak es un demonio rastreador al servicio de Azazel en el universo de Lucifer de Damian R Belmont. Descubre su origen como Somael, su papel, habilidades y destino final",
+    "title": "Valak",
+    "image": "assets/images/characters/valak.webp"
+  },
+  "alias": [
+    "Señor de los Susurros",
+    "Somael"
+  ],
+  "universe": "lucifer",
+  "publication": {
+    "updatedAt": "2026-04-12T04:14:06.219Z",
+    "status": "published",
+    "visibility": "public",
+    "version": 1
+  },
   "relations": {
+    "creatures": [],
     "characters": [
       "lucifer",
       "azazel",
       "jose_vila",
       "jerethiel"
     ],
-    "creatures": [],
     "events": [],
     "related": [],
     "locations": [
@@ -25,41 +41,25 @@
       "caida"
     ]
   },
-  "alias": [
-    "Señor de los Susurros",
-    "Somael"
-  ],
-  "universe": "lucifer",
-  "publication": {
-    "updatedAt": "2026-04-12T04:02:21.280Z",
-    "visibility": "public",
-    "status": "published",
-    "version": 1
-  },
-  "seo": {
-    "description": "Valak es un demonio rastreador al servicio de Azazel en el universo de Lucifer de Damian R Belmont. Descubre su origen como Somael, su papel, habilidades y destino final",
-    "title": "Valak",
-    "image": "assets/images/characters/valak.webp"
-  },
   "description": "Valak es un demonio rastreador al servicio de Azazel en el universo de Lucifer de Damian R Belmont. Descubre su origen como Somael, su papel, habilidades y destino final.",
-  "section": "",
+  "section": "infierno",
   "hierarchy": {
     "order": 0,
-    "faction": "",
+    "realm": "",
     "rank": "",
-    "realm": ""
+    "faction": ""
   },
   "lore": {
     "origin": "",
     "role": "",
     "nature": ""
   },
+  "subsection": "",
   "paths": {
-    "json": "characters/valak.json",
     "html": "valak.html",
+    "json": "infierno/valak.json",
     "url": "?id=valak"
   },
-  "subsection": "",
   "excerpt": "Valak es una entidad demoníaca del Infierno al servicio de [[Azazel]], enviada a la Tierra para investigar la relación entre [[Lucifer]] y el humano [[José Vila]]. Antes de su caída fue una Potestad menor llamada Somael, encargada de vigilar el comportamiento de las entidades celestiales. Dotado de una sensibilidad excepcional para percibir alteraciones espirituales, acabó convirtiéndose en espía y rastreador infernal. Su descubrimiento de la verdadera naturaleza de Lucifer selló su destino.",
   "content": {
     "summary": "Valak es una entidad demoníaca del Infierno al servicio de [[Azazel]], enviada a la Tierra para investigar la relación entre [[Lucifer]] y el humano [[José Vila]]. Antes de su caída fue una Potestad menor llamada Somael, encargada de vigilar el comportamiento de las entidades celestiales. Dotado de una sensibilidad excepcional para percibir alteraciones espirituales, acabó convirtiéndose en espía y rastreador infernal. Su descubrimiento de la verdadera naturaleza de Lucifer selló su destino.",
@@ -144,8 +144,8 @@
     "dominio": "",
     "lealtad": "",
     "afinidad": "",
-    "estado": "",
-    "naturaleza": ""
+    "naturaleza": "",
+    "estado": ""
   },
   "subtitle": "",
   "title": "Valak",

@@ -1,0 +1,153 @@
+{
+  "type": "character",
+  "slug": "valak",
+  "id": "valak",
+  "relations": {
+    "characters": [
+      "lucifer",
+      "azazel",
+      "jose_vila",
+      "jerethiel"
+    ],
+    "creatures": [],
+    "events": [],
+    "related": [],
+    "locations": [
+      "souto",
+      "seminario_ourense",
+      "salamanca",
+      "lobios"
+    ],
+    "organizations": [],
+    "artifacts": [],
+    "concepts": [
+      "potestades",
+      "caida"
+    ]
+  },
+  "alias": [
+    "Señor de los Susurros",
+    "Somael"
+  ],
+  "universe": "lucifer",
+  "publication": {
+    "updatedAt": "2026-04-12T03:55:49.233Z",
+    "visibility": "public",
+    "status": "published",
+    "version": 1
+  },
+  "seo": {
+    "description": "Valak es un demonio rastreador al servicio de Azazel en el universo de Lucifer de Damian R Belmont. Descubre su origen como Somael, su papel, habilidades y destino final",
+    "title": "Valak",
+    "image": "assets/images/characters/valak.webp"
+  },
+  "description": "Valak es un demonio rastreador al servicio de Azazel en el universo de Lucifer de Damian R Belmont. Descubre su origen como Somael, su papel, habilidades y destino final.",
+  "section": "",
+  "hierarchy": {
+    "order": 0,
+    "faction": "",
+    "rank": "",
+    "realm": ""
+  },
+  "lore": {
+    "origin": "",
+    "role": "",
+    "nature": ""
+  },
+  "paths": {
+    "json": "characters/valak.json",
+    "html": "valak.html",
+    "url": "?id=valak"
+  },
+  "subsection": "",
+  "excerpt": "Valak es una entidad demoníaca del Infierno al servicio de [[Azazel]], enviada a la Tierra para investigar la relación entre [[Lucifer]] y el humano [[José Vila]]. Antes de su caída fue una Potestad menor llamada Somael, encargada de vigilar el comportamiento de las entidades celestiales. Dotado de una sensibilidad excepcional para percibir alteraciones espirituales, acabó convirtiéndose en espía y rastreador infernal. Su descubrimiento de la verdadera naturaleza de Lucifer selló su destino.",
+  "content": {
+    "summary": "Valak es una entidad demoníaca del Infierno al servicio de [[Azazel]], enviada a la Tierra para investigar la relación entre [[Lucifer]] y el humano [[José Vila]]. Antes de su caída fue una Potestad menor llamada Somael, encargada de vigilar el comportamiento de las entidades celestiales. Dotado de una sensibilidad excepcional para percibir alteraciones espirituales, acabó convirtiéndose en espía y rastreador infernal. Su descubrimiento de la verdadera naturaleza de Lucifer selló su destino.",
+    "sections": [
+      {
+        "id": "identidad_previa",
+        "groupTitle": "Antes de la Caída",
+        "title": "Identidad previa",
+        "text": "Antes de su caída, el demonio conocido como [[Valak]] fue una entidad celestial llamada Somael, perteneciente al coro de las [[Potestades]]. Dentro de su jerarquía ocupaba un rango menor, circunstancia que marcó profundamente su evolución posterior.\n\nSomael no era una figura destacada dentro del Cielo, pero sí funcionalmente relevante, desempeñando un papel delicado en la preservación del orden celestial."
+      },
+      {
+        "id": "funcion_en_el_cielo",
+        "groupTitle": "Antes de la Caída",
+        "title": "Función en el Cielo",
+        "text": "Como miembro de las [[Potestades]], Somael estaba encargado de vigilar el comportamiento de las entidades celestiales, actuando como una suerte de supervisor interno del cumplimiento del orden divino.\n\nSu labor consistía en detectar desviaciones emocionales o conductuales, analizar irregularidades y reportar anomalías que pudieran comprometer la estabilidad del orden.\n\nPoseía una capacidad excepcional para percibir fluctuaciones en el ánimo de sus iguales, lo que le permitía anticipar conflictos o desviaciones antes de que se manifestasen de forma evidente."
+      },
+      {
+        "id": "caracter_y_percepcion",
+        "groupTitle": "Antes de la Caída",
+        "title": "Carácter y percepción entre los ángeles",
+        "text": "Somael era alto, de cabello oscuro, alas orgullosas y rostro afable. A pesar de la naturaleza intrusiva de su función, no era una entidad malquerida dentro del Cielo.\n\nEra considerado discreto, metódico y útil para la estabilidad del orden, y su presencia generaba cautela más que rechazo. Aunque no destacaba por rango ni por poder, sí era reconocido por la precisión de sus observaciones y por su audacia investigadora."
+      },
+      {
+        "id": "relacion_con_jerethiel",
+        "groupTitle": "Antes de la Caída",
+        "title": "Relación con [[Jerethiel]]",
+        "text": "Somael mantenía una relación cercana con [[Jerethiel]], un ángel menor que representaba su principal vínculo emocional dentro del Cielo.\n\nJerethiel confiaba en él y lo veía como un guardián del orden, mientras que Somael encontraba en su amigo una conexión genuina, libre de sospecha y ajena a la rigidez de su función."
+      },
+      {
+        "id": "la_grieta",
+        "groupTitle": "Antes de la Caída",
+        "title": "La grieta: duda y vanidad",
+        "text": "Con el tiempo, Somael comenzó a desarrollar una inquietud silenciosa. Su exposición constante a las conductas de otros ángeles le llevó a percibir pequeñas desviaciones no siempre sancionadas, diferencias en la aplicación del orden y actitudes que escapaban al control que él mismo debía ejercer.\n\nEsto dio lugar a una duda persistente: por qué él debía someterse estrictamente a las normas mientras otros parecían moverse con mayor libertad.\n\nSu posición baja dentro de las [[Potestades]] alimentó una necesidad creciente de demostrar su valía, así como una desconfianza incipiente hacia la perfección del orden que protegía."
+      },
+      {
+        "id": "influencia_de_azazel",
+        "groupTitle": "Antes de la Caída",
+        "title": "Influencia de [[Azazel]]",
+        "text": "Durante este periodo de duda, Somael entró en contacto con [[Azazel]], una entidad de mayor rango dentro de las jerarquías celestiales, ya inclinada hacia la futura rebelión liderada por [[Lucifer]].\n\nAzazel no lo empujó directamente a la traición, sino que alimentó sus inquietudes mediante ideas sobre la imperfección del orden, la diferencia entre obedecer y comprender, y la limitación de quienes siguen la ley sin cuestionarla.\n\nBajo esta influencia, Somael comenzó a retrasar informes, observar más allá de lo permitido e interpretar por sí mismo aquello que debía simplemente registrar."
+      },
+      {
+        "id": "rebelion_y_enfrentamiento",
+        "groupTitle": "Antes de la Caída",
+        "title": "La rebelión y el enfrentamiento con [[Jerethiel]]",
+        "text": "Cuando la rebelión liderada por [[Lucifer]] comenzó a tomar forma, Somael ya se encontraba internamente alineado con los rebeldes, aun antes de consumarse su caída.\n\nFue en ese contexto cuando [[Jerethiel]] lo encaró, tratando de hacerlo volver y apelando a la lealtad que aún creía viva en él. El enfrentamiento entre ambos no fue una batalla caótica, sino un duelo preciso y contenido, en el que Somael aplicó su capacidad analítica para anticipar y superar a su oponente.\n\nFinalmente, Somael venció y dio muerte a Jerethiel. Aquella fue su primera muerte y el acto que rompió de forma irreversible su vínculo con el orden celestial."
+      },
+      {
+        "id": "la_caida",
+        "groupTitle": "Antes de la Caída",
+        "title": "La caída",
+        "text": "La muerte de [[Jerethiel]] marcó el verdadero punto de no retorno para Somael.\n\nNo fue únicamente la rebelión de [[Lucifer]] lo que definió su condena, sino la decisión consciente de priorizar su propio juicio sobre el orden, justificar sus actos como necesarios y aceptar que ya no existía un camino de retorno.\n\nTras la Caída de las legiones rebeldes, su naturaleza se deformó y Somael pasó a convertirse en la entidad demoníaca conocida como Valak."
+      },
+      {
+        "id": "apariencia_y_naturaleza",
+        "groupTitle": "Después de la Caída",
+        "title": "Apariencia y naturaleza",
+        "text": "Valak se manifiesta con la apariencia de un niño humano pálido y enfermizo, con profundas ojeras y ojos completamente negros, carentes de iris o esclerótica. Su presencia resulta inquietante y antinatural, como si su forma fuese solo una máscara imperfecta de algo mucho más oscuro.\n\nSobre su hombro izquierdo reposa un pequeño dragón bicéfalo, una criatura demoníaca que reacciona a las vibraciones espirituales y actúa como extensión de sus sentidos.\n\nValak no percibe el mundo como los humanos, sino como una superposición de rastros energéticos, interpretando la realidad a través de lo que describe como \\\"olores espirituales\\\". Más que observar, caza. No mira a los rostros, sino a las gargantas, como un depredador que anticipa el final de sus presas."
+      },
+      {
+        "id": "servicio_a_azazel",
+        "groupTitle": "Después de la Caída",
+        "title": "Servicio a [[Azazel]]",
+        "text": "Tras su transformación en demonio, Valak quedó al servicio de [[Azazel]], señor de los secretos prohibidos. Su antigua función como vigilante del orden se pervirtió hasta convertirse en espionaje espiritual, rastreo de entidades y seguimiento de anomalías entre mundos.\n\nEn el Infierno actúa como sabueso y observador, especializado en detectar residuos energéticos, seguir presencias ocultas y descubrir verdades que otros prefieren mantener enterradas."
+      },
+      {
+        "id": "mision_en_la_tierra",
+        "groupTitle": "Eventos de la novela",
+        "title": "Misión en la Tierra",
+        "text": "Bajo órdenes de [[Azazel]], Valak fue enviado a la Tierra para investigar las constantes ausencias de Lucifer y descubrir la naturaleza de su vínculo con el joven [[José Vila]].\n\nEn octubre de 1972, llegó a la aldea de [[Souto]], donde irrumpió en la rectoral para interrogar al sacerdote Don Eladio. Mediante el uso de sus garras etéreas, desgarró la memoria del hombre hasta descubrir que José había sido enviado al [[Seminario de Ourense]]. Tras obtener la información, detuvo su corazón, acabando con su vida.\n\nPosteriormente, siguió el rastro de José hasta el Seminario Menor y más tarde hasta [[Salamanca]], observando desde las sombras cómo Lucifer intervenía en la vida del joven, protegiéndolo y moldeando su destino.\n\nTras la muerte del ángel Ramiel y del arcángel Camael, Valak analizó los residuos energéticos del enfrentamiento y comprendió que Lucifer había destruido a un Príncipe del Cielo. A partir de ese momento, concluyó que José Vila no era un humano ordinario, sino un posible recipiente o pieza clave dentro de un plan mayor."
+      },
+      {
+        "id": "descubrimiento_y_muerte",
+        "groupTitle": "Eventos de la novela",
+        "title": "Descubrimiento y muerte",
+        "text": "En 1983, mientras vigilaba a [[José Vila]] durante una misa en [[Lobios]], Valak intentó interactuar con el residuo de un milagro reciente. Al hacerlo, entró en contacto con Luz Celestial, lo que le provocó un dolor insoportable y una revelación inmediata.\n\nComprendió entonces que Lucifer no había caído completamente, que seguía siendo puro en esencia, y que sus acciones en la Tierra constituían una traición directa al Infierno.\n\nPresa del pánico, Valak intentó huir para informar a [[Azazel]], pero fue interceptado por Lucifer en el vacío entre mundos. Allí, Lucifer lo atrapó con una manifestación de sombras y lo destruyó por haber descubierto su secreto.\n\nComo advertencia, Lucifer llevó posteriormente la cabeza decapitada de Valak ante [[Azazel]] y los Grandes Demonios, dejando claro el destino de cualquiera que osara interferir en sus planes."
+      }
+    ]
+  },
+  "tags": [],
+  "infobox": {
+    "reino": "",
+    "dominio": "",
+    "lealtad": "",
+    "afinidad": "",
+    "estado": "",
+    "naturaleza": ""
+  },
+  "subtitle": "",
+  "title": "Valak",
+  "image": "assets/images/characters/valak.webp"
+}

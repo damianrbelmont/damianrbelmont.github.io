@@ -1,3 +1,17 @@
 {
-  "entries": []
+  "entries": [
+    {
+      "id": "valak",
+      "slug": "valak",
+      "title": "Valak",
+      "type": "character",
+      "section": "",
+      "subsection": "",
+      "excerpt": "Valak es una entidad demoníaca del Infierno al servicio de [[Azazel]], enviada a la Tierra para investigar la relación entre [[Lucifer]] y el humano [[José Vila]]. Antes de su caída fue una Potestad menor llamada Somael, encargada de vigilar el comportamiento de las entidades celestiales. Dotado de una sensibilidad excepcional para percibir alteraciones espirituales, acabó convirtiéndose en espía y rastreador infernal. Su descubrimiento de la verdadera naturaleza de Lucifer selló su destino.",
+      "image": "assets/images/characters/valak.webp",
+      "path": "characters/valak.json",
+      "status": "published",
+      "visibility": "public"
+    }
+  ]
 }

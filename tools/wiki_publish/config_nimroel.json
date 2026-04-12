@@ -5,7 +5,6 @@
   "local_root": "lore/nimroel",
   "data_dir": "data",
   "index_mode": "typed_arrays",
-  "public_index_file": "data/public-index.json",
   "generator_script": "lore/nimroel/scripts/generate-entry-pages.ps1",
   "protected_html": [
     "index.html"

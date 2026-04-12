@@ -1,6 +1,6 @@
 console.log("app.js cargado");
 
-const INDEX_FILE_PATH = "data/public-index.json";
+const INDEX_FILE_PATH = "data/index.json";
 const entityCache = new Map();
 let indexCache = null;
 const categoryItemsCache = new Map();
@@ -656,7 +656,7 @@ async function loadIndex() {
 
   const response = await fetch(INDEX_FILE_PATH, { cache: "no-store" });
   if (!response.ok) {
-    throw new Error("No se pudo cargar data/public-index.json.");
+    throw new Error("No se pudo cargar data/index.json.");
   }
 
   indexCache = (await response.json()) || {};

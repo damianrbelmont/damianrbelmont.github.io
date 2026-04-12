@@ -343,16 +343,13 @@ def sync_nimroel(config: dict[str, Any], db: Any) -> dict[str, Any]:
     wiki_root = ROOT / config["local_root"]
     data_root = wiki_root / config.get("data_dir", "data")
     local_index_path = data_root / "index.json"
-    public_index_path = ROOT / config.get("public_index_file", "lore/nimroel/data/public-index.json")
 
     firebase_index = normalize_typed_index(get_document(db, config["firestore_index_document"]))
     docs_map = get_collection_docs(db, config["firestore_collection"])
 
-    keep_json_files: set[Path] = {local_index_path, public_index_path}
+    keep_json_files: set[Path] = {local_index_path}
     public_entries: list[dict[str, Any]] = []
     html_keep_names: set[str] = set()
-
-    synced_index: dict[str, list[str]] = {key: [] for key in firebase_index.keys()}
     seen_ids: set[str] = set()
     for index_key, ids in firebase_index.items():
         for entry_id in ids:
@@ -367,9 +364,6 @@ def sync_nimroel(config: dict[str, Any], db: Any) -> dict[str, Any]:
                 continue
 
             seen_ids.add(entry_id)
-            if index_key not in synced_index:
-                synced_index[index_key] = []
-            synced_index[index_key].append(entry_id)
 
             relative_json_path = resolve_nimroel_doc_path(entry_id, payload, index_key)
             local_payload_path = data_root / Path(relative_json_path)
@@ -400,11 +394,7 @@ def sync_nimroel(config: dict[str, Any], db: Any) -> dict[str, Any]:
 
             html_keep_names.add(f"{slug}.html")
 
-    for key in sorted(synced_index.keys()):
-        synced_index[key] = sorted(set(synced_index[key]))
-
-    write_json(local_index_path, synced_index)
-    write_json(public_index_path, {"entries": sorted(public_entries, key=lambda x: x["title"].lower())})
+    write_json(local_index_path, {"entries": sorted(public_entries, key=lambda x: x["title"].lower())})
     clean_orphan_json_files(data_root, keep_json_files)
 
     run_generator(ROOT / config["generator_script"])

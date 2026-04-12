@@ -1,4 +1,4 @@
-console.log("app.js cargado");
+﻿console.log("app.js cargado");
 
 const INDEX_FILE_PATH = "data/index.json";
 const entityCache = new Map();
@@ -385,7 +385,7 @@ function renderRelationList(items) {
     <ul class="sidebar-list">
       ${items.map((item) => `
         <li>${item.linkable
-          ? `<a href="${getEntityHrefById(item.id)}">${escapeHtml(item.label)}</a>`
+          ? `<a href="${getEntityHrefById(item.id, item.label || item.name)}">${escapeHtml(item.label)}</a>`
           : `<span>${escapeHtml(item.label)}</span>`
         }</li>
       `).join("")}
@@ -495,11 +495,26 @@ function getEntryHref(entry) {
   return "index.html";
 }
 
-function getEntityHrefById(id) {
+function getPlaceholderHref(ref, label = "") {
+  const cleanRef = unwrapWikiReference((ref || "").toString().trim());
+  if (!cleanRef) return "placeholder.html";
+  const prettyLabel = stripWikiMarkup((label || "").toString().trim());
+  const params = new URLSearchParams();
+  params.set("ref", cleanRef);
+  if (prettyLabel) {
+    params.set("label", prettyLabel);
+  }
+  return `placeholder.html?${params.toString()}`;
+}
+
+function getEntityHrefById(id, fallbackLabel = "") {
   const cleanId = unwrapWikiReference((id || "").toString().trim());
   if (!cleanId) return "index.html";
   const entry = indexCache ? getIndexEntryById(indexCache, cleanId) : null;
-  return getEntryHref(entry || { id: cleanId });
+  if (isPublicPublishedEntry(entry)) {
+    return getEntryHref(entry);
+  }
+  return getPlaceholderHref(cleanId, fallbackLabel || formatName(cleanId));
 }
 
 function isPublicPublishedEntry(entry) {
@@ -615,7 +630,7 @@ async function openCategoryList(categoryKey) {
       <ul class="category-modal-list">
         ${items.map((item) => `
           <li>
-            <a href="${getEntityHrefById(item.id)}" class="category-modal-link">
+            <a href="${getEntityHrefById(item.id, item.label || item.name)}" class="category-modal-link">
               ${escapeHtml(item.name)}
             </a>
           </li>
@@ -783,8 +798,6 @@ async function parseLinks(text) {
     if (!fallbackLabel) return "";
 
     const entityId = resolveWikiEntityId(targetRef || fallbackLabel);
-    const href = getEntityHrefById(entityId || targetRef || fallbackLabel);
-
     let linkLabel = fallbackLabel;
     if (!hasCustomLabel && entityId) {
       if (!labelCache.has(entityId)) {
@@ -796,6 +809,7 @@ async function parseLinks(text) {
       }
     }
 
+    const href = getEntityHrefById(entityId || targetRef || fallbackLabel, linkLabel || fallbackLabel);
     return `<a href="${escapeHtml(href)}">${escapeHtml(linkLabel)}</a>`;
   }));
 
@@ -957,7 +971,7 @@ async function renderSidebar(data) {
         <p><strong>Mencionado en:</strong></p>
         <ul>
           ${backlinkItems.map((item) => `
-            <li><a href="${getEntityHrefById(item.id)}">${escapeHtml(item.label || formatName(item.id))}</a></li>
+            <li><a href="${getEntityHrefById(item.id, item.label || item.name)}">${escapeHtml(item.label || formatName(item.id))}</a></li>
           `).join("")}
         </ul>
       `;
@@ -1160,7 +1174,7 @@ async function initSearch() {
 
     for (const item of filtered) {
       const li = document.createElement("li");
-      li.innerHTML = `<a href="${getEntityHrefById(item.id)}" class="search-link">${item.name}</a>`;
+      li.innerHTML = `<a href="${getEntityHrefById(item.id, item.label || item.name)}" class="search-link">${item.name}</a>`;
 
       resultsContainer.appendChild(li);
     }

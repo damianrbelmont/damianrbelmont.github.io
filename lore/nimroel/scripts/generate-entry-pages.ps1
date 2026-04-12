@@ -370,15 +370,37 @@ function Resolve-EntryByRef {
     return $null
 }
 
+function Get-PlaceholderHref {
+    param(
+        [AllowNull()][object]$Ref,
+        [AllowNull()][object]$Label
+    )
+    $raw = Normalize-Reference $Ref
+    if ([string]::IsNullOrWhiteSpace($raw)) { return "placeholder.html" }
+
+    $cleanLabel = Normalize-Text $Label
+    if ([string]::IsNullOrWhiteSpace($cleanLabel)) {
+        $cleanLabel = Format-ReferenceLabel $raw
+    }
+
+    $query = "ref=$([System.Uri]::EscapeDataString($raw))"
+    if (-not [string]::IsNullOrWhiteSpace($cleanLabel)) {
+        $query += "&label=$([System.Uri]::EscapeDataString($cleanLabel))"
+    }
+    return "placeholder.html?$query"
+}
+
 function Get-EntryHref {
-    param([AllowNull()][object]$Ref)
+    param(
+        [AllowNull()][object]$Ref,
+        [AllowNull()][object]$Label
+    )
     $raw = Normalize-Reference $Ref
     $entry = Resolve-EntryByRef $raw
     if ($null -ne $entry -and -not [string]::IsNullOrWhiteSpace($entry.slug)) {
         return "$([System.Uri]::EscapeDataString($entry.slug)).html"
     }
-    if ([string]::IsNullOrWhiteSpace($raw)) { return "index.html" }
-    return "index.html?id=$([System.Uri]::EscapeDataString($raw))"
+    return Get-PlaceholderHref -Ref $raw -Label $Label
 }
 
 function Get-EntryDisplayLabel {
@@ -429,7 +451,7 @@ function Convert-InlineWikiLinks {
             $visibleLabel = Format-ReferenceLabel $targetRef
         }
 
-        $href = Get-EntryHref $targetRef
+        $href = Get-EntryHref -Ref $targetRef -Label $visibleLabel
         [void]$builder.Append("<a href=""$(Escape-Html $href)"">$(Escape-Html $visibleLabel)</a>")
         $currentIndex = $match.Index + $match.Length
     }
@@ -511,7 +533,7 @@ function Render-RefList {
     if ($null -eq $Refs -or $Refs.Count -eq 0) { return "" }
     $items = $Refs | ForEach-Object {
         $label = Get-EntryDisplayLabel $_
-        $href = Get-EntryHref $_
+        $href = Get-EntryHref -Ref $_ -Label $label
         "<li><a href=""$(Escape-Html $href)"">$(Escape-Html $label)</a></li>"
     }
     return "<ul class=""sidebar-list"">`n$($items -join "`n")`n</ul>"
@@ -711,8 +733,8 @@ $($tocItems -join "`n")
 
     $birthplaceRef = Get-FirstText $detail @("birthplace", "origin", "extra.birthplace", "extra.origin")
     if (-not [string]::IsNullOrWhiteSpace($birthplaceRef)) {
-        $originHref = Get-EntryHref $birthplaceRef
         $originLabel = Get-EntryDisplayLabel $birthplaceRef
+        $originHref = Get-EntryHref -Ref $birthplaceRef -Label $originLabel
         $rows["origin"] = "<p><strong>Origen:</strong> <a href=""$(Escape-Html $originHref)"">$(Escape-Html $originLabel)</a></p>"
     }
 

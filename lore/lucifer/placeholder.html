@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrada en construccion | Lucifer Wiki</title>
+  <meta name="description" content="Esta entrada de la wiki de Lucifer estara disponible proximamente.">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/damian.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-container">
+      <div class="author-name">Damian R.<br>Belmont</div>
+      <img src="../../assets/images/DRB.png" alt="Firma DRB" class="header-logo">
+      <nav class="desktop-nav">
+        <ul class="desktop-menu">
+          <li><a href="../../index.html">Inicio</a></li>
+          <li><a href="../../damian/index.html">Damian</a></li>
+          <li><a href="../../novelas/index.html">Novelas</a></li>
+          <li><a href="../index.html" class="active-link">Wiki</a></li>
+          <li><a href="../../novelas/proximamente/index.html">Proximamente</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <picture>
+      <source srcset="assets/images/Hero_Lucifer.webp" media="(min-width: 1024px)">
+      <img src="assets/images/Hero_Lucifer.webp" class="hero-img" alt="Lore de Lucifer">
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Lucifer - Helel Ben Sahar</h1>
+    </div>
+  </section>
+
+  <div class="layout">
+    <main class="center">
+      <section id="content">
+        <div class="breadcrumb">
+          <a href="index.html">Inicio</a>
+          <span> / </span>
+          <span class="breadcrumb-current">Entrada en construccion</span>
+        </div>
+
+        <h1>Entrada en construccion</h1>
+
+        <div class="content-body">
+          <div class="wiki-summary">
+            <p id="missingMessage">La pagina de esta entrada estara disponible proximamente.</p>
+            <p><strong>Referencia:</strong> <span id="missingRef">-</span></p>
+          </div>
+
+          <div class="wiki-sections">
+            <section class="wiki-section">
+              <button class="wiki-section-toggle" type="button" aria-expanded="true">
+                <h2 class="wiki-section-title">Mientras tanto</h2>
+                <span class="wiki-section-arrow" aria-hidden="true">&#9652;</span>
+              </button>
+              <div class="wiki-section-body wiki-section-text">
+                <p>Puedes volver al indice de la wiki o regresar a la pagina anterior.</p>
+                <p>
+                  <button id="backBtn" type="button" class="menu-toggle" style="padding: 10px 14px; cursor: pointer;">Volver atras</button>
+                  <a id="indexLink" href="index.html" style="margin-left: 12px;">Ir al indice</a>
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../../scripts/script.js"></script>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var ref = (params.get("ref") || "").trim();
+      var label = (params.get("label") || "").trim();
+
+      function formatFallback(value) {
+        return (value || "")
+          .replace(/[_-]+/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .replace(/\b\w/g, function (letter) { return letter.toUpperCase(); });
+      }
+
+      var display = label || formatFallback(ref) || "esta entrada";
+      var messageEl = document.getElementById("missingMessage");
+      var refEl = document.getElementById("missingRef");
+      if (messageEl) {
+        messageEl.textContent = "La pagina de " + display + " estara disponible proximamente.";
+      }
+      if (refEl) {
+        refEl.textContent = ref ? ("[[" + ref + "]]") : "-";
+      }
+
+      var backBtn = document.getElementById("backBtn");
+      if (backBtn) {
+        backBtn.addEventListener("click", function () {
+          if (window.history.length > 1) {
+            window.history.back();
+          } else {
+            window.location.href = "index.html";
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -145,22 +145,47 @@ function Get-EntryByReference {
     return $null
 }
 
+function Get-PlaceholderHref {
+    param(
+        [AllowNull()][object]$Reference,
+        [AllowNull()][object]$Label
+    )
+    $cleanReference = Normalize-DisplayText $Reference
+    if ([string]::IsNullOrWhiteSpace($cleanReference)) { return "placeholder.html" }
+
+    $cleanLabel = Normalize-DisplayText $Label
+    if ([string]::IsNullOrWhiteSpace($cleanLabel)) {
+        $cleanLabel = $cleanReference
+    }
+
+    $query = "ref=$([System.Uri]::EscapeDataString($cleanReference))"
+    if (-not [string]::IsNullOrWhiteSpace($cleanLabel)) {
+        $query += "&label=$([System.Uri]::EscapeDataString($cleanLabel))"
+    }
+    return "placeholder.html?$query"
+}
+
 function Get-EntryHrefById {
-    param([AllowNull()][object]$Id)
+    param(
+        [AllowNull()][object]$Id,
+        [AllowNull()][object]$Label
+    )
     $cleanId = Normalize-DisplayText $Id
     if ([string]::IsNullOrWhiteSpace($cleanId)) { return "index.html" }
     $entry = Get-EntryByReference $cleanId
     if ($null -ne $entry) {
         $slug = Normalize-Text $entry.slug
+        if ([string]::IsNullOrWhiteSpace($slug)) {
+            $entryId = Normalize-Text $entry.id
+            if (-not [string]::IsNullOrWhiteSpace($entryId)) {
+                $slug = Get-Slug $entryId
+            }
+        }
         if (-not [string]::IsNullOrWhiteSpace($slug)) {
             return "$([System.Uri]::EscapeDataString($slug)).html"
         }
-        $entryId = Normalize-Text $entry.id
-        if (-not [string]::IsNullOrWhiteSpace($entryId)) {
-            return "index.html?id=$([System.Uri]::EscapeDataString($entryId))"
-        }
     }
-    return "index.html?id=$([System.Uri]::EscapeDataString($cleanId))"
+    return Get-PlaceholderHref -Reference $cleanId -Label $Label
 }
 
 function Convert-InlineWikiLinks {
@@ -214,7 +239,7 @@ function Convert-InlineWikiLinks {
                     $targetLabel = $entryTitle
                 }
             }
-            $href = Get-EntryHrefById $targetId
+            $href = Get-EntryHrefById -Id $targetId -Label $targetLabel
             [void]$builder.Append("<a href=""$(Escape-Html $href)"">$(Escape-Html $targetLabel)</a>")
         }
 

@@ -2,36 +2,36 @@
   "type": "concept",
   "slug": "cielo",
   "id": "cielo",
+  "relations": {
+    "creatures": [],
+    "characters": [],
+    "events": [],
+    "related": [],
+    "locations": [],
+    "organizations": [],
+    "artifacts": [],
+    "concepts": []
+  },
+  "alias": [],
+  "universe": "lucifer",
+  "publication": {
+    "updatedAt": "2026-04-13T13:51:51.745Z",
+    "visibility": "public",
+    "status": "published",
+    "version": 1
+  },
   "seo": {
     "description": "El Cielo en el universo de Lucifer constituye una estructura metafísica diseñada como un sistema de gestión de la realidad. Lejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación.",
     "title": "Cielo",
     "image": ""
   },
-  "mechanics": {
-    "creation": "",
-    "restoration": "",
-    "evolution": "",
-    "degradation": ""
-  },
-  "universe": "lucifer",
-  "publication": {
-    "updatedAt": "2026-04-13T13:46:51.112Z",
-    "visibility": "public",
-    "status": "published",
-    "version": 1
-  },
-  "alias": [],
   "description": "El Cielo en el universo de Lucifer constituye una estructura metafísica diseñada como un sistema de gestión de la realidad. Lejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación.",
   "interpretations": [],
-  "relations": {
-    "related": [],
-    "characters": [],
-    "events": [],
-    "creatures": [],
-    "locations": [],
-    "organizations": [],
-    "artifacts": [],
-    "concepts": []
+  "mechanics": {
+    "evolution": "",
+    "degradation": "",
+    "restoration": "",
+    "creation": ""
   },
   "section": "cielo",
   "hierarchy": {
@@ -49,13 +49,13 @@
     "importance": "",
     "function": ""
   },
-  "subsection": "",
   "paths": {
     "json": "cielo/cielo.json",
     "html": "cielo.html",
     "url": "?id=cielo"
   },
-  "principles": [],
+  "subsection": "",
+  "excerpt": "El Cielo en el universo de Lucifer constituye una estructura metafísica diseñada como un sistema de gestión de la realidad. Lejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación.",
   "content": {
     "summary": "El Cielo en el universo de Lucifer constituye una estructura metafísica diseñada como un sistema de gestión de la realidad. Lejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación.",
     "sections": [
@@ -83,18 +83,6 @@
         "id": "metatron",
         "title": "Metatrón",
         "text": "Metatrón es una entidad singular dentro del sistema celestial, ya que no forma parte de la creación original angelical. Se trata de un humano elevado por Dios a un estado superior, convirtiéndose en su Voz y Escriba.\nSu poder no radica en la fuerza energética, sino en el conocimiento absoluto y en su capacidad de interpretar y transmitir la voluntad divina. Dentro del sistema, desempeña funciones específicas de alto nivel, como la recepción de las almas de los Sumos Pontífices en el Segundo Cielo, en cumplimiento de la Ley Celestial."
-      },
-      {
-        "id": "trono_dios",
-        "groupTitle": "El Trono de Dios",
-        "title": "El Trono de Dios",
-        "text": "El Trono de Dios representa el origen absoluto de toda la energía del sistema. Desde él emana la fuerza que sostiene el Cielo, la realidad y todas las entidades que la componen.\nNo forma parte de los siete niveles, sino que existe como el centro desde el cual se genera y distribuye toda la energía divina."
-      },
-      {
-        "id": "leyes_celestiales",
-        "groupTitle": "Leyes Celestiales",
-        "title": "Las Leyes Celestiales",
-        "text": "El funcionamiento del Cielo se rige por una serie de principios estructurales. La proximidad al Trono determina la pureza de la energía que una entidad puede experimentar, mientras que la compatibilidad energética establece los límites de acceso entre niveles. La no intervención directa sobre humanos garantiza el respeto al libre albedrío, y la proporcionalidad regula el uso de la fuerza en función de la amenaza. Finalmente, la presencia de entidades de alta densidad energética puede generar efectos de presión sobre niveles inferiores, afectando a su estabilidad."
       },
       {
         "id": "primer_cielo",
@@ -137,18 +125,30 @@
         "groupTitle": "Los Siete Cielos",
         "title": "Séptimo Cielo",
         "text": "El Séptimo Cielo es el nivel más cercano al Trono de Dios y constituye el núcleo de distribución de la energía divina hacia toda la creación. En este plano operan los serafines, los querubines y los tronos, cada uno desempeñando un papel específico dentro del flujo energético.\nLos serafines canalizan la energía divina, los querubines la transmiten mediante vibración y conocimiento, y los tronos estabilizan la voluntad divina dentro del sistema. Este nivel no es accesible para la mayoría de entidades debido a la intensidad de la energía que contiene."
+      },
+      {
+        "id": "trono_dios",
+        "groupTitle": "El Trono de Dios",
+        "title": "El Trono de Dios",
+        "text": "El Trono de Dios representa el origen absoluto de toda la energía del sistema. Desde él emana la fuerza que sostiene el Cielo, la realidad y todas las entidades que la componen.\nNo forma parte de los siete niveles, sino que existe como el centro desde el cual se genera y distribuye toda la energía divina."
+      },
+      {
+        "id": "leyes_celestiales",
+        "groupTitle": "Leyes Celestiales",
+        "title": "Las Leyes Celestiales",
+        "text": "El funcionamiento del Cielo se rige por una serie de principios estructurales. La proximidad al Trono determina la pureza de la energía que una entidad puede experimentar, mientras que la compatibilidad energética establece los límites de acceso entre niveles. La no intervención directa sobre humanos garantiza el respeto al libre albedrío, y la proporcionalidad regula el uso de la fuerza en función de la amenaza. Finalmente, la presencia de entidades de alta densidad energética puede generar efectos de presión sobre niveles inferiores, afectando a su estabilidad."
       }
     ]
   },
-  "excerpt": "El Cielo en el universo de Lucifer constituye una estructura metafísica diseñada como un sistema de gestión de la realidad. Lejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación.",
+  "tags": [],
   "infobox": {
     "tipo": "",
     "alcance": "",
-    "estado": "",
-    "naturaleza": ""
+    "naturaleza": "",
+    "estado": ""
   },
-  "subtitle": "",
   "title": "El Cielo",
+  "subtitle": "",
   "image": "",
-  "tags": []
+  "principles": []
 }

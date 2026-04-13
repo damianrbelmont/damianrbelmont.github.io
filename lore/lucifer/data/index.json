@@ -1,6 +1,19 @@
 {
   "entries": [
     {
+      "id": "cielo",
+      "slug": "cielo",
+      "title": "Cielo",
+      "type": "concept",
+      "section": "cielo",
+      "subsection": "",
+      "excerpt": "El Cielo en el universo de Lucifer constituye una estructura metafísica diseñada como un sistema de gestión de la realidad. Lejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación.",
+      "image": "",
+      "path": "cielo/cielo.json",
+      "status": "published",
+      "visibility": "public"
+    },
+    {
       "id": "valak",
       "slug": "valak",
       "title": "Valak",

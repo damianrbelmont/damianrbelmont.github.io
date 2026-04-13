@@ -1,0 +1,152 @@
+{
+  "type": "concept",
+  "slug": "cielo",
+  "id": "cielo",
+  "seo": {
+    "description": "",
+    "title": "",
+    "image": ""
+  },
+  "alias": [],
+  "universe": "lucifer",
+  "publication": {
+    "updatedAt": "2026-04-13T13:40:42.159Z",
+    "status": "published",
+    "visibility": "public",
+    "version": 1
+  },
+  "mechanics": {
+    "creation": "",
+    "degradation": "",
+    "evolution": "",
+    "restoration": ""
+  },
+  "description": "El Cielo en el universo de Lucifer constituye una estructura metafísica diseñada como un sistema de gestión de la realidad. Lejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación.",
+  "interpretations": [],
+  "relations": {
+    "characters": [],
+    "related": [],
+    "events": [],
+    "creatures": [],
+    "locations": [],
+    "organizations": [],
+    "artifacts": [],
+    "concepts": []
+  },
+  "section": "cielo",
+  "hierarchy": {
+    "order": 0,
+    "domain": "",
+    "level": ""
+  },
+  "lore": {
+    "origin": "",
+    "role": "",
+    "nature": ""
+  },
+  "cosmicRole": {
+    "function": "",
+    "importance": "",
+    "scope": ""
+  },
+  "subsection": "",
+  "paths": {
+    "json": "cielo/cielo.json",
+    "html": "cielo.html",
+    "url": "?id=cielo"
+  },
+  "tags": [],
+  "content": {
+    "summary": "El Cielo en el universo de Lucifer constituye una estructura metafísica diseñada como un sistema de gestión de la realidad. Lejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación.",
+    "sections": [
+      {
+        "id": "sistema",
+        "title": "Sistema Celestial",
+        "text": "El Cielo opera como un sistema centralizado cuya estructura responde a criterios funcionales más que simbólicos. Toda la energía que sostiene la realidad emana de Dios y es distribuida progresivamente a través de los distintos niveles celestiales. Cada uno de estos niveles cumple una función específica dentro del conjunto, lo que permite separar procesos como el registro de almas, su evaluación y la ejecución de su destino.\nEste modelo implica que el Cielo no actúa como una entidad moral directa, sino como una maquinaria de gestión estructurada. En este contexto, los seres humanos conservan el libre albedrío y no son objeto de intervención directa por parte de entidades celestiales en términos de castigo o ejecución, siendo su destino determinado únicamente tras su paso por el sistema."
+      },
+      {
+        "id": "energia_celestial",
+        "title": "La Energía Celestial",
+        "text": "La organización del Cielo está directamente relacionada con la densidad y pureza de la energía divina. Los niveles superiores, más cercanos al Trono, contienen una energía más intensa, pura y difícil de soportar, mientras que los niveles inferiores presentan una energía más filtrada y estable.\nEl acceso a estos niveles no depende del rango jerárquico de una entidad, sino de su capacidad para soportar dicha energía. Esto establece una limitación estructural que impide que ciertas entidades puedan existir de forma estable en planos superiores sin una adaptación o autorización específica."
+      },
+      {
+        "id": "jerarquias",
+        "title": "Jerarquías Celestiales",
+        "text": "Las entidades del Cielo se clasifican en diferentes categorías en función de su naturaleza, independientemente de las funciones que desempeñen en cada momento.\nEn el nivel inferior se encuentran los ángeles, que actúan como unidades operativas encargadas de la ejecución de tareas dentro del sistema. Los arcángeles representan una categoría superior, especializada en intervenciones concretas que requieren mayor precisión o poder. Por encima de ellos, los príncipes ejercen funciones de coordinación y gestión sobre estructuras más amplias.\nEn un nivel intermedio se sitúan las potestades, las virtudes y las voluntades. Las potestades están vinculadas al control estructural y al mantenimiento del sistema, las virtudes a la ejecución de energía en intervenciones, y las voluntades a la planificación y aplicación del Plan Divino.\nEn el nivel superior se encuentran los tronos, los querubines y los serafines, cuya función está directamente relacionada con la estabilidad, transmisión y canalización de la energía divina."
+      },
+      {
+        "id": "arcangeles_primordiales",
+        "title": "Arcángeles Primordiales",
+        "text": "Los Arcángeles Primordiales constituyen la jerarquía más elevada dentro de la creación angelical. Se trata de los primeros seres creados por Dios y los más cercanos a la fuente de energía divina.\nA diferencia del resto de entidades, poseen la capacidad de acceder a cualquier nivel del Cielo sin limitaciones, debido a su naturaleza energética superior. Su papel no es operativo en el sentido tradicional, sino que actúan como autoridad última en decisiones críticas que afectan al sistema.\nEntre ellos se encuentran Lucifer, considerado el primero y más poderoso, junto con Miguel, Gabriel, Rafael y Uriel."
+      },
+      {
+        "id": "metatron",
+        "title": "Metatrón",
+        "text": "Metatrón es una entidad singular dentro del sistema celestial, ya que no forma parte de la creación original angelical. Se trata de un humano elevado por Dios a un estado superior, convirtiéndose en su Voz y Escriba.\nSu poder no radica en la fuerza energética, sino en el conocimiento absoluto y en su capacidad de interpretar y transmitir la voluntad divina. Dentro del sistema, desempeña funciones específicas de alto nivel, como la recepción de las almas de los Sumos Pontífices en el Segundo Cielo, en cumplimiento de la Ley Celestial."
+      },
+      {
+        "id": "trono_dios",
+        "title": "El Trono de Dios",
+        "text": "El Trono de Dios representa el origen absoluto de toda la energía del sistema. Desde él emana la fuerza que sostiene el Cielo, la realidad y todas las entidades que la componen.\nNo forma parte de los siete niveles, sino que existe como el centro desde el cual se genera y distribuye toda la energía divina."
+      },
+      {
+        "id": "leyes_celestiales",
+        "title": "Leyes Celestiales",
+        "text": "El funcionamiento del Cielo se rige por una serie de principios estructurales. La proximidad al Trono determina la pureza de la energía que una entidad puede experimentar, mientras que la compatibilidad energética establece los límites de acceso entre niveles. La no intervención directa sobre humanos garantiza el respeto al libre albedrío, y la proporcionalidad regula el uso de la fuerza en función de la amenaza. Finalmente, la presencia de entidades de alta densidad energética puede generar efectos de presión sobre niveles inferiores, afectando a su estabilidad."
+      },
+      {
+        "id": "primer_cielo",
+        "groupTitle": "Los Siete Cielos",
+        "title": "Primer Cielo",
+        "text": "El Primer Cielo constituye el punto de acceso al sistema celestial. En él se reciben todas las almas humanas tras la muerte, donde son registradas y estabilizadas antes de ser procesadas por niveles superiores. Este nivel también actúa como origen de los ángeles custodios, que son enviados a la Tierra con instrucciones procedentes de niveles superiores del sistema.\nLa gestión del Primer Cielo recae principalmente en los ángeles, que ejecutan las tareas operativas, y en los príncipes, que coordinan su funcionamiento. Debido a su condición de punto de entrada, está protegido por fuerzas celestiales, con supervisión de entidades de mayor rango en situaciones excepcionales."
+      },
+      {
+        "id": "segundo_cielo",
+        "groupTitle": "Los Siete Cielos",
+        "title": "Segundo Cielo",
+        "text": "El Segundo Cielo es el nivel encargado de ejecutar el destino final de las almas humanas. No realiza ningún tipo de evaluación, sino que actúa como punto de tránsito donde se materializan las decisiones tomadas en el Quinto Cielo.\nDesde este nivel, las almas son enviadas al Cuarto Cielo, donde se encuentra el Paraíso, o al Infierno, según corresponda. En este mismo nivel tiene lugar un evento excepcional: la recepción de las almas de los Sumos Pontífices por parte de Metatrón. Este acceso directo no implica privilegio en el juicio, sino únicamente una variación en el protocolo de entrada al sistema."
+      },
+      {
+        "id": "tercer_cielo",
+        "groupTitle": "Los Siete Cielos",
+        "title": "Tercer Cielo",
+        "text": "El Tercer Cielo alberga el Archivo de la Providencia, que actúa como el sistema de información central del Cielo. En este nivel se registran todos los datos relativos a las almas humanas vivas, así como los informes y misiones asignadas a las entidades celestiales.\nSu función es esencialmente estructural, ya que proporciona la información necesaria para la toma de decisiones en niveles superiores. La gestión de este nivel recae principalmente en los príncipes, que supervisan el flujo y la integridad de los datos."
+      },
+      {
+        "id": "cuarto_cielo",
+        "groupTitle": "Los Siete Cielos",
+        "title": "Cuarto Cielo",
+        "text": "El Cuarto Cielo constituye el destino final de las almas que han sido aceptadas dentro del sistema celestial. Este nivel no debe entenderse únicamente como un lugar de descanso, sino como un estado de integración permanente con la luz divina.\nLas almas que acceden a este nivel reciben de forma constante la energía procedente del Trono, lo que garantiza su estabilidad y permanencia. La gestión del Paraíso está a cargo de príncipes y potestades, que aseguran el correcto mantenimiento de este estado."
+      },
+      {
+        "id": "quinto_cielo",
+        "groupTitle": "Los Siete Cielos",
+        "title": "Quinto Cielo",
+        "text": "El Quinto Cielo es el núcleo del proceso de evaluación de las almas humanas. En este nivel, entidades como las potestades, virtudes y voluntades analizan en profundidad los hechos, decisiones y potencial de cada alma.\nEl juicio que se realiza no es de carácter moral en sentido clásico, sino estructural, basado en la coherencia del alma con el Plan Divino. Tras este análisis, se emite una resolución que es enviada al Segundo Cielo para su ejecución."
+      },
+      {
+        "id": "sexto_cielo",
+        "groupTitle": "Los Siete Cielos",
+        "title": "Sexto Cielo",
+        "text": "El Sexto Cielo actúa como centro de planificación y toma de decisiones del sistema celestial. Desde este nivel se diseñan y coordinan las intervenciones del Cielo en la Tierra, el Infierno y en la propia estructura celestial.\nEn él operan entidades de alto rango como las voluntades y las virtudes, así como arcángeles encargados de estructurar operaciones complejas. Las decisiones que implican riesgos críticos o afectan al equilibrio del sistema requieren la aprobación de los Arcángeles Primordiales, que actúan como autoridad última."
+      },
+      {
+        "id": "septimo_cielo",
+        "groupTitle": "Los Siete Cielos",
+        "title": "Séptimo Cielo",
+        "text": "El Séptimo Cielo es el nivel más cercano al Trono de Dios y constituye el núcleo de distribución de la energía divina hacia toda la creación. En este plano operan los serafines, los querubines y los tronos, cada uno desempeñando un papel específico dentro del flujo energético.\nLos serafines canalizan la energía divina, los querubines la transmiten mediante vibración y conocimiento, y los tronos estabilizan la voluntad divina dentro del sistema. Este nivel no es accesible para la mayoría de entidades debido a la intensidad de la energía que contiene."
+      }
+    ]
+  },
+  "principles": [],
+  "infobox": {
+    "tipo": "",
+    "alcance": "",
+    "naturaleza": "",
+    "estado": ""
+  },
+  "title": "Cielo",
+  "subtitle": "",
+  "image": "",
+  "excerpt": "El Cielo en el universo de Lucifer constituye una estructura metafísica diseñada como un sistema de gestión de la realidad. Lejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación."
+}

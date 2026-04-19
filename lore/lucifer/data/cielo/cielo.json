@@ -7,32 +7,32 @@
     "title": "El Cielo en el universo de Lucifer | Damian R. Belmont",
     "image": ""
   },
-  "alias": [],
+  "mechanics": {
+    "evolution": "",
+    "degradation": "",
+    "restoration": "",
+    "creation": ""
+  },
   "universe": "lucifer",
   "publication": {
-    "updatedAt": "2026-04-19T05:12:41.905Z",
+    "updatedAt": "2026-04-19T07:45:36.583Z",
     "status": "published",
     "visibility": "public",
     "version": 1
   },
-  "interpretations": [],
+  "alias": [],
   "description": "El Cielo en el universo de Lucifer constituye una estructura metafísica diseñada como un sistema de gestión de la realidad. Lejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación.",
   "relations": {
-    "characters": [],
-    "related": [],
-    "events": [],
     "creatures": [],
+    "characters": [],
+    "events": [],
+    "related": [],
     "locations": [],
     "organizations": [],
     "artifacts": [],
     "concepts": []
   },
-  "mechanics": {
-    "evolution": "",
-    "restoration": "",
-    "degradation": "",
-    "creation": ""
-  },
+  "excerpt": "El Cielo en el universo de Lucifer constituye una estructura metafísica diseñada como un sistema de gestión de la realidad. Lejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación.",
   "section": "cielo",
   "hierarchy": {
     "order": 0,
@@ -50,19 +50,19 @@
     "scope": ""
   },
   "paths": {
-    "html": "cielo.html",
     "json": "cielo/cielo.json",
+    "html": "cielo.html",
     "url": "?id=cielo"
   },
   "subsection": "",
-  "excerpt": "El Cielo en el universo de Lucifer constituye una estructura metafísica diseñada como un sistema de gestión de la realidad. Lejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación.",
+  "principles": [],
   "content": {
-    "summary": "El Cielo en el universo de Lucifer constituye una estructura metafísica diseñada como un sistema de gestión de la realidad.\nLejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación.",
+    "summary": "El Cielo en el universo de [[Lucifer]] constituye una estructura metafísica diseñada como un sistema de gestión de la realidad.\nLejos de ser un espacio simbólico o puramente espiritual, funciona como una infraestructura organizada cuya finalidad es administrar la energía divina, supervisar el desarrollo del Plan y gestionar el destino de las almas humanas.\nEste sistema se organiza en siete niveles jerárquicos, conocidos como los Siete Cielos, además del Trono de Dios, que actúa como fuente absoluta de energía y origen de toda la creación.",
     "sections": [
       {
         "id": "sistema",
         "title": "Sistema Celestial",
-        "text": "El Cielo opera como un sistema centralizado cuya estructura responde a criterios funcionales más que simbólicos.\nToda la energía que sostiene la realidad emana de Dios y es distribuida progresivamente a través de los distintos niveles celestiales. Cada uno de estos niveles cumple una función específica dentro del conjunto, lo que permite separar procesos como el registro de almas, su evaluación y la ejecución de su destino.\nEste modelo implica que el Cielo no actúa como una entidad moral directa, sino como una maquinaria de gestión estructurada.\nEn este contexto, los seres humanos conservan el libre albedrío y no son objeto de intervención directa por parte de entidades celestiales en términos de castigo o ejecución, siendo su destino determinado únicamente tras su paso por el sistema."
+        "text": "El Cielo opera como un sistema centralizado cuya estructura responde a criterios funcionales más que simbólicos.\nToda la energía que sostiene la realidad emana de [[Dios]] y es distribuida progresivamente a través de los distintos niveles celestiales. Cada uno de estos niveles cumple una función específica dentro del conjunto, lo que permite separar procesos como el registro de almas, su evaluación y la ejecución de su destino.\nEste modelo implica que el Cielo no actúa como una entidad moral directa, sino como una maquinaria de gestión estructurada.\nEn este contexto, los seres humanos conservan el libre albedrío y no son objeto de intervención directa por parte de entidades celestiales en términos de castigo o ejecución, siendo su destino determinado únicamente tras su paso por el sistema."
       },
       {
         "id": "energia_celestial",
@@ -77,12 +77,12 @@
       {
         "id": "arcangeles_primordiales",
         "title": "Arcángeles Primordiales",
-        "text": "Los Arcángeles Primordiales constituyen la jerarquía más elevada dentro de la creación angelical. Se trata de los primeros seres creados por Dios y los más cercanos a la fuente de energía divina.\nA diferencia del resto de entidades, poseen la capacidad de acceder a cualquier nivel del Cielo sin limitaciones, debido a su naturaleza energética superior. Su papel no es operativo en el sentido tradicional, sino que actúan como autoridad última en decisiones críticas que afectan al sistema.\nEntre ellos se encuentran Lucifer, considerado el primero y más poderoso, junto con Miguel, Gabriel, Rafael y Uriel."
+        "text": "Los Arcángeles Primordiales constituyen la jerarquía más elevada dentro de la creación angelical. Se trata de los primeros seres creados por Dios y los más cercanos a la fuente de energía divina.\nA diferencia del resto de entidades, poseen la capacidad de acceder a cualquier nivel del Cielo sin limitaciones, debido a su naturaleza energética superior. Su papel no es operativo en el sentido tradicional, sino que actúan como autoridad última en decisiones críticas que afectan al sistema.\nEntre ellos se encuentran [[Lucifer]], considerado el primero y más poderoso, junto con [[Miguel]], [[Gabriel]], [[Rafael]] y [[Uriel]]."
       },
       {
         "id": "metatron",
         "title": "Metatrón",
-        "text": "Metatrón es una entidad singular dentro del sistema celestial, ya que no forma parte de la creación original angelical. Se trata de un humano elevado por Dios a un estado superior, convirtiéndose en su Voz y Escriba.\nSu poder no radica en la fuerza energética, sino en el conocimiento absoluto y en su capacidad de interpretar y transmitir la voluntad divina. Dentro del sistema, desempeña funciones específicas de alto nivel, como la recepción de las almas de los Sumos Pontífices en el Segundo Cielo, en cumplimiento de la Ley Celestial."
+        "text": "[[Metatrón]] es una entidad singular dentro del sistema celestial, ya que no forma parte de la creación original angelical. Se trata de un humano elevado por Dios a un estado superior, convirtiéndose en su Voz y Escriba.\nSu poder no radica en la fuerza energética, sino en el conocimiento absoluto y en su capacidad de interpretar y transmitir la voluntad divina. Dentro del sistema, desempeña funciones específicas de alto nivel, como la recepción de las almas de los Sumos Pontífices en el Segundo Cielo, en cumplimiento de la Ley Celestial."
       },
       {
         "id": "primer_cielo",
@@ -94,7 +94,7 @@
         "id": "segundo_cielo",
         "groupTitle": "Los Siete Cielos",
         "title": "Segundo Cielo",
-        "text": "El Segundo Cielo es el nivel encargado de ejecutar el destino final de las almas humanas. No realiza ningún tipo de evaluación, sino que actúa como punto de tránsito donde se materializan las decisiones tomadas en el Quinto Cielo.\nDesde este nivel, las almas son enviadas al Cuarto Cielo, donde se encuentra el Paraíso, o al Infierno, según corresponda. En este mismo nivel tiene lugar un evento excepcional: la recepción de las almas de los Sumos Pontífices por parte de Metatrón. Este acceso directo no implica privilegio en el juicio, sino únicamente una variación en el protocolo de entrada al sistema."
+        "text": "El Segundo Cielo es el nivel encargado de ejecutar el destino final de las almas humanas. No realiza ningún tipo de evaluación, sino que actúa como punto de tránsito donde se materializan las decisiones tomadas en el Quinto Cielo.\nDesde este nivel, las almas son enviadas al Cuarto Cielo, donde se encuentra el Paraíso, o al [[Infierno]], según corresponda. En este mismo nivel tiene lugar un evento excepcional: la recepción de las almas de los Sumos Pontífices por parte de Metatrón. Este acceso directo no implica privilegio en el juicio, sino únicamente una variación en el protocolo de entrada al sistema."
       },
       {
         "id": "tercer_cielo",
@@ -140,15 +140,15 @@
       }
     ]
   },
-  "principles": [],
+  "tags": [],
   "infobox": {
     "alcance": "",
     "tipo": "",
-    "naturaleza": "",
-    "estado": ""
+    "estado": "",
+    "naturaleza": ""
   },
-  "title": "Cielo",
+  "interpretations": [],
   "subtitle": "",
   "image": "",
-  "tags": []
+  "title": "Cielo"
 }

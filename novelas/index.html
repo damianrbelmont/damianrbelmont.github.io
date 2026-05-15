@@ -60,22 +60,28 @@
                 </a>
             </article>
 
-            <article class="book-item future-project" onclick="openModal('modal-fantasy1')" style="cursor: pointer;">
+            <article class="book-item future-project">
+                <a href="#modal-fantasy1" class="book-link-wrapper js-modal-trigger" data-modal-target="modal-fantasy1"
+                    aria-controls="modal-fantasy1" aria-haspopup="dialog">
                 <div class="book-placeholder">
                     <img src="../assets/images/libros/nimroel/Fenix2.webp" alt="Portada Nimroel Parte 1"
                         class="book-cover nimroel-cover">
                 </div>
                 <h2 class="book-title">Las Crónicas de Nimroel (Parte 1)</h2>
                 <p class="book-meta">FANTASÍA ÉPICA VOL. 1</p>
+            </a>
             </article>
 
-            <article class="book-item future-project" onclick="openModal('modal-fantasy2')" style="cursor: pointer;">
+            <article class="book-item future-project">
+                <a href="#modal-fantasy2" class="book-link-wrapper js-modal-trigger" data-modal-target="modal-fantasy2"
+                    aria-controls="modal-fantasy2" aria-haspopup="dialog">
                 <div class="book-placeholder">
                     <img src="../assets/images/libros/nimroel/Fenix1.webp" alt="Portada Nimroel Parte 2"
                         class="book-cover nimroel-cover">
                 </div>
                 <h2 class="book-title">Las Crónicas de Nimroel (Parte 2)</h2>
                 <p class="book-meta">FANTASÍA ÉPICA VOL. 2</p>
+            </a>
             </article>
 
         </div>
@@ -114,7 +120,7 @@
 
     <div id="modal-tech" class="modal-overlay">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('modal-tech')">&times;</span>
+            <button type="button" class="close-modal" data-modal-close="modal-tech" aria-label="Cerrar modal">&times;</button>
             <h3 class="modal-title">PRÓXIMO LANZAMIENTO</h3>
             <div class="modal-text">
                 <p>En esta novela, la humanidad se enfrenta al cambio más drástico en toda la historia de la
@@ -126,7 +132,7 @@
 
     <div id="modal-fantasy1" class="modal-overlay">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('modal-fantasy1')">&times;</span>
+            <button type="button" class="close-modal" data-modal-close="modal-fantasy1" aria-label="Cerrar modal">&times;</button>
             <h3 class="modal-title">FANTASÍA ÉPICA VOL. 1</h3>
             <div class="modal-text">
                 <p>Bienvenido a un mundo de fantasía llamado Nimroel. En este volumen 1 se desencadenarán fuerzas
@@ -138,7 +144,7 @@
 
     <div id="modal-fantasy2" class="modal-overlay">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('modal-fantasy2')">&times;</span>
+            <button type="button" class="close-modal" data-modal-close="modal-fantasy2" aria-label="Cerrar modal">&times;</button>
             <h3 class="modal-title">FANTASÍA ÉPICA VOL. 2</h3>
             <div class="modal-text">
                 <p>Descubre la continuación del viaje de nuestros héroes hacia la confrontación final con el mal que

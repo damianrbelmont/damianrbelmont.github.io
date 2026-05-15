@@ -30,3 +30,35 @@ window.addEventListener('click', (event) => {
         document.body.style.overflow = ''; // Reactiva el scroll
     }
 });
+
+// 4. ACTIVADORES SEMANTICOS PARA MODALES
+document.addEventListener('DOMContentLoaded', () => {
+    const modalTriggers = document.querySelectorAll('.js-modal-trigger[data-modal-target]');
+    const closeButtons = document.querySelectorAll('[data-modal-close]');
+
+    modalTriggers.forEach((trigger) => {
+        const targetId = trigger.getAttribute('data-modal-target');
+        if (!targetId) return;
+
+        trigger.addEventListener('click', (event) => {
+            event.preventDefault();
+            openModal(targetId);
+        });
+
+        trigger.addEventListener('keydown', (event) => {
+            if (event.key === ' ' || event.key === 'Spacebar') {
+                event.preventDefault();
+                openModal(targetId);
+            }
+        });
+    });
+
+    closeButtons.forEach((button) => {
+        const targetId = button.getAttribute('data-modal-close');
+        if (!targetId) return;
+
+        button.addEventListener('click', () => {
+            closeModal(targetId);
+        });
+    });
+});

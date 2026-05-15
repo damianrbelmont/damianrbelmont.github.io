@@ -266,6 +266,12 @@ ul {
     color: #d8cdb8;
 }
 
+.lore-action-secondary:hover {
+    background: rgba(184, 155, 94, 0.18);
+    border-color: var(--accent);
+    color: #f2e8d3;
+}
+
 .site-footer {
     background-color: #080808;
     padding: 4rem 2rem;

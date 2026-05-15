@@ -718,7 +718,7 @@ $mainSectionsHtml
       </a>
     </div>
     <div class="footer-legal">
-      <p>&copy; 2026 Damian R. Belmont. Ficcion especulativa Â· Todos los derechos reservados</p>
+      <p>&copy; 2026 Damian R. Belmont. Ficcion especulativa · Todos los derechos reservados</p>
     </div>
   </footer>
 </body>

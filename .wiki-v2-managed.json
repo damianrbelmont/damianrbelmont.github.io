@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "buildId": "552dd729ba771bd9f5cd13d711d03e1386a7cd180559dcd6d1a05cffeefcc325",
+  "files": [
+    {
+      "path": "assets/wiki-common.css",
+      "sha256": "250a93cbb271b9f6e93ff7f91c9e5bfa307bed80430fc3627547df30d5485525"
+    },
+    {
+      "path": "assets/wiki-lucifer.css",
+      "sha256": "c3940500c6b489bef17605804927ce167d5549975ec281bf3e5443c98095112e"
+    },
+    {
+      "path": "assets/wiki-navigation.js",
+      "sha256": "4fe1439df30d1a4b4b3173f0f8695588502fc6f1a41c600663331378df77de12"
+    },
+    {
+      "path": "assets/wiki-nimroel.css",
+      "sha256": "03ed3fc6c9180232e012e41a0ebf04446370be382cd3fb4730b19f294692e631"
+    },
+    {
+      "path": "lore/lucifer/valak.html",
+      "sha256": "0ec97fd4639ade9c7b9992f25d8252d88278353c265d584631270bce48a6b6ec"
+    },
+    {
+      "path": "lore/nimroel/kazan-rise.html",
+      "sha256": "f336d385dffb9058445514f1a10ff04248e7f5c01cc55f66790ef86a44e89010"
+    }
+  ]
+}
